@@ -39,3 +39,10 @@ Envoie tout vers le serveur :
 
 	$git push
 
+
+
+
+Pour plus d’info, voir : 
+	
+	http://sites.uclouvain.be/SystInfo/notes/Outils/html/git.html
+
