@@ -2,7 +2,7 @@
 ####Marche à suivre : 
 Cloner le dossier git sur son ordi : 
 Avec le terminal se positionner dans le dossier ou le dossier git sera cloné. 
-`$git clone https://github.com/… `
+`$git clone https://github.com/… ` (en vrai avec ca faut a chaque fois remetrre le mot de passe mais y'a moyen de le faire en ssh,c'est chiant a installer mais plus simple par apres... Bonne chance)
 
 Se positionner dans le dossier git
 Pour récupérer les modifications faites depuis la dernière fois : `$git pull`
