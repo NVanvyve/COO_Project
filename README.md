@@ -1,24 +1,47 @@
-# COO_Project
-####Marche à suivre : 
-Cloner le dossier git sur son ordi : 
-Avec le terminal se positionner dans le dossier ou le dossier git sera cloné. 
-`$git clone https://github.com/… ` (en vrai avec ca faut a chaque fois remetrre le mot de passe mais y'a moyen de le faire en ssh,c'est chiant a installer mais plus simple par apres... Bonne chance)
+# fractal
+=======
+Demarche a suivre :
 
-Se positionner dans le dossier git
-Pour récupérer les modifications faites depuis la dernière fois : `$git pull`
+Pour cloner le dossier sur son ordi : Avec le terminal tu te positionnes dans le dossier ou tu veux cloner les dossiers. (le plus simple c'est de creer un nouveau repertoire specialement pour github).
 
-Faire ses modifs
-Donne les différences entre le version ne ligne et le dossier local : `$git diff`
+Ensuite une fois dans ce répertoire tu tapes les commandes suivantes:
 
-Affiche les fichiers modifiés et ceux qui vont être commités : `$git status`
+$git init 
 
-Sélectionne les fichier a commiter : `$git add`
+$git config --global user.name "ton nom d'utilisateur github"
 
-Pour tout : `$git add -A`
+$git config --global user.email tonAdresseEmailAssocie
 
-Commit : `$git commit -m "Message explicatif de la modification$`
+$git config core.editor gedit
 
-Envoie tout vers le serveur : `$git push`
+Maintenant que le repertoire est pret on peut cloner les fichiers.
 
-Pour plus d’info, voir : 	
+$git clone https://github.com/NomUtilisateurCreateur/NomProjet
+
+Normalement la tu as tout les fichiers dans ton dossier.
+
+Tu modifies le code ect ... 
+
+Tu veux renvoyer ce que t'as modifier sur le serveur. Il faut bien que tu vérifies que tu te trouves dans le répertoire ou ce trouve les fichiers/dossiers que tu veux renvoyer. Ensuite tu procèdes de la manière suivante:
+
+$git add <nomfichier>   //si tu veux envoyer qu'un seul fichier/répertoire du répertoire
+
+$git add -A             //si tu veux envoyer tout
+
+$git commit -m 'ce que tu as modifier'
+
+$git remote add origin https://github.com/NomUtilisateurCreateur/NomProjet    //seulement si c'est la première fois que tu vas envoyer                                                                               un fichier sur le serveur.
+
+$git push origin master
+
+
+
+Si maintenant tu veux juste voire s'il y a eu un nouvel update sur le serveur tu peux utiliser la commande suivante:
+
+$git pull https://github.com/NomUtilisateurCreateur/NomProjet
+
+
+Pour plus d'info, voir :
+
 http://sites.uclouvain.be/SystInfo/notes/Outils/html/git.html
+
