@@ -19,9 +19,9 @@ public class MyListActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, //contexte courant
                 android.R.layout.simple_list_item_1, //id de l'element de layout utilise
-                //par defaut pour representer les
-                //lignes de la liste (cet id est pre
-                // -defini dans Android)
+                                                    //par defaut pour representer les
+                                                    //lignes de la liste (cet id est pre
+                                                    // -defini dans Android)
                 someStrings); // la collection d'elements à adapter à la liste
         setListAdapter(adapter);
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
