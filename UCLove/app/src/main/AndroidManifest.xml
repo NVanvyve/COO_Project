@@ -22,5 +22,7 @@
             android:name=".MyListActivity"
             android:label="@string/title_activity_my_list" >
         </activity>
+        <activity android:name=".Connection"></activity>
+
     </application>
 </manifest>
