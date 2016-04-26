@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/app_name"
+        android:id="@+id/appName"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="50sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="@string/login"
+        android:ems="10"
+        android:id="@+id/editLogin"
+        android:layout_below="@+id/appName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="134dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editPasswd"
+        android:layout_marginTop="16dp"
+        android:text="@string/password"
+        android:layout_below="@+id/textPasswd"
+        android:layout_alignLeft="@+id/editLogin"
+        android:layout_alignStart="@+id/editLogin" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/login"
+        android:id="@+id/textLogin"
+        android:layout_marginBottom="47dp"
+        android:textSize="20sp"
+        android:layout_alignBottom="@+id/editLogin"
+        android:layout_alignLeft="@+id/editLogin"
+        android:layout_alignStart="@+id/editLogin" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/password"
+        android:id="@+id/textPasswd"
+        android:textSize="20sp"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/editLogin"
+        android:layout_alignLeft="@+id/editPasswd"
+        android:layout_alignStart="@+id/editPasswd" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/registrer"
+        android:id="@+id/registrerButton"
+        android:layout_marginTop="32dp"
+        android:layout_below="@+id/editPasswd"
+        android:layout_alignLeft="@+id/editPasswd"
+        android:layout_alignStart="@+id/editPasswd" />
+</RelativeLayout>
