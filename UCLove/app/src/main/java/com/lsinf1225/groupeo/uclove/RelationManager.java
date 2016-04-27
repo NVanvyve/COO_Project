@@ -22,8 +22,8 @@ public class RelationManager {
     public static final String CREATE_TABLE_RELATION = "CREATE TABLE "+TABLE_NAME+
             " (" +
             " "+KEY_RELATION_ID+" INTEGER not null primary key," +
-            " "+KEY_USER_ID_A+" INTEGER not null references Utilisateur," +
-            " "+KEY_USER_ID_B+" INTEGER not null references Utilisateur," +
+            " "+KEY_USER_ID_A+" INTEGER not null references User," +
+            " "+KEY_USER_ID_B+" INTEGER not null references User," +
             " "+KEY_STATUS+" TEXT not null," +
             " "+KEY_FAV_A+" INTEGER not null default 0," +
             " "+KEY_FAV_B+" INTEGER not null default 0," +
