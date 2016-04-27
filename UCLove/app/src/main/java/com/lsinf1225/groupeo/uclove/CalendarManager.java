@@ -12,14 +12,14 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.sql.Blob;
 
-public class CalenderManager {
+public class CalendarManager {
 
-    private static final String TABLE_NAME = "Calender";
+    private static final String TABLE_NAME = "Calendar";
     public static final String KEY_CAL_ID="cal_id";
     public static final String KEY_CAL_USER_ID="cal_user_id";
     public static final String KEY_CAL_DATE="cal_date";
     public static final String KEY_CAL_STATUS="cal_status";
-    public static final String CREATE_TABLE_CALENDER = "CREATE TABLE "+TABLE_NAME+
+    public static final String CREATE_TABLE_CALENDAR = "CREATE TABLE "+TABLE_NAME+
             " (" +
             " "+KEY_USER_ID+" INTEGER not null primary key," +
             " "+KEY_USER_USERNAME+" TEXT not null," +
@@ -42,7 +42,7 @@ public class CalenderManager {
     private SQLiteDatabase db;
 
     // Constructeur
-    public UserManager(Context context)
+    public CalendarManager(Context context)
     {
         maBaseSQLite = MySQLite.getInstance(context);
     }
@@ -59,75 +59,64 @@ public class CalenderManager {
         db.close();
     }
 
-    public long addCalender(Calender calender) {
+    public long addCalendar(Calendar calendar) {
         // Ajout d'un enregistrement dans la table
 
         ContentValues values = new ContentValues();
-        values.put(KEY_CAL_ID, calender.getCalID());
-        values.put(KEY_CAL_USER_ID, calender.getCalUserID());
-        values.put(KEY_CAL_DATE, calender.getCalDate());
-        values.put(KEY_CAL_STATUS, calender.getCalStatus());
+        values.put(KEY_CAL_ID, calendar.getCalID());
+        values.put(KEY_CAL_USER_ID, calendar.getCalUserID());
+        values.put(KEY_CAL_DATE, calendar.getCalDate());
+        values.put(KEY_CAL_STATUS, calendar.getCalStatus());
 
         // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
         return db.insert(TABLE_NAME,null,values);
     }
 
-    public int modCalender(Calender calender) {
+    public int modCalendar(Calendar calendar) {
         // modification d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la requête
 
         ContentValues values = new ContentValues();
-        values.put(KEY_CAL_ID, calender.getCalID());
-        values.put(KEY_CAL_USER_ID, calender.getCalUserID());
-        values.put(KEY_CAL_DATE, calender.getCalDate());
-        values.put(KEY_CAL_STATUS, calender.getCalStatus());
+        values.put(KEY_CAL_ID, calendar.getCalID());
+        values.put(KEY_CAL_USER_ID, calendar.getCalUserID());
+        values.put(KEY_CAL_DATE, calendar.getCalDate());
+        values.put(KEY_CAL_STATUS, calendar.getCalStatus());
 
         String where = KEY_CAL_ID+" = ?";
-        String[] whereArgs = {calender.getCalID()+""};
+        String[] whereArgs = {calendar.getCalID()+""};
 
         return db.update(TABLE_NAME, values, where, whereArgs);
     }
 
-    public int supCalender(Calender calender) {
+    public int supCalendar(Calendar calendar) {
         // suppression d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la clause WHERE, 0 sinon
 
         String where = KEY_CAL_ID+" = ?";
-        String[] whereArgs = {calender.getCalID()+""};
+        String[] whereArgs = {calendar.getCalID()+""};
 
         return db.delete(TABLE_NAME, where, whereArgs);
     }
 
-    public Calender getCalender(long cal_id) {
+    public Calendar getCalendar(long cal_id) {
         // Retourne le calendrier dont l'id est passé en paramètre
-        Calender a = new Calender(0, 0, "", "");
+        Calendar a = new Calendar(0, 0, "", "");
 
         Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_CAL_ID+"="+cal_id, null);
         if (c.moveToFirst()) {
-            a.setCalID(c.getInt(c.getColumnIndex(KEY_USER_ID)));
-            a.setUserUsername(c.getString(c.getColumnIndex(KEY_USER_USERNAME)));
-            a.setUserPassword(c.getString(c.getColumnIndex(KEY_USER_PASSWORD)));
-            a.setUserFirstName(c.getString(c.getColumnIndex(KEY_USER_FIRST_NAME)));
-            a.setUserLastName(c.getString(c.getColumnIndex(KEY_USER_LAST_NAME)));
-            a.setUserBirthDate(c.getString(c.getColumnIndex(KEY_USER_BIRTH_DATE)));
-            a.setUserCity(c.getString(c.getColumnIndex(KEY_USER_CITY)));
-            a.setUserLanguage(c.getString(c.getColumnIndex(KEY_USER_LANGUAGE)));
-            a.setUserHairColor(c.getString(c.getColumnIndex(KEY_USER_HAIR_COLOR)));
-            a.setUserHairType(c.getString(c.getColumnIndex(KEY_USER_HAIR_TYPE)));
-            a.setUserEyesColor(c.getString(c.getColumnIndex(KEY_USER_EYES_COLOR)));
-            a.setUserSex(c.getString(c.getColumnIndex(KEY_USER_SEX)));
-            a.setUserSexuality(c.getString(c.getColumnIndex(KEY_USER_SEXUALITY)));
-            a.setUserPosition(c.getString(c.getColumnIndex(KEY_USER_POSITION)));
-            a.setUserProfilePic(c.getBlob(c.getColumnIndex(KEY_USER_PROFILE_PICTURE)));
+            a.setCalID(c.getInt(c.getColumnIndex(KEY_CAL_ID)));
+            a.setCalUserID(c.getInt(c.getColumnIndex(KEY_CAL_USER_ID)));
+            a.setCalDate(c.getString(c.getColumnIndex(KEY_CAL_DATE)));
+            a.setCalStatus(c.getString(c.getColumnIndex(KEY_CAL_STATUS)));
             c.close();
         }
 
         return a;
     }
 
-    public Cursor getUsers() {
+    public Cursor getCalendars() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
     }
 
-} // class UserManager
+} // class CalendarManager
