@@ -5,7 +5,7 @@
 
 package com.lsinf1225.groupeo.uclove;
 
-public class Calender {
+public class Calendar {
 
     private int cal_id;
     private int cal_user_id;
@@ -13,7 +13,7 @@ public class Calender {
     private String cal_status;
 
     // Constructeur
-    public Calender(int cal_id,
+    public Calendar(int cal_id,
                 int cal_user_id,
                 String cal_date,
                 String cal_status) {
@@ -60,4 +60,4 @@ public class Calender {
         this.cal_status = cal_status;
     }
 
-} // class Calender
+} // class Calendar
