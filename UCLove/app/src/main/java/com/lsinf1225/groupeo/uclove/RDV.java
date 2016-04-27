@@ -18,7 +18,7 @@ public class RDV {
                 int rdv_user_id,
                 int rdv_rel_id,
                 String rdv_date,
-                String rdv_status)
+                String rdv_status) {
         this.rdv_user_id=rdv_user_id;
         this.rdv_rel_id=rdv_rel_id;
         this.rdv_date=rdv_date;
