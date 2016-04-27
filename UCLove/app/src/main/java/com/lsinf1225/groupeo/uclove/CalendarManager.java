@@ -19,24 +19,18 @@ public class CalendarManager {
     public static final String KEY_CAL_USER_ID="cal_user_id";
     public static final String KEY_CAL_DATE="cal_date";
     public static final String KEY_CAL_STATUS="cal_status";
+    CREATE TABLE Calendrier (   userID INTEGER not null references Utilisateur,
+                            dateDispo TEXT not null,
+                            statutDate TEXT not null default 'Libre',
+                            unique(userID, dateDispo)
+)
     public static final String CREATE_TABLE_CALENDAR = "CREATE TABLE "+TABLE_NAME+
             " (" +
-            " "+KEY_USER_ID+" INTEGER not null primary key," +
-            " "+KEY_USER_USERNAME+" TEXT not null," +
-            " "+KEY_USER_PASSWORD+" TEXT not null," +
-            " "+KEY_USER_FIRST_NAME+" TEXT not null," +
-            " "+KEY_USER_LAST_NAME+" TEXT not null," +
-            " "+KEY_USER_BIRTH_DATE+" TEXT not null," +
-            " "+KEY_USER_CITY+" TEXT not null," +
-            " "+KEY_USER_LANGUAGE+" TEXT not null," +
-            " "+KEY_USER_HAIR_COLOR+" TEXT," +
-            " "+KEY_USER_HAIR_TYPE+" TEXT," +
-            " "+KEY_USER_EYES_COLOR+" TEXT," +
-            " "+KEY_USER_SEX+" TEXT not null," +
-            " "+KEY_USER_SEXUALITY+" TEXT not null," +
-            " "+KEY_USER_POSITION+" TEXT not null," +
-            " "+KEY_USER_PROFILE_PICTURE+" BLOB," +
-            " unique("+KEY_USER_FIRST_NAME+", "+KEY_USER_LAST_NAME+", "+KEY_USER_BIRTH_DATE+") " +
+            " "+KEY_CAL_ID+" INTEGER not null primary key," +
+            " "+KEY_CAL_USER_ID+" INTEGER not null references User," +
+            " "+KEY_CAL_DATE+" TEXT not null," +
+            " "+KEY_CAL_STATUS+" TEXT not null default 'libre'," +
+            " unique("+KEY_CAL_USER_ID+", "+KEY_CAL_DATE+") " +
             ");";
     private MySQLite maBaseSQLite; // notre gestionnaire du fichier SQLite
     private SQLiteDatabase db;
