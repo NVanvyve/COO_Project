@@ -102,11 +102,11 @@ public class NotificationManager {
         Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_NOTIF_ID+"="+notif_id, null);
         if (c.moveToFirst()) {
             a.setNotifID(c.getInt(c.getColumnIndex(KEY_NOTIF_ID)));
-            a.setNotifUserID(c.getString(c.getColumnIndex(KEY_NOTIF_USER_ID)));
+            a.setNotifUserID(c.getInt(c.getColumnIndex(KEY_NOTIF_USER_ID)));
             a.setNotifDate(c.getString(c.getColumnIndex(KEY_NOTIF_DATE)));
             a.setNotifText(c.getString(c.getColumnIndex(KEY_NOTIF_TEXT)));
             a.setNotifStatus(c.getString(c.getColumnIndex(KEY_NOTIF_STATUS)));
-            a.setNotifCode(c.getString(c.getColumnIndex(KEY_NOTIF_CODE)));
+            a.setNotifCode(c.getInt(c.getColumnIndex(KEY_NOTIF_CODE)));
             c.close();
         }
 
