@@ -15,7 +15,7 @@ public class Notification {
     private int notif_code;
 
     // Constructeur
-    public User(int notif_id,
+    public Notification(int notif_id,
                 int notif_user_id,
                 String notif_date,
                 String notif_text,
@@ -76,7 +76,7 @@ public class Notification {
     }
 
     //NOTIF_CODE
-    public String getNotifCode() {
+    public int getNotifCode() {
         return notif_code;
     }
 

@@ -52,16 +52,16 @@ public class NotificationManager {
         db.close();
     }
 
-    public long addNotification(User user) {
+    public long addNotification(Notification notification) {
         // Ajout d'un enregistrement dans la table
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NOTIF_ID, user.getNotifID());
-        values.put(KEY_NOTIF_USER_ID, user.getNotifUserID());
-        values.put(KEY_NOTIF_DATE, user.getNotifDate());
-        values.put(KEY_NOTIF_TEXT, user.getNotifText());
-        values.put(KEY_NOTIF_STATUS, user.getNotifStatus());
-        values.put(KEY_NOTIF_CODE, user.getNotifCode());
+        values.put(KEY_NOTIF_ID, notification.getNotifID());
+        values.put(KEY_NOTIF_USER_ID, notification.getNotifUserID());
+        values.put(KEY_NOTIF_DATE, notification.getNotifDate());
+        values.put(KEY_NOTIF_TEXT, notification.getNotifText());
+        values.put(KEY_NOTIF_STATUS, notification.getNotifStatus());
+        values.put(KEY_NOTIF_CODE, notification.getNotifCode());
 
         // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
         return db.insert(TABLE_NAME,null,values);
@@ -72,15 +72,15 @@ public class NotificationManager {
         // valeur de retour : (int) nombre de lignes affectées par la requête
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NOTIF_ID, user.getNotifID());
-        values.put(KEY_NOTIF_USER_ID, user.getNotifUserID());
-        values.put(KEY_NOTIF_DATE, user.getNotifDate());
-        values.put(KEY_NOTIF_TEXT, user.getNotifText());
-        values.put(KEY_NOTIF_STATUS, user.getNotifStatus());
-        values.put(KEY_NOTIF_CODE, user.getNotifCode());
+        values.put(KEY_NOTIF_ID, notification.getNotifID());
+        values.put(KEY_NOTIF_USER_ID, notification.getNotifUserID());
+        values.put(KEY_NOTIF_DATE, notification.getNotifDate());
+        values.put(KEY_NOTIF_TEXT, notification.getNotifText());
+        values.put(KEY_NOTIF_STATUS, notification.getNotifStatus());
+        values.put(KEY_NOTIF_CODE, notification.getNotifCode());
 
         String where = KEY_NOTIF_ID+" = ?";
-        String[] whereArgs = {user.getNotifID()+""};
+        String[] whereArgs = {notification.getNotifID()+""};
 
         return db.update(TABLE_NAME, values, where, whereArgs);
     }
@@ -90,7 +90,7 @@ public class NotificationManager {
         // valeur de retour : (int) nombre de lignes affectées par la clause WHERE, 0 sinon
 
         String where = KEY_NOTIF_ID+" = ?";
-        String[] whereArgs = {user.getNotifID()+""};
+        String[] whereArgs = {notification.getNotifID()+""};
 
         return db.delete(TABLE_NAME, where, whereArgs);
     }
