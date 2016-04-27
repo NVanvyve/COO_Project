@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="button_choose_item">Choisi un nouvel élément</string>
-    <string name="label_current_selection">Sélection actuelle : </string>
-    <string name="action_settings">Parametres</string>
-    <string name="label_default_selection" translatable="false">Rien</string>
-</resources>
