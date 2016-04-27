@@ -1,41 +1,35 @@
 package com.lsinf1225.groupeo.uclove;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.net.Uri;
 import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.app.Activity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.content.Intent;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
-import android.database.Cursor;
-import android.util.Log;
-
+import android.widget.Toast;
 import java.io.File;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AccountCreation extends AppCompatActivity {
 
-    private int REQUEST_IMAGE_CAPTURE = 1;
-    private byte[] profile_picture;
+    String mCurrentPhotoPath;
+    static final int REQUEST_TAKE_PHOTO = 1;
+    Uri fileUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_creation);
+        //ImageView myImage = (ImageView) findViewById(R.id.imageView);
+        //myImage.setImageResource(R.drawable.testpic);
+        //Picasso.with(myImage.getContext()).load(R.drawable.testpic).fit().centerCrop().into(myImage);
+        //Picasso.with(myImage.getContext()).load(new File(fileUri)).resize(600, 200).centerCrop().into(myImage);
     }
 
     public String mapLanguage(String language) {
@@ -155,29 +149,23 @@ public class AccountCreation extends AppCompatActivity {
         return returnedSexuality;
     }
 
-    static final int REQUEST_TAKE_PHOTO = 1;
-    Uri fileUri;
-
     public void takePicture(View v) {
-        System.out.println("SALUT");
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
-            // Create the File where the photo should go
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // Error occurred while creating the File
-            }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                fileUri = Uri.fromFile(photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-            }
+        // Create the File where the photo should go
+        File photoFile = null;
+        try {
+            photoFile = createImageFile();
+        } catch (IOException ex) {
+            // Error occurred while creating the File
+        }
+        // Continue only if the File was successfully created
+        if (photoFile != null) {
+            fileUri = Uri.fromFile(photoFile);
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+            startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+        }
     }
-
-    String mCurrentPhotoPath;
 
     private File createImageFile() throws IOException {
         // Create an image file name
@@ -194,9 +182,7 @@ public class AccountCreation extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
-            Picasso.with(context).load(new File(path/to/File)).fit().centerCrop().into(imageView);
-            ImageView myImage = (ImageView) findViewById(R.id.imageView);
-            myImage.setImageURI(fileUri);
+            // Photo taken
         }
     }
 
@@ -237,22 +223,31 @@ public class AccountCreation extends AppCompatActivity {
         final Spinner sexualitySpinner = (Spinner) findViewById(R.id.account_creation_sexuality);
         String sexuality = mapSexuality(sexualitySpinner.getSelectedItem().toString());
 
-        System.out.println(sexuality);
-
         String position = "POSITION";
 
         UserManager m = new UserManager(this); // gestionnaire de la table "user"
         m.open();
 
-        User newUser = new User(0, username, password, first_name, last_name, birth_date, city, language, hairColor, hairType, eyesColor, sex, sexuality, position, profile_picture);
-        long userID = m.addUser(newUser);
+        User newUser = new User(0, username, password, first_name, last_name, birth_date, city, language, hairColor, hairType, eyesColor, sex, sexuality, position, mCurrentPhotoPath);
+
+        if (m.canCreateAccount(newUser)) {
+            // Si l'utilisateur n'existe pas, on l'ajoute dans la BDD
+            long userID = m.addUser(newUser);
+
+            Intent Menu = new Intent(AccountCreation.this, Menu.class);
+            Menu.putExtra("userID", userID);
+
+            // Puis on lance l'intent !
+            startActivity(Menu);
+        } else {
+            Context context = getApplicationContext();
+            CharSequence text = "Cet utilisateur existe déjà!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
 
         m.close();
-
-        Intent Menu = new Intent(AccountCreation.this, Menu.class);
-        Menu.putExtra("userID", userID);
-
-        // Puis on lance l'intent !
-        startActivity(Menu);
     }
 }

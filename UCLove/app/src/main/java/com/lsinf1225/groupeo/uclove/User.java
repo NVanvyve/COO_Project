@@ -21,7 +21,7 @@ public class User {
     private String user_sex;
     private String user_sexuality;
     private String user_position;
-    private byte[] user_profile_picture;
+    private String user_profile_picture;
 
     // Constructeur
     public User(int user_id,
@@ -38,7 +38,7 @@ public class User {
                 String user_sex,
                 String user_sexuality,
                 String user_position,
-                byte[] user_profile_picture) {
+                String user_profile_picture) {
         this.user_id=user_id;
         this.user_username=user_username;
         this.user_password=user_password;
@@ -184,11 +184,11 @@ public class User {
     }
 
     //PROFILEPIC
-    public byte[] getUserProfilePic() {
+    public String getUserProfilePic() {
         return user_profile_picture;
     }
 
-    public void setUserProfilePic(byte[] user_profile_picture) {
+    public void setUserProfilePic(String user_profile_picture) {
         this.user_profile_picture = user_profile_picture;
     }
 
