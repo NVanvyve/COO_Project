@@ -21,7 +21,7 @@ public class NotificationManager {
     public static final String KEY_NOTIF_TEXT="notif_text";
     public static final String KEY_NOTIF_STATUS="notif_status";
     public static final String KEY_NOTIF_CODE="notif_code";
-    public static final String CREATE_TABLE_USER = "CREATE TABLE "+TABLE_NAME+
+    public static final String CREATE_TABLE_NOTIFICATION = "CREATE TABLE "+TABLE_NAME+
             " (" +
             " "+KEY_NOTIF_ID+" INTEGER not null primary key," +
             " "+KEY_NOTIF_USER_ID+" INTEGER not null references Utilisateur," +
