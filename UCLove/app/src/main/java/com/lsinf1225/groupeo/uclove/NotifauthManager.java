@@ -108,4 +108,4 @@ public class NotifauthManager {
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
     }
 
-} // class RelationManager
+} // class Notif Auth Manager
