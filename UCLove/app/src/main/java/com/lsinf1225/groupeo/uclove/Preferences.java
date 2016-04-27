@@ -31,26 +31,26 @@ public class Preferences {
 
     // Constructeur
     public Preferences(int pref_id,
-                int pref_user_id,
-                int pref_language_FR,
-                int pref_language_EN,
-                int pref_hair_color_blond,
-                int pref_hair_color_brown,
-                int pref_hair_color_black,
-                int pref_hair_color_ginger,
-                int pref_hair_color_greywhite,
-                int pref_hair_color_other,
-                int pref_hair_type_short,
-                int pref_hair_type_medium,
-                int pref_hair_type_long,
-                int pref_eyes_color_blue,
-                int pref_eyes_color_brown,
-                int pref_eyes_color_black,
-                int pref_eyes_color_green,
-                int pref_eyes_color_grey,
-                int pref_age_max,
-                int pref_age_min,
-                int pref_distance_max)
+                       int pref_user_id,
+                       int pref_language_FR,
+                       int pref_language_EN,
+                       int pref_hair_color_blond,
+                       int pref_hair_color_brown,
+                       int pref_hair_color_black,
+                       int pref_hair_color_ginger,
+                       int pref_hair_color_greywhite,
+                       int pref_hair_color_other,
+                       int pref_hair_type_short,
+                       int pref_hair_type_medium,
+                       int pref_hair_type_long,
+                       int pref_eyes_color_blue,
+                       int pref_eyes_color_brown,
+                       int pref_eyes_color_black,
+                       int pref_eyes_color_green,
+                       int pref_eyes_color_grey,
+                       int pref_age_max,
+                       int pref_age_min,
+                       int pref_distance_max)
     {
         this.pref_id=pref_id;
         this.pref_user_id=pref_user_id;
@@ -267,4 +267,4 @@ public class Preferences {
         this.pref_distance_max = pref_distance_max;
     }
 
-} // class User
+} // class Preferences

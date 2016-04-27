@@ -10,8 +10,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.sql.Blob;
-
 public class NotificationManager {
 
     private static final String TABLE_NAME = "Notification";
@@ -24,12 +22,12 @@ public class NotificationManager {
     public static final String CREATE_TABLE_NOTIFICATION = "CREATE TABLE "+TABLE_NAME+
             " (" +
             " "+KEY_NOTIF_ID+" INTEGER not null primary key," +
-            " "+KEY_NOTIF_USER_ID+" INTEGER not null references Utilisateur," +
+            " "+KEY_NOTIF_USER_ID+" INTEGER not null references User," +
             " "+KEY_NOTIF_DATE+" TEXT not null," +
             " "+KEY_NOTIF_TEXT+" TEXT not null," +
             " "+KEY_NOTIF_STATUS+" TEXT not null," +
             " "+KEY_NOTIF_CODE+" INTEGER not null," +
-            " unique("+KEY_NOTIF_USER_ID+", "+KEY_NOTIF_DATE+", "+KEY_NOTIF_DATE+") " +
+            " unique("+KEY_NOTIF_USER_ID+", "+KEY_NOTIF_DATE+", "+KEY_NOTIF_TEXT+") " +
             ");";
     private MySQLite maBaseSQLite; // notre gestionnaire du fichier SQLite
     private SQLiteDatabase db;

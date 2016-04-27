@@ -1,27 +1,26 @@
+package com.lsinf1225.groupeo.uclove;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.lsinf1225.groupeo.uclove.MySQLite;
-import com.lsinf1225.groupeo.uclove.User;
-
 public class MessageManager {
 
     private static final String TABLE_NAME = "Message";
     public static final String KEY_MESSAGE_ID = "message_id";
-    public static final String KEY_MESSAGE_REL_ID = "rel_id";
-    public static final String KEY_MESSAGE_USER_ID = "user_id";
-    public static final String KEY_MESSAGE_DATE = "date";
-    public static final String KEY_MESSAGE_TEXT_ = "message_text";
-    public static final String CREATE_TABLE_MESSAGE = "CREATE TABLE " + TABLE_MESSAGE +
+    public static final String KEY_MESSAGE_REL_ID = "message_rel_id";
+    public static final String KEY_MESSAGE_USER_ID = "message_user_id";
+    public static final String KEY_MESSAGE_DATE = "message_date";
+    public static final String KEY_MESSAGE_TEXT = "message_text";
+    public static final String CREATE_TABLE_MESSAGE = "CREATE TABLE " + TABLE_NAME +
             " (" +
             " " + KEY_MESSAGE_ID + " INTEGER not null primary key," +
-            " " + KEY_MESSAGE_REL_ID + " INTEGER not null," +
-            " " + KEY_MESSAGE_USER_ID + " INTEGER not null," +
+            " " + KEY_MESSAGE_REL_ID + " INTEGER not null references Relation," +
+            " " + KEY_MESSAGE_USER_ID + " INTEGER not null references User," +
             " " + KEY_MESSAGE_DATE + " TEXT not null," +
-            " " + KEY_MESSAGE_DATE + "D TEXT not null," +
-            " unique(" + KEY_USER_FIRST_NAME + ", " + KEY_USER_LAST_NAME + ", " + KEY_USER_BIRTH_DATE + ") " +
+            " " + KEY_MESSAGE_TEXT + " TEXT not null," +
+            " unique(" + KEY_MESSAGE_USER_ID + ", " + KEY_MESSAGE_DATE + ") " +
             ");";
     private MySQLite maBaseSQLite; // notre gestionnaire du fichier SQLite
     private SQLiteDatabase db;
@@ -45,71 +44,62 @@ public class MessageManager {
         // Ajout d'un enregistrement dans la table
 
         ContentValues values = new ContentValues();
-        values.put(KEY_MESSAGE_ID, message.getMessageID());
         values.put(KEY_MESSAGE_REL_ID, message.getMessageRelID());
         values.put(KEY_MESSAGE_USER_ID, message.getMessageUserID());
         values.put(KEY_MESSAGE_DATE, message.getMessageDate());
-        values.put(KEY_MESSAGE_TEXT_, message.getMessage_Date());
+        values.put(KEY_MESSAGE_TEXT, message.getMessageText());
 
 
         // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
         return db.insert(TABLE_NAME, null, values);
     }
 
-    public int modUser(User user) {
+    public int modMessage(Message message) {
         // modification d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la requête
 
         ContentValues values = new ContentValues();
-        values.put(KEY_USER_USERNAME, user.getUserUsername());
-        values.put(KEY_USER_PASSWORD, user.getUserPassword());
-        values.put(KEY_USER_FIRST_NAME, user.getUserFirstName());
-        values.put(KEY_USER_LAST_NAME, user.getUserLastName());
-        values.put(KEY_USER_BIRTH_DATE, user.getUserBirthDate());
-        values.put(KEY_USER_CITY, user.getUserCity());
-        values.put(KEY_USER_LANGUAGE, user.getUserLanguage());
-        values.put(KEY_USER_HAIR_COLOR, user.getUserHairColor());
-        values.put(KEY_USER_HAIR_TYPE, user.getUserHairType());
-        values.put(KEY_USER_EYES_COLOR, user.getUserEyesColor());
-        values.put(KEY_USER_SEX, user.getUserSex());
-        values.put(KEY_USER_SEXUALITY, user.getUserSexuality());
-        values.put(KEY_USER_POSITION, user.getUserPosition());
-        values.put(KEY_USER_PROFILE_PICTURE, user.getUserProfilePic());
+        values.put(KEY_MESSAGE_REL_ID, message.getMessageRelID());
+        values.put(KEY_MESSAGE_USER_ID, message.getMessageUserID());
+        values.put(KEY_MESSAGE_DATE, message.getMessageDate());
+        values.put(KEY_MESSAGE_TEXT, message.getMessageText());
 
-        String where = KEY_USER_ID + " = ?";
-        String[] whereArgs = {user.getUserID() + ""};
+        String where = KEY_MESSAGE_ID + " = ?";
+        String[] whereArgs = {message.getMessageID() + ""};
 
         return db.update(TABLE_NAME, values, where, whereArgs);
     }
 
-    public int supUser(User user) {
+    public int supMessage(Message message) {
         // suppression d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la clause WHERE, 0 sinon
 
-        String where = KEY_USER_ID + " = ?";
-        String[] whereArgs = {user.getUserID() + ""};
+        String where = KEY_MESSAGE_ID + " = ?";
+        String[] whereArgs = {message.getMessageID() + ""};
 
         return db.delete(TABLE_NAME, where, whereArgs);
     }
 
-    public User getUser(long user_id) {
-        // Retourne l'user dont l'id est passé en paramètre
-        byte[] blob = {0};
-        User a = new User(0, "", "", "", "", "", "", "", "", "", "", "", "", "", blob);
+    public Message getMessage(long message_id) {
+        // Retourne le message dont l'id est passé en paramètre
 
-        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_USER_ID + "=" + user_id, null);
+        Message a = new Message(0, 0, 0, "", "");
+
+        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_MESSAGE_ID + "=" + message_id, null);
         if (c.moveToFirst()) {
-            a.setUserID(c.getInt(c.getColumnIndex(KEY_USER_ID)));
-            a.setUserUsername(c.getString(c.getColumnIndex(KEY_USER_USERNAME)));
-            a.setUserPassword(c.getString(c.getColumnIndex(KEY_USER_PASSWORD)));
-            a.setUserFirstName(c.getString(c.getColumnIndex(KEY_USER_FIRST_NAME)));
-            a.setUserLastName(c.getString(c.getColumnIndex(KEY_USER_LAST_NAME)));
-            a.setUserBirthDate(c.getString(c.getColumnIndex(KEY_USER_BIRTH_DATE)));
-            a.setUserCity(c.getString(c.getColumnIndex(KEY_USER_CITY)));
-            a.setUserLanguage(c.getString(c.getColumnIndex(KEY_USER_LANGUAGE)));
-            a.setUserHairColor(c.getString(c.getColumnIndex(KEY_USER_HAIR_COLOR)));
-            a.setUserHairType(c.getString(c.getColumnIndex(KEY_USER_HAIR_TYPE)));
-            a.setUserEyesColor(c.getString(c.getColumnIndex(KEY_USER_EYES_COLOR)));
+            a.setMessageID(c.getInt(c.getColumnIndex(KEY_MESSAGE_ID)));
+            a.setMessageUserID(c.getInt(c.getColumnIndex(KEY_MESSAGE_USER_ID)));
+            a.setMessageRelID(c.getInt(c.getColumnIndex(KEY_MESSAGE_REL_ID)));
+            a.setMessageDate(c.getString(c.getColumnIndex(KEY_MESSAGE_DATE)));
+            a.setMessageText(c.getString(c.getColumnIndex(KEY_MESSAGE_TEXT)));
+            c.close();
         }
+        return a;
     }
+
+    public Cursor getMessages() {
+        // sélection de tous les enregistrements de la table
+        return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
+    }
+
 }

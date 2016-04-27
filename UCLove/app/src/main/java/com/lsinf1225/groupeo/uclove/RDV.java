@@ -15,10 +15,10 @@ public class RDV {
 
     // Constructeur
     public RDV(int rdv_id,
-                int rdv_user_id,
-                int rdv_rel_id,
-                String rdv_date,
-                String rdv_status) {
+               int rdv_user_id,
+               int rdv_rel_id,
+               String rdv_date,
+               String rdv_status) {
         this.rdv_id=rdv_id;
         this.rdv_user_id=rdv_user_id;
         this.rdv_rel_id=rdv_rel_id;
@@ -32,7 +32,9 @@ public class RDV {
         return rdv_id;
     }
 
-    public void setRDVID(int rdv_id) {this.rdv_id = rdv_id;}
+    public void setRDVID(int rdv_id) {
+        this.rdv_id = rdv_id;
+    }
 
     //RDV_User_ID
     public int getRDVUserID() {

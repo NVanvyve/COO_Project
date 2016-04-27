@@ -16,10 +16,10 @@ public class Message {
 
     // Constructeur
     public Message(int message_id,
-                int message_rel_id,
-                int message_user_id,
-                String message_date,
-                String message_text) {
+                   int message_rel_id,
+                   int message_user_id,
+                   String message_date,
+                   String message_text) {
         this.message_id=message_id;
         this.message_rel_id=message_rel_id;
         this.message_user_id=message_user_id;
@@ -28,7 +28,7 @@ public class Message {
 
     }
 
-    // USERID
+    // MESSAGEID
     public int getMessageID() {
         return message_id;
     }
@@ -37,8 +37,8 @@ public class Message {
         this.message_id = message_id;
     }
 
-    //USERNAME
-    public String getMessageRelID() {
+    //MESSAGERELID
+    public int getMessageRelID() {
         return message_rel_id;
     }
 
@@ -46,8 +46,8 @@ public class Message {
         this.message_rel_id = message_rel_id;
     }
 
-    //PASSWORD
-    public String getMessageUserID() {
+    //MESSAGEUSERID
+    public int getMessageUserID() {
         return message_user_id;
     }
 
@@ -55,7 +55,7 @@ public class Message {
         this.message_user_id = message_user_id;
     }
 
-    //FIRSTNAME
+    //MESSAGEDATE
     public String getMessageDate() {
         return message_date;
     }
@@ -64,7 +64,7 @@ public class Message {
         this.message_date = message_date;
     }
 
-    //LASTNAME
+    //MESSAGETEXT
     public String getMessageText() {
         return message_text;
     }

@@ -10,27 +10,26 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-public class NotifauthManager {
+public class NotifAuthManager {
 
     private static final String TABLE_NAME = "NotifAuth";
     public static final String KEY_NOTIFAUTH_ID="notifauth_id";
-    public static final String KEY_USER_ID ="notifauth_user_id";
-    public static final String KEY_NOTIF_CODE ="notifauth_code";
-    public static final String KEY_BOOL ="notifauth_bool";
-    public static final String CREATE_TABLE_RELATION = "CREATE TABLE "+TABLE_NAME+
+    public static final String KEY_NOTIFAUTH_USER_ID ="notifauth_user_id";
+    public static final String KEY_NOTIFAUTH_NOTIF_CODE ="notifauth_code";
+    public static final String KEY_NOTIFAUTH_BOOL ="notifauth_bool";
+    public static final String CREATE_TABLE_NOTIFAUTH = "CREATE TABLE "+TABLE_NAME+
             " (" +
             " "+KEY_NOTIFAUTH_ID+" INTEGER not null primary key," +
-            " "+KEY_USER_ID+" INTEGER not null references User," +
-            " "+KEY_NOTIF_CODE+" INTEGER not null," +
-            " "+KEY_BOOL+" INTEGER not null," +
-            " unique("+KEY_USER_ID+", "+KEY_NOTIF_CODE+", "+KEY_BOOL+") " +
+            " "+KEY_NOTIFAUTH_USER_ID+" INTEGER not null references User," +
+            " "+KEY_NOTIFAUTH_NOTIF_CODE+" INTEGER not null," +
+            " "+KEY_NOTIFAUTH_BOOL+" INTEGER not null," +
+            " unique("+KEY_NOTIFAUTH_USER_ID+", "+KEY_NOTIFAUTH_NOTIF_CODE+", "+KEY_NOTIFAUTH_BOOL+") " +
             ");";
     private MySQLite maBaseSQLite; // notre gestionnaire du fichier SQLite
     private SQLiteDatabase db;
 
-
     // Constructeur
-    public NotifauthManager(Context context)
+    public NotifAuthManager(Context context)
     {
         maBaseSQLite = MySQLite.getInstance(context);
     }
@@ -47,63 +46,61 @@ public class NotifauthManager {
         db.close();
     }
 
-    public long addRelation(Notifauth notifauth) {
+    public long addNotifAuth(NotifAuth notifauth) {
         // Ajout d'un enregistrement dans la table
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NOTIFAUTH_ID,notifauth.getNotifauthID() );
-        values.put(KEY_USER_ID,notifauth.getNotifauthUserID());
-        values.put(KEY_NOTIF_CODE,notifauth.getNotifauthCode() );
-        values.put(KEY_BOOL, notifauth.getNotifauthBool());
+        values.put(KEY_NOTIFAUTH_USER_ID,notifauth.getNotifAuthUserID());
+        values.put(KEY_NOTIFAUTH_NOTIF_CODE,notifauth.getNotifAuthNotifCode() );
+        values.put(KEY_NOTIFAUTH_BOOL, notifauth.getNotifAuthBool());
 
         // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
         return db.insert(TABLE_NAME,null,values);
     }
 
-    public int modRelation(Notifauth notifauth) {
+    public int modNotifAuth(NotifAuth notifauth) {
         // modification d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la requête
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NOTIFAUTH_ID,notifauth.getNotifauthID() );
-        values.put(KEY_USER_ID,notifauth.getNotifauthUserID());
-        values.put(KEY_NOTIF_CODE,notifauth.getNotifauthCode() );
-        values.put(KEY_BOOL, notifauth.getNotifauthBool());
+        values.put(KEY_NOTIFAUTH_USER_ID,notifauth.getNotifAuthUserID());
+        values.put(KEY_NOTIFAUTH_NOTIF_CODE,notifauth.getNotifAuthNotifCode() );
+        values.put(KEY_NOTIFAUTH_BOOL, notifauth.getNotifAuthBool());
 
 
         String where = KEY_NOTIFAUTH_ID+" = ?";
-        String[] whereArgs = {notifauth.getNotifauthID()+""};
+        String[] whereArgs = {notifauth.getNotifAuthID()+""};
 
         return db.update(TABLE_NAME, values, where, whereArgs);
     }
 
-    public int supUser(Notifauth notifauth) {
+    public int supNotifAuth(NotifAuth notifauth) {
         // suppression d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la clause WHERE, 0 sinon
 
         String where = KEY_NOTIFAUTH_ID+" = ?";
-        String[] whereArgs = {notifauth.getNotifauthID()+""};
+        String[] whereArgs = {notifauth.getNotifAuthID()+""};
 
         return db.delete(TABLE_NAME, where, whereArgs);
     }
 
-    public Notifauth getNotifauth(long notifauth_id) {
-        // Retourne la Notifauth dont l'id est passé en paramètre
-        Notifauth a = new Notifauth(0,0,0,0);
+    public NotifAuth getNotifAuth(long notifauth_id) {
+        // Retourne la NotifAuth dont l'id est passé en paramètre
+        NotifAuth a = new NotifAuth(0,0,0,0);
 
         Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_NOTIFAUTH_ID+"="+notifauth_id, null);
         if (c.moveToFirst()) {
-            a.setNotifauthID(c.getInt(c.getColumnIndex(KEY_NOTIFAUTH_ID)));
-            a.setNotifauthUserID(c.getInt(c.getColumnIndex(KEY_USER_ID)));
-            a.setNotifauthCode(c.getInt(c.getColumnIndex(KEY_NOTIF_CODE)));
-            a.setNotifauthBool(c.getInt(c.getColumnIndex(KEY_BOOL)));
+            a.setNotifAuthID(c.getInt(c.getColumnIndex(KEY_NOTIFAUTH_ID)));
+            a.setNotifAuthUserID(c.getInt(c.getColumnIndex(KEY_NOTIFAUTH_USER_ID)));
+            a.setNotifAuthNotifCode(c.getInt(c.getColumnIndex(KEY_NOTIFAUTH_NOTIF_CODE)));
+            a.setNotifAuthBool(c.getInt(c.getColumnIndex(KEY_NOTIFAUTH_BOOL)));
             c.close();
         }
 
         return a;
     }
 
-    public Cursor getNotifauths() {
+    public Cursor getNotifAuths() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
     }

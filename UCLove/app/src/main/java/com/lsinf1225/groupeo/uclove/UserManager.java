@@ -10,8 +10,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.sql.Blob;
-
 public class UserManager {
 
     private static final String TABLE_NAME = "User";

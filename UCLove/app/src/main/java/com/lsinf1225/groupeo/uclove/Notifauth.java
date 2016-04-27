@@ -5,7 +5,7 @@
 
 package com.lsinf1225.groupeo.uclove;
 
-public class Notifauth {
+public class NotifAuth {
 
     private int notifauth_id;
     private int notifauth_user_id;
@@ -14,7 +14,7 @@ public class Notifauth {
 
 
     // Constructeur
-    public Notifauth(int notifauth_id,
+    public NotifAuth(int notifauth_id,
                      int notifauth_user_id,
                      int notifauth_code,
                      int notifauth_bool) {
@@ -22,50 +22,45 @@ public class Notifauth {
         this.notifauth_user_id=notifauth_user_id;
         this.notifauth_code=notifauth_code;
         this.notifauth_bool=notifauth_bool;
-        }
+    }
 
 
     // NotifAuth ID
-    public int getNotifauthID() {
+    public int getNotifAuthID() {
         return notifauth_id;
     }
 
-    public void setNotifauthID(int notifauth_id) {
+    public void setNotifAuthID(int notifauth_id) {
         this.notifauth_id = notifauth_id;
     }
 
-
-
     // NotifAuth User ID
-    public int getNotifauthUserID() {
+    public int getNotifAuthUserID() {
         return notifauth_user_id;
     }
 
-    public void setNotifauthUserID(int notifauth_user_id) {
+    public void setNotifAuthUserID(int notifauth_user_id) {
         this.notifauth_user_id = notifauth_user_id;
     }
 
-
-
     // NotifAuth Code
-    public int getNotifauthCode() {
+    public int getNotifAuthNotifCode() {
         return notifauth_code;
     }
 
-    public void setNotifauthCode(int notifauth_code) {
+    public void setNotifAuthNotifCode(int notifauth_code) {
         this.notifauth_code = notifauth_code;
     }
 
 
 
     // NotifAuth Bool
-    public int getNotifauthBool() {
+    public int getNotifAuthBool() {
         return notifauth_bool;
     }
 
-    public void setNotifauthBool(int notifauth_bool) {
+    public void setNotifAuthBool(int notifauth_bool) {
         this.notifauth_bool = notifauth_bool;
     }
 
 } // class NotifAuth
-

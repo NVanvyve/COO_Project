@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MySQLite extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "db.sqlite";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static MySQLite sInstance;
 
     public static synchronized MySQLite getInstance(Context context) {
@@ -28,7 +28,15 @@ public class MySQLite extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         // Création de la base de données
         // on exécute ici les requêtes de création des tables
-        sqLiteDatabase.execSQL(UserManager.CREATE_TABLE_USER); // création table "user"
+        sqLiteDatabase.execSQL(UserManager.CREATE_TABLE_USER); // création table "User"
+        sqLiteDatabase.execSQL(RDVManager.CREATE_TABLE_RDV); // création table "RDV"
+        sqLiteDatabase.execSQL(MessageManager.CREATE_TABLE_MESSAGE); // création table "RDV"
+        sqLiteDatabase.execSQL(NotificationManager.CREATE_TABLE_NOTIFICATION); // création table "Notification"
+        sqLiteDatabase.execSQL(NotifAuthManager.CREATE_TABLE_NOTIFAUTH); // création table "NotifAuth"
+        sqLiteDatabase.execSQL(RelationManager.CREATE_TABLE_RELATION); // création table "Relation"
+        sqLiteDatabase.execSQL(CalendarManager.CREATE_TABLE_CALENDAR); // création table "Calendar"
+        sqLiteDatabase.execSQL(PreferencesManager.CREATE_TABLE_PREFERENCES); // création table "Preferences"
+
     }
 
     @Override

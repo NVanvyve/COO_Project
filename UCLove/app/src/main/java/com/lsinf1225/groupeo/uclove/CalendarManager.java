@@ -19,17 +19,12 @@ public class CalendarManager {
     public static final String KEY_CAL_USER_ID="cal_user_id";
     public static final String KEY_CAL_DATE="cal_date";
     public static final String KEY_CAL_STATUS="cal_status";
-    CREATE TABLE Calendrier (   userID INTEGER not null references Utilisateur,
-                            dateDispo TEXT not null,
-                            statutDate TEXT not null default 'Libre',
-                            unique(userID, dateDispo)
-)
     public static final String CREATE_TABLE_CALENDAR = "CREATE TABLE "+TABLE_NAME+
             " (" +
             " "+KEY_CAL_ID+" INTEGER not null primary key," +
             " "+KEY_CAL_USER_ID+" INTEGER not null references User," +
             " "+KEY_CAL_DATE+" TEXT not null," +
-            " "+KEY_CAL_STATUS+" TEXT not null default 'libre'," +
+            " "+KEY_CAL_STATUS+" TEXT not null default 'Libre'," +
             " unique("+KEY_CAL_USER_ID+", "+KEY_CAL_DATE+") " +
             ");";
     private MySQLite maBaseSQLite; // notre gestionnaire du fichier SQLite
@@ -57,7 +52,6 @@ public class CalendarManager {
         // Ajout d'un enregistrement dans la table
 
         ContentValues values = new ContentValues();
-        values.put(KEY_CAL_ID, calendar.getCalID());
         values.put(KEY_CAL_USER_ID, calendar.getCalUserID());
         values.put(KEY_CAL_DATE, calendar.getCalDate());
         values.put(KEY_CAL_STATUS, calendar.getCalStatus());
@@ -71,7 +65,6 @@ public class CalendarManager {
         // valeur de retour : (int) nombre de lignes affectées par la requête
 
         ContentValues values = new ContentValues();
-        values.put(KEY_CAL_ID, calendar.getCalID());
         values.put(KEY_CAL_USER_ID, calendar.getCalUserID());
         values.put(KEY_CAL_DATE, calendar.getCalDate());
         values.put(KEY_CAL_STATUS, calendar.getCalStatus());

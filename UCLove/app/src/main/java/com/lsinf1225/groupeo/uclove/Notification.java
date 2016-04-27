@@ -16,11 +16,11 @@ public class Notification {
 
     // Constructeur
     public Notification(int notif_id,
-                int notif_user_id,
-                String notif_date,
-                String notif_text,
-                String notif_status,
-                int notif_code) {
+                        int notif_user_id,
+                        String notif_date,
+                        String notif_text,
+                        String notif_status,
+                        int notif_code) {
         this.notif_id=notif_id;
         this.notif_user_id=notif_user_id;
         this.notif_date=notif_date;
