@@ -14,7 +14,7 @@ public class RDV {
     private String rdv_status;
 
     // Constructeur
-    public User(int rdv_id,
+    public RDV(int rdv_id,
                 int rdv_user_id,
                 int rdv_rel_id,
                 String rdv_date,
@@ -70,4 +70,4 @@ public class RDV {
         this.rdv_status = rdv_status;
     }
 
-} // class User
+} // class RDV
