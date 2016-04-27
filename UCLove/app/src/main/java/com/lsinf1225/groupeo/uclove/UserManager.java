@@ -9,6 +9,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.Settings;
 
 public class UserManager {
 
@@ -129,8 +130,8 @@ public class UserManager {
 
     public User getUser(long user_id) {
         // Retourne l'user dont l'id est passé en paramètre
-        byte[] blob = {0};
-        User a = new User(0,"", "", "", "", "", "", "", "", "", "", "", "", "", blob);
+
+        User a = new User(0,"", "", "", "", "", "", "", "", "", "", "", "", "", "");
 
         Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_USER_ID+"="+user_id, null);
         if (c.moveToFirst()) {
@@ -148,7 +149,7 @@ public class UserManager {
             a.setUserSex(c.getString(c.getColumnIndex(KEY_USER_SEX)));
             a.setUserSexuality(c.getString(c.getColumnIndex(KEY_USER_SEXUALITY)));
             a.setUserPosition(c.getString(c.getColumnIndex(KEY_USER_POSITION)));
-            a.setUserProfilePic(c.getBlob(c.getColumnIndex(KEY_USER_PROFILE_PICTURE)));
+            a.setUserProfilePic(c.getString(c.getColumnIndex(KEY_USER_PROFILE_PICTURE)));
             c.close();
         }
 
@@ -159,5 +160,46 @@ public class UserManager {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
     }
+
+    public boolean canCreateAccount(User user) {
+        // Vérifie si l'utilisateur est déjà dans la base de données au moment de l'inscription.
+
+        String userName = user.getUserUsername();
+        String firstName = user.getUserFirstName();
+        String lastName = user.getUserLastName();
+        String birthDate = user.getUserBirthDate();
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_USER_FIRST_NAME + "='" + firstName +
+                "' AND " + KEY_USER_LAST_NAME + "='" + lastName +
+                "' AND " + KEY_USER_BIRTH_DATE + "='" + birthDate +
+                "' AND " + KEY_USER_USERNAME + "='" + userName +
+                "'";
+        Cursor c = db.rawQuery(query, null);
+        if (c.moveToFirst()) {
+            c.close();
+            return true;
+        } else {
+            c.close();
+            return true;
+        }
+    }
+
+    public long isAlreadyInDatabase(String userName, String password) {
+        // retourne le user_id de l'utilisateur s'il est déjà inscrit, sinon retourne -1
+
+        String query = "SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_USER_USERNAME+"='"+userName+
+                "' AND "+KEY_USER_PASSWORD+"='"+password+
+                "'";
+        Cursor c = db.rawQuery(query, null);
+        if(c.moveToFirst()){
+            long userID = c.getLong(c.getColumnIndex(KEY_USER_ID));
+            c.close();
+            return userID;
+        } else {
+            c.close();
+            return -1;
+        }
+    }
+
 
 } // class UserManager

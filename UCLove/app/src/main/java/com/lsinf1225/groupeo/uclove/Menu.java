@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 
@@ -29,7 +31,6 @@ public class Menu extends AppCompatActivity {
         Intent intent = getIntent();
 
         long user_id = intent.getLongExtra("userID", -1L);
-        System.out.println(user_id);
 
         UserManager m = new UserManager(this); // gestionnaire de la table "user"
         m.open();
@@ -38,18 +39,7 @@ public class Menu extends AppCompatActivity {
 
         m.close();
 
-        System.out.println("LENGTH 2 = " + currentUser.getUserProfilePic().length);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(currentUser.getUserProfilePic() , 0, currentUser.getUserProfilePic().length);
-
-        ImageView profile_picture = (ImageView) findViewById(R.id.menu_profile_picture);
-        //profile_picture.setImageBitmap(bitmap);
-        //profile_picture.setImageResource(R.drawable.testpic);
-
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        profile_picture.setMinimumHeight(dm.heightPixels);
-        profile_picture.setMinimumWidth(dm.widthPixels);
-        profile_picture.setImageBitmap(bitmap);
+        ImageView myImage = (ImageView) findViewById(R.id.menu_profile_picture);
+        Picasso.with(myImage.getContext()).load(currentUser.getUserProfilePic()).fit().centerCrop().into(myImage);
     }
 }

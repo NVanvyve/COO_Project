@@ -165,15 +165,6 @@
                 android:layout_below="@+id/account_creation_sexuality"
                 android:layout_centerHorizontal="true"
                 android:onClick="createAccount" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView"
-                android:layout_below="@+id/account_creation_send_info"
-                android:layout_alignLeft="@+id/account_creation_send_info"
-                android:layout_alignStart="@+id/account_creation_send_info" />
-
         </RelativeLayout>
     </ScrollView>
 
