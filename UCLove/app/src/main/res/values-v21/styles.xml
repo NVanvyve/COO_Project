@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MyCustomTheme" parent="AppTheme">
+        <item name="colorPrimary">@color/asphalt</item>
+        <item name="colorPrimaryDark">@color/asphaltdark</item>
+        <item name="colorAccent">@color/asphaltlight</item>
+        <item name="android:windowBackground">?android:attr/colorBackground</item>
+        <item name="android:statusBarColor">@color/asphaltdark</item>
+    </style>
+</resources>

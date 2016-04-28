@@ -8,7 +8,7 @@
     <string name="username">Nom d\'utilisateur</string>
     <string name="go">Go!</string>
     <string name="Position">Position</string>
-    <string name="birth_date">Date de naissance JJ/MM/AAAA</string>
+    <string name="birth_date">Date de naissance</string>
     <string name="city">Ville</string>
     <string name="eyes_color">Couleur des yeux</string>
     <string name="hair_color">Couleur des cheveux</string>
@@ -48,4 +48,10 @@
     <string name="select_language">Langue</string>
     <string name="select_sexuality">Sexualité</string>
     <string name="menu">Menu</string>
+    <string name="menu_friend_requests">Demandes d\'ami</string>
+    <string name="menu_friends">Amis</string>
+    <string name="menu_make_new_friends">Chercher des amis</string>
+    <string name="menu_profile">Profil</string>
+    <string name="menu_settings">Réglages</string>
+    <string name="profile_picture">Photo de profil</string>
 </resources>

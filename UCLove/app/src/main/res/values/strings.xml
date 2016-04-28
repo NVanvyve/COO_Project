@@ -8,7 +8,7 @@
     <string name="or">or...</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
-    <string name="birth_date">Birth date DD/MM/YYYY</string>
+    <string name="birth_date">Birth date</string>
     <string name="city">City</string>
 
     <string name="language">Language</string>
@@ -92,4 +92,5 @@
     <string name="upload_picture">Take a picture</string>
     <string name="Position">Position</string>
     <string name="picture">photo</string>
+    <string name="profile_picture">profile picture</string>
 </resources>

@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="menu">Menu</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_make_new_friends">Make new friends</string>
+    <string name="menu_friends">Friends</string>
+    <string name="menu_friend_requests">Friend requests</string>
 </resources>

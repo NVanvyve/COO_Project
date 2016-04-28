@@ -60,7 +60,9 @@
         android:layout_alignLeft="@+id/main_password"
         android:layout_alignStart="@+id/main_password"
         android:layout_alignRight="@+id/main_password"
-        android:layout_alignEnd="@+id/main_password" />
+        android:layout_alignEnd="@+id/main_password"
+        android:background="@drawable/buttons"
+        style="@style/customButton" />
 
     <Button
         android:layout_width="wrap_content"
@@ -72,5 +74,7 @@
         android:layout_alignLeft="@+id/main_password"
         android:layout_alignStart="@+id/main_password"
         android:layout_alignRight="@+id/main_password"
-        android:layout_alignEnd="@+id/main_password" />
+        android:layout_alignEnd="@+id/main_password"
+        style="@style/customButton"
+        android:background="@drawable/buttons" />
 </RelativeLayout>

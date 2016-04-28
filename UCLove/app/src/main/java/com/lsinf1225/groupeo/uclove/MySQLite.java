@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MySQLite extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "db.sqlite";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
     private static MySQLite sInstance;
 
     public static synchronized MySQLite getInstance(Context context) {
