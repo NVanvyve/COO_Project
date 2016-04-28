@@ -27,6 +27,10 @@
             android:name=".Menu"
             android:label="@string/menu" >
         </activity>
+        <activity
+            android:name=".Profile"
+            android:label="@string/profile" >
+        </activity>
     </application>
 
 </manifest>

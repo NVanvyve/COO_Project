@@ -42,4 +42,11 @@ public class Menu extends AppCompatActivity {
         ImageView myImage = (ImageView) findViewById(R.id.menu_profile_picture);
         Picasso.with(myImage.getContext()).load(currentUser.getUserProfilePic()).fit().centerCrop().into(myImage);
     }
+
+    public void switchToProfile(View v) {
+        // Acces à Profil
+        Intent AccountCreation = new Intent(Menu.this, Profile.class);
+        startActivity(Profile);
+    }
+
 }
