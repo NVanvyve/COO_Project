@@ -8,7 +8,7 @@
     <string name="username">Nom d\'utilisateur</string>
     <string name="go">Go!</string>
     <string name="Position">Position</string>
-    <string name="birth_date">Date de naissance</string>
+    <string name="birth_date">Date de naissance JJ/MM/AAAA</string>
     <string name="city">Ville</string>
     <string name="eyes_color">Couleur des yeux</string>
     <string name="hair_color">Couleur des cheveux</string>
