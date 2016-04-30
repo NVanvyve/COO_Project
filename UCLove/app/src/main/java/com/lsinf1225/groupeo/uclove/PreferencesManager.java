@@ -144,7 +144,6 @@ public class PreferencesManager {
     public int supPreferences(Preferences pref) {
         // suppression d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la clause WHERE, 0 sinon
-
         String where = KEY_PREF_ID+" = ?";
         String[] whereArgs = {pref.getPrefID()+""};
 

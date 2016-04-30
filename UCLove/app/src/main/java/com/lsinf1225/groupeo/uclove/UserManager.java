@@ -9,6 +9,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import android.provider.Settings;
 
 public class UserManager {
@@ -89,7 +90,7 @@ public class UserManager {
         values.put(KEY_USER_PROFILE_PICTURE, user.getUserProfilePic());
 
         // insert() retourne l'id du nouvel enregistrement inséré, ou -1 en cas d'erreur
-        return db.insert(TABLE_NAME,null,values);
+        return db.insert(TABLE_NAME, null, values);
     }
 
     public int modUser(User user) {
@@ -187,7 +188,7 @@ public class UserManager {
     public long isAlreadyInDatabase(String userName, String password) {
         // retourne le user_id de l'utilisateur s'il est déjà inscrit, sinon retourne -1
 
-        String query = "SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_USER_USERNAME+"='"+userName+
+        String query = "SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_USER_USERNAME+"="+userName+
                 "' AND "+KEY_USER_PASSWORD+"='"+password+
                 "'";
         Cursor c = db.rawQuery(query, null);
@@ -199,6 +200,129 @@ public class UserManager {
             c.close();
             return -1;
         }
+    }
+    public String formatquery(String str[]){
+        if(str[0]==null){
+            return(null);
+        }
+        else{
+            String acc="AND ( ";
+            int i=0;
+            while(str[i]!=null){
+                if(str[i+1]==null){
+                    acc+=str[i]+" )";
+                    return(acc);
+                }
+                else{
+                    acc+=str[i]+"  OR";
+                }
+            }
+        }
+    }
+
+    public long userSearcher(User user){
+
+     //retourne un utilisateur qui satisfait les critères de recherche de user et avec lequel il n'a pas encore interragis
+        String query ="SELECT pref_id FROM Preferences P WHERE "+user.getUserID()+"= P.pref_user_id";
+        long prefID=-1;
+        Cursor c = db.rawQuery(query,null);
+        if(c.moveToFirst()){
+            prefID = c.getLong(c.getColumnIndex(KEY_USER_ID));
+            c.close();
+
+        } else {
+            c.close();
+            return -1;
+        }
+        PreferencesManager m = new PreferencesManager(this);
+        m.open();
+        Preferences newPrefs = m.getPreferences(prefID);
+        m.close();
+
+        query="select user_id FROM User U WHERE ";
+        String haircolorpref[]=new String[7] ;
+        int hc=0;
+        String hairTypepref[]=new String[4];
+        int ht=0;
+        String eyecolorpref[]=new String[6];
+        int ec=0;
+        if(newPrefs.getPrefHairColorBlond()==1) {
+
+            haircolorpref[hc]="U.user_hair_color = Blond";
+            hc+=1;
+        }
+        if(newPrefs.getPrefHairColorBrown()==1) {
+            haircolorpref[hc]="U.user_hair_color = Brown";
+            hc+=1;
+        }
+        if(newPrefs.getPrefHairColorBlack()==1) {
+            haircolorpref[hc]="U.user_hair_color = Black";
+            hc+=1;
+        }
+        if(newPrefs.getPrefHairColorGinger()==1) {
+            haircolorpref[hc]="U.user_hair_color = Ginger";
+            hc+=1;
+        }
+        if(newPrefs.getPrefHairColorGreywhite()==1) {
+            haircolorpref[hc]="U.user_hair_color = Grey/white";
+            hc+=1;
+        }
+        if(newPrefs.getPrefHairColorOther()==1) {
+            haircolorpref[hc]="U.user_hair_color = Other";
+            hc+=1;
+        }
+        if(newPrefs.getPrefHairTypeShort()==1) {
+            hairTypepref[ht]="U.user_hair_type = Short";
+            ht+=1;
+        }
+        if(newPrefs.getPrefHairTypeMedium()== 1) {
+            hairTypepref[ht]="U.user_hair_type = Medium";
+            ht+=1;
+        }
+        if(newPrefs.getPrefHairTypeLong()== 1) {
+            hairTypepref[ht]="U.user_hair_type = Long";
+            ht+=1;
+        }
+        if(newPrefs.getPrefEyesColorBlue()==1) {
+            eyecolorpref[ec]="U.user_eyes_color = Blue";
+            ec+=1;
+        }
+        if(newPrefs.getPrefEyesColorBrown()==1) {
+            eyecolorpref[ec]="U.user_eyes_color = Brown";
+            ec+=1;
+        }
+        if(newPrefs.getPrefEyesColorBlack()==1) {
+            eyecolorpref[ec]="U.user_eyes_color = Black";
+            ec+=1;
+        }
+        if(newPrefs.getPrefEyesColorGreen()==1) {
+            eyecolorpref[ec]="U.user_eyes_color = green";
+            ec+=1;
+        }
+        if(newPrefs.getPrefEyesColorGrey()==1) {
+            eyecolorpref[ec]="U.user_eyes_color = Grey";
+            ec+=1;
+        }
+        query+="( U.user_id <>"+String.valueOf(user.getUserID())+" AND cast(strftime('%Y.%m%d', 'now') - strftime('%Y.%m%d', U.user_birth_date) as int) <="+String.valueOf(newPrefs.getPrefAgeMax())+" AND cast(strftime('%Y.%m%d', 'now') - strftime('%Y.%m%d', U.user_birth_date) as int) >="+String.valueOf(newPrefs.getPrefAgeMin())+" )";
+        query+=formatquery(haircolorpref);
+        query+=formatquery(hairTypepref);
+        query+=formatquery(eyecolorpref);
+        //à implémenter requete pour éviter de retrouver quelqu'un qu'on a déjà rencontré
+        Cursor d = db.rawQuery(query,null);
+        if(d.moveToFirst()){
+            long userID = d.getLong(d.getColumnIndex(KEY_USER_ID));
+            d.close();
+            return(userID);
+
+        } else {
+            d.close();
+            return -1;
+        }
+
+
+
+
+
     }
 
 
