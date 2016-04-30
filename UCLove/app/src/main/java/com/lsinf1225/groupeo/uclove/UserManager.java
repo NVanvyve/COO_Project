@@ -218,28 +218,19 @@ public class UserManager {
                 }
             }
         }
+        return(null);
     }
 
     public long userSearcher(User user){
 
      //retourne un utilisateur qui satisfait les critères de recherche de user et avec lequel il n'a pas encore interragis
-        String query ="SELECT pref_id FROM Preferences P WHERE "+user.getUserID()+"= P.pref_user_id";
-        long prefID=-1;
-        Cursor c = db.rawQuery(query,null);
-        if(c.moveToFirst()){
-            prefID = c.getLong(c.getColumnIndex(KEY_USER_ID));
-            c.close();
 
-        } else {
-            c.close();
-            return -1;
-        }
         PreferencesManager m = new PreferencesManager(this);
         m.open();
-        Preferences newPrefs = m.getPreferences(prefID);
+        Preferences newPrefs = m.getPreferences(user.getUserID());
         m.close();
 
-        query="select user_id FROM User U WHERE ";
+        String query="select user_id FROM User U Relation R WHERE ";
         String haircolorpref[]=new String[7] ;
         int hc=0;
         String hairTypepref[]=new String[4];
@@ -248,73 +239,83 @@ public class UserManager {
         int ec=0;
         if(newPrefs.getPrefHairColorBlond()==1) {
 
-            haircolorpref[hc]="U.user_hair_color = Blond";
+            haircolorpref[hc]="U.user_hair_color = 'Blond'";
             hc+=1;
         }
         if(newPrefs.getPrefHairColorBrown()==1) {
-            haircolorpref[hc]="U.user_hair_color = Brown";
+            haircolorpref[hc]="U.user_hair_color = 'Brown'";
             hc+=1;
         }
         if(newPrefs.getPrefHairColorBlack()==1) {
-            haircolorpref[hc]="U.user_hair_color = Black";
+            haircolorpref[hc]="U.user_hair_color = 'Black'";
             hc+=1;
         }
         if(newPrefs.getPrefHairColorGinger()==1) {
-            haircolorpref[hc]="U.user_hair_color = Ginger";
+            haircolorpref[hc]="U.user_hair_color = 'Ginger'";
             hc+=1;
         }
         if(newPrefs.getPrefHairColorGreywhite()==1) {
-            haircolorpref[hc]="U.user_hair_color = Grey/white";
+            haircolorpref[hc]="U.user_hair_color = 'Grey/white'";
             hc+=1;
         }
         if(newPrefs.getPrefHairColorOther()==1) {
-            haircolorpref[hc]="U.user_hair_color = Other";
+            haircolorpref[hc]="U.user_hair_color = 'Other'";
             hc+=1;
         }
         if(newPrefs.getPrefHairTypeShort()==1) {
-            hairTypepref[ht]="U.user_hair_type = Short";
+            hairTypepref[ht]="U.user_hair_type = 'Short'";
             ht+=1;
         }
         if(newPrefs.getPrefHairTypeMedium()== 1) {
-            hairTypepref[ht]="U.user_hair_type = Medium";
+            hairTypepref[ht]="U.user_hair_type = 'Medium'";
             ht+=1;
         }
         if(newPrefs.getPrefHairTypeLong()== 1) {
-            hairTypepref[ht]="U.user_hair_type = Long";
+            hairTypepref[ht]="U.user_hair_type = 'Long'";
             ht+=1;
         }
         if(newPrefs.getPrefEyesColorBlue()==1) {
-            eyecolorpref[ec]="U.user_eyes_color = Blue";
+            eyecolorpref[ec]="U.user_eyes_color = 'Blue'";
             ec+=1;
         }
         if(newPrefs.getPrefEyesColorBrown()==1) {
-            eyecolorpref[ec]="U.user_eyes_color = Brown";
+            eyecolorpref[ec]="U.user_eyes_color = 'Brown'";
             ec+=1;
         }
         if(newPrefs.getPrefEyesColorBlack()==1) {
-            eyecolorpref[ec]="U.user_eyes_color = Black";
+            eyecolorpref[ec]="U.user_eyes_color = 'Black'";
             ec+=1;
         }
         if(newPrefs.getPrefEyesColorGreen()==1) {
-            eyecolorpref[ec]="U.user_eyes_color = green";
+            eyecolorpref[ec]="U.user_eyes_color = 'green'";
             ec+=1;
         }
         if(newPrefs.getPrefEyesColorGrey()==1) {
-            eyecolorpref[ec]="U.user_eyes_color = Grey";
+            eyecolorpref[ec]="U.user_eyes_color = 'Grey'";
             ec+=1;
         }
-        query+="( U.user_id <>"+String.valueOf(user.getUserID())+" AND cast(strftime('%Y.%m%d', 'now') - strftime('%Y.%m%d', U.user_birth_date) as int) <="+String.valueOf(newPrefs.getPrefAgeMax())+" AND cast(strftime('%Y.%m%d', 'now') - strftime('%Y.%m%d', U.user_birth_date) as int) >="+String.valueOf(newPrefs.getPrefAgeMin())+" )";
+        query+="( U.user_id <>'"+String.valueOf(user.getUserID())+"' AND cast(strftime('%Y.%m%d', 'now') - strftime('%Y.%m%d', U.user_birth_date) as int) <='"+String.valueOf(newPrefs.getPrefAgeMax())+"' AND cast(strftime('%Y.%m%d', 'now') - strftime('%Y.%m%d', U.user_birth_date) as int) >='"+String.valueOf(newPrefs.getPrefAgeMin())+"' )";
         query+=formatquery(haircolorpref);
         query+=formatquery(hairTypepref);
         query+=formatquery(eyecolorpref);
-        //à implémenter requete pour éviter de retrouver quelqu'un qu'on a déjà rencontré
+        if(user.getUserSexuality().equals("heterosexual")){
+            query+=" AND ( U.user_sex <>'"+user.getUserSex()+"' AND (U.user_sexuality ='heterosexual' OR U.user_sexuality='bisexual' )";
+        }
+        else if(user.getUserSexuality().equals("homosexual")){
+            query+=" AND ( U.user_sex ='"+user.getUserSex()+"' AND (U.user_sexuality ='homosexual' OR U.user_sexuality='bisexual'  )";
+        }
+        else{
+            query+=" AND ( (U.user_sexuality ='homosexual' AND U.user_sexuality <>'"+user.getUserSex()+"') OR (U.user_sexuality='bisexual') OR (U.user_sexuality ='heterosexual' AND U.user_sexuality ='"+user.getUserSex()+"')  )";
+        }
+        query+=" AND ( U.user_id = P.user_id_a AND P.user_id_b='"+String.valueOf(user.getUserID())+"' AND P.rel_status='request'";
         Cursor d = db.rawQuery(query,null);
         if(d.moveToFirst()){
             long userID = d.getLong(d.getColumnIndex(KEY_USER_ID));
             d.close();
             return(userID);
 
-        } else {
+        }
+        else {
             d.close();
             return -1;
         }

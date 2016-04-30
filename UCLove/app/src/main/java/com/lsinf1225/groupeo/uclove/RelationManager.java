@@ -16,7 +16,7 @@ public class RelationManager {
     public static final String KEY_RELATION_ID="rel_id";
     public static final String KEY_RELATION_USER_ID_A ="rel_user_id_a";
     public static final String KEY_RELATION_USER_ID_B ="rel_user_id_b";
-    public static final String KEY_RELATION_STATUS ="rel_status";
+    public static final String KEY_RELATION_STATUS ="rel_status"; //request,accepted,declined
     public static final String KEY_RELATION_FAV_A = "rel_fav_a";
     public static final String KEY_RELATION_FAV_B = "rel_fav_b";
     public static final String CREATE_TABLE_RELATION = "CREATE TABLE "+TABLE_NAME+
