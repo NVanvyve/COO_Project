@@ -41,9 +41,10 @@ public class MySQLite extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
-        // Mise à jour de la base de données
-        // méthode appelée sur incrémentation de DATABASE_VERSION
-        // on peut faire ce qu'on veut ici, comme recréer la base :
+        /*  Mise à jour de la base de données
+            méthode appelée sur incrémentation de DATABASE_VERSION
+            on peut faire ce qu'on veut ici, comme recréer la base :
+        */
         onCreate(sqLiteDatabase);
     }
 

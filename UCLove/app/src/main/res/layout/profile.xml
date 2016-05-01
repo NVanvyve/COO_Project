@@ -5,161 +5,165 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.lsinf1225.groupeo.uclove.Menu"
+    tools:context="com.lsinf1225.groupeo.uclove.Profile"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:id="@+id/menu_profile_picture"
-        android:contentDescription="@string/profile_picture"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="#c82727" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="270dp"
+            android:id="@+id/profile_picture"
+            android:contentDescription="@string/profile_picture"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Prénom"
-        android:id="@+id/profile_firstname"
-        android:layout_gravity="center_horizontal"
-        android:textSize="20sp"
-        android:padding="10dp"
-        android:textColor="@color/asphaltdark"
-        android:layout_alignTop="@+id/menu_profile_picture"
-        android:layout_toRightOf="@+id/menu_profile_picture"
-        android:layout_toEndOf="@+id/menu_profile_picture" />
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView2"
+            android:layout_below="@+id/profile_picture"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/profile_picture"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Nom"
-        android:id="@+id/profile_name"
-        android:layout_gravity="center_horizontal"
-        android:textSize="20sp"
-        android:padding="10dp"
-        android:textColor="@color/asphaltdark"
-        android:layout_below="@+id/profile_firstname"
-        android:layout_toRightOf="@+id/menu_profile_picture"
-        android:layout_toEndOf="@+id/menu_profile_picture" />
+            <GridLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Login"
-        android:id="@+id/textView5"
-        android:layout_gravity="center_horizontal"
-        android:textSize="20sp"
-        android:padding="10dp"
-        android:textColor="@color/asphaltdark"
-        android:layout_below="@+id/profile_name"
-        android:layout_toRightOf="@+id/menu_profile_picture"
-        android:layout_toEndOf="@+id/menu_profile_picture" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/profile_login"
+                    android:id="@+id/profile_login"
+                    android:textSize="15sp"
+                    android:padding="10dp"
+                    android:textColor="@color/asphaltdark"
+                    android:layout_below="@+id/profile_firstname"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_column="0"
+                    android:layout_row="1" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Date de naissance"
-        android:id="@+id/textView6"
-        android:layout_gravity="center_horizontal"
-        android:padding="10dp"
-        android:textColor="@color/asphaltdark"
-        android:layout_marginTop="24dp"
-        android:layout_below="@+id/menu_profile_picture"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="15sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/profile_name"
+                    android:textSize="25sp"
+                    android:padding="10dp"
+                    android:textColor="@color/asphaltdark"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/profile_firstname"
+                    android:layout_toEndOf="@+id/profile_firstname"
+                    android:layout_column="0"
+                    android:layout_row="0"
+                    android:text="Nom"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Ville"
-        android:id="@+id/textView4"
-        android:layout_gravity="center_horizontal"
-        android:padding="10dp"
-        android:textColor="@color/asphaltdark"
-        android:textSize="15sp"
-        android:layout_below="@+id/textView6"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+                <TextView
+                    android:layout_width="154dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Langue"
+                    android:id="@+id/profile_language"
+                    android:padding="10dp"
+                    android:textColor="@color/asphaltdark"
+                    android:textSize="15sp"
+                    android:layout_below="@+id/profile_login"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_column="0"
+                    android:layout_row="4" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Langue"
-        android:id="@+id/textView7"
-        android:layout_gravity="center_horizontal"
-        android:padding="10dp"
-        android:textColor="@color/asphaltdark"
-        android:textSize="15sp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Date de naissance"
+                    android:id="@+id/profile_birth"
+                    android:padding="10dp"
+                    android:textColor="@color/asphaltdark"
+                    android:textSize="15sp"
+                    android:layout_toRightOf="@+id/profile_city"
+                    android:layout_toEndOf="@+id/profile_city"
+                    android:layout_above="@+id/profile_orientation"
+                    android:layout_column="0"
+                    android:layout_row="3" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Couleur cheveux"
-        android:id="@+id/textView8"
-        android:layout_gravity="center_horizontal"
-        android:padding="10dp"
-        android:textColor="@color/asphaltdark"
-        android:textSize="15sp"
-        android:layout_below="@+id/textView7"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/profile_city"
+                    android:id="@+id/profile_city"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Type cheveux"
-        android:id="@+id/textView9"
-        android:layout_gravity="center_horizontal"
-        android:padding="10dp"
-        android:textColor="@color/asphaltdark"
-        android:textSize="15sp"
-        android:layout_below="@+id/textView8"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+                    android:padding="10dp"
+                    android:textColor="@color/asphaltdark"
+                    android:textSize="15sp"
+                    android:layout_above="@+id/profile_language"
+                    android:layout_toRightOf="@+id/profile_name"
+                    android:layout_toEndOf="@+id/profile_name"
+                    android:layout_column="0"
+                    android:layout_row="2" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Sexe"
-        android:id="@+id/textView10"
-        android:layout_gravity="center_horizontal"
-        android:padding="10dp"
-        android:textColor="@color/asphaltdark"
-        android:textSize="15sp"
-        android:layout_below="@+id/textView9"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/profile_eyes"
+                    android:id="@+id/profile_eyes_color"
+                    android:padding="10dp"
+                    android:textColor="@color/asphaltdark"
+                    android:textSize="15sp"
+                    android:layout_below="@+id/profil_sex"
+                    android:layout_alignLeft="@+id/profil_sex"
+                    android:layout_alignStart="@+id/profil_sex"
+                    android:layout_column="0"
+                    android:layout_row="7" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Sexualité"
-        android:id="@+id/textView11"
-        android:layout_gravity="center_horizontal"
-        android:padding="10dp"
-        android:textColor="@color/asphaltdark"
-        android:textSize="15sp"
-        android:layout_below="@+id/textView10"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Sexe"
+                    android:id="@+id/profil_sex"
+                    android:padding="10dp"
+                    android:textColor="@color/asphaltdark"
+                    android:textSize="15sp"
+                    android:layout_below="@+id/profile_orientation"
+                    android:layout_toRightOf="@+id/profile_hair_type"
+                    android:layout_toEndOf="@+id/profile_hair_type"
+                    android:layout_column="0"
+                    android:layout_row="5" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/hair"
+                    android:id="@+id/hair"
+                    android:padding="10dp"
+                    android:textColor="@color/asphaltdark"
+                    android:textSize="15sp"
+                    android:layout_below="@+id/profil_sex"
+                    android:layout_alignLeft="@+id/profile_city"
+                    android:layout_alignStart="@+id/profile_city"
+                    android:layout_column="0"
+                    android:layout_row="6" />
+
+            </GridLayout>
+        </ScrollView>
+
+    </TableLayout>
+
 
 </RelativeLayout>
