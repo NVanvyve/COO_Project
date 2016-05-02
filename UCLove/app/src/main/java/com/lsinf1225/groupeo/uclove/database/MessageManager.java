@@ -119,6 +119,7 @@ public class MessageManager {
             a.setMessageUserID(c.getInt(c.getColumnIndex(KEY_MESSAGE_USER_ID)));
             a.setMessageDate(c.getString(c.getColumnIndex(KEY_MESSAGE_DATE)));
             a.setMessageText(c.getString(c.getColumnIndex(KEY_MESSAGE_TEXT)));
+            loop++;
           }
           while(c.moveToNext() && (loop <= recent_number));
       }
