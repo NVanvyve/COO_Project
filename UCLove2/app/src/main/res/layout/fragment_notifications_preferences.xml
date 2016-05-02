@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView2" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/pref_notif_intro"
+                android:id="@+id/pref_notif_intro" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/pref_notif_friend"
+                android:paddingTop="20dp"
+                android:id="@+id/pref_notif_friend" />
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pref_notif_friend_request"
+                android:id="@+id/pref_notif_friend_request"
+                android:checked="true"
+                android:paddingTop="10dp"
+                android:textSize="18sp" />
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pref_notif_friend_accepted"
+                android:id="@+id/pref_notif_friend_accepted"
+                android:checked="true"
+                android:paddingTop="10dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/pref_notif_messages"
+                android:paddingTop="20dp"
+                android:id="@+id/pref_notif_messages" />
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pref_notif_new_message"
+                android:id="@+id/pref_notif_new_message"
+                android:checked="true"
+                android:paddingTop="10dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/pref_notif_meeting"
+                android:paddingTop="20dp"
+                android:id="@+id/pref_notif_meeting" />
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pref_notif_meeting_request"
+                android:id="@+id/pref_notif_meeting_request"
+                android:checked="true"
+                android:paddingTop="10dp"
+                android:textSize="18sp" />
+
+            <Switch
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pref_notif_meeting_accepted"
+                android:id="@+id/pref_notif_meeting_accepted"
+                android:checked="true"
+                android:paddingTop="10dp"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

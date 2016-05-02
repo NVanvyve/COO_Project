@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="profile">Profile</string>
-    <string name="hair">Hair :</string>
-    <string name="profile_login">Login :</string>
-    <string name="profile_city">City :</string>
-    <string name="profile_eyes">Eyes :</string>
-</resources>

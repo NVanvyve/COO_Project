@@ -1,0 +1,180 @@
+<resources>
+    <string name="app_name">UCLove</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!--Account connection-->
+    <string name="account_creation_intro">Fields with a star (*) are required.</string>
+    <string name="connexion">Log in</string>
+    <string name="password">Password</string>
+    <string name="account_creation_password">Password *</string>
+    <string name="username">Username</string>
+    <string name="account_creation_username">Username *</string>
+    <string name="create_account">Create an account</string>
+    <string name="go">Go!</string>
+    <string name="or">or...</string>
+    <string name="first_name">First name *</string>
+    <string name="last_name">Last name *</string>
+    <string name="birth_date">Birth date</string>
+    <string name="set_birth_date">Set birth date *</string>
+    <string name="city">City *</string>
+
+    <!--Account creation-->
+    <string name="language">Language</string>
+    <string name="select_language">Select your language *</string>
+    <string name="french">French</string>
+    <string name="english">English</string>
+    <string-array name="language">
+        <item>@string/select_language</item>
+        <item>@string/french</item>
+        <item>@string/english</item>
+    </string-array>
+
+    <string name="hair_color">Hair color</string>
+    <string name="select_hair_color">Select your hair color</string>
+    <string name="hair_color_blond">Blond</string>
+    <string name="hair_color_brown">Brown</string>
+    <string name="hair_color_black">Black</string>
+    <string name="hair_color_ginger">Ginger</string>
+    <string name="hair_color_greywhite">Grey/white</string>
+    <string name="hair_color_other">Other</string>
+    <string-array name="hair_color">
+        <item>@string/select_hair_color</item>
+        <item>@string/hair_color_blond</item>
+        <item>@string/hair_color_brown</item>
+        <item>@string/hair_color_black</item>
+        <item>@string/hair_color_ginger</item>
+        <item>@string/hair_color_greywhite</item>
+        <item>@string/hair_color_other</item>
+    </string-array>
+
+    <string name="hair_type">Hair type</string>
+    <string name="select_hair_type">Select your hair type</string>
+    <string name="hair_type_short">Short</string>
+    <string name="hair_type_medium">Medium</string>
+    <string name="hair_type_long">Long</string>
+    <string-array name="hair_type">
+        <item>@string/select_hair_type</item>
+        <item>@string/hair_type_short</item>
+        <item>@string/hair_type_medium</item>
+        <item>@string/hair_type_long</item>
+    </string-array>
+
+    <string name="eyes_color">Eyes color</string>
+    <string name="select_eyes_color">Select your eyes color</string>
+    <string name="eyes_color_blue">Blue</string>
+    <string name="eyes_color_brown">Brown</string>
+    <string name="eyes_color_black">Black</string>
+    <string name="eyes_color_green">Green</string>
+    <string name="eyes_color_grey">Grey</string>
+    <string-array name="eyes_color">
+        <item>@string/select_eyes_color</item>
+        <item>@string/eyes_color_blue</item>
+        <item>@string/eyes_color_brown</item>
+        <item>@string/eyes_color_black</item>
+        <item>@string/eyes_color_green</item>
+        <item>@string/eyes_color_grey</item>
+    </string-array>
+
+    <string name="sex">Sex</string>
+    <string name="select_sex">Select your gender *</string>
+    <string name="sex_m">Male</string>
+    <string name="sex_f">Female</string>
+    <string-array name="sex">
+        <item>@string/select_sex</item>
+        <item>@string/sex_m</item>
+        <item>@string/sex_f</item>
+    </string-array>
+
+    <string name="sexuality">Sexuality</string>
+    <string name="select_sexuality">Select your sexuality *</string>
+    <string name="sexuality_hetero">Heterosexual</string>
+    <string name="sexuality_homo">Homosexual</string>
+    <string name="sexuality_bi">Bisexual</string>
+    <string-array name="sexuality">
+        <item>@string/select_sexuality</item>
+        <item>@string/sexuality_hetero</item>
+        <item>@string/sexuality_homo</item>
+        <item>@string/sexuality_bi</item>
+    </string-array>
+
+    <string name="upload_picture">Take a picture</string>
+    <string name="Position">Position</string>
+    <string name="picture">picture</string>
+    <string name="profile_picture">profile picture</string>
+
+    <!--Navigation menu-->
+    <string name="nav_about_you">About you</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_notifications">Notifications</string>
+    <string name="nav_friends_search">Search friends</string>
+    <string name="nav_friend_requests">Friend requests</string>
+    <string name="nav_friends">Friends</string>
+    <string name="nav_favourites">Favourites</string>
+    <string name="nav_messages">Messages</string>
+    <string name="nav_meet">Meet friends</string>
+    <string name="nav_preferences">Preferences</string>
+    <string name="nav_notifications_preferences">Notifications preferences</string>
+    <string name="nav_search_preferences">Search preferences</string>
+    <string name="nav_edit_profile">Edit your profile</string>
+    <string name="nav_log_off">Log off</string>
+
+    <!--Search preferences fragment-->
+    <string name="pref_search_intro">Select your friends search preferences here. By default, every option is taken into account. If you don\'t want a particular characteristic to appear in the results, just deselect it.</string>
+    <string name="pref_search_language">Language spoken</string>
+        <string name="pref_search_language_fr">French</string>
+        <string name="pref_search_language_en">English</string>
+
+    <string name="pref_search_hair_color">Hair color</string>
+        <string name="pref_search_hair_color_blond">Blond hair</string>
+        <string name="pref_search_hair_color_brown">Brown hair</string>
+        <string name="pref_search_hair_color_black">Black hair</string>
+        <string name="pref_search_hair_color_ginger">Ginger hair</string>
+        <string name="pref_search_hair_color_greywhite">Grey/white hair</string>
+        <string name="pref_search_hair_color_other">Other</string>
+
+    <string name="pref_search_hair_type">Hair type</string>
+        <string name="pref_search_hair_type_short">Short hair</string>
+        <string name="pref_search_hair_type_medium">Medium hair</string>
+        <string name="pref_search_hair_type_long">Long hair</string>
+
+    <string name="pref_search_eyes_color">Eyes color</string>
+        <string name="pref_search_eyes_color_blue">Blue eyes</string>
+        <string name="pref_search_eyes_color_brown">Brown eyes</string>
+        <string name="pref_search_eyes_color_black">Black eyes</string>
+        <string name="pref_search_eyes_color_green">Green eyes</string>
+        <string name="pref_search_eyes_color_grey">Grey eyes</string>
+
+    <string name="pref_search_age">Age</string>
+        <string name="pref_search_age_max">Maximum age</string>
+        <string name="pref_search_age_min">Minimum age</string>
+
+    <string name="pref_search_distance">Distance</string>
+    <string name="pref_search_distance_max">Maximum distance</string>
+
+    <!--Notifications preferences fragment-->
+    <string name="pref_notif_intro">Select your notifications preferences here. By default, you receive all notifications. Deselect the ones you don\'t want to see.</string>
+    <string name="pref_notif_friend">Friends</string>
+        <string name="pref_notif_friend_request">Friend request</string>
+        <string name="pref_notif_friend_accepted">Friend request accepted</string>
+    <string name="pref_notif_messages">Messages</string>
+        <string name="pref_notif_new_message">New message</string>
+    <string name="pref_notif_meeting">Meeting</string>
+        <string name="pref_notif_meeting_request">Meeting request</string>
+        <string name="pref_notif_meeting_accepted">Meeting request accepted</string>
+
+    <!--Profile fragment-->
+    <string name="profile_username">Username :</string>
+    <string name="profile_last_name">Last name :</string>
+    <string name="profile_first_name">First name :</string>
+    <string name="profile_birth_date">Birth date :</string>
+    <string name="profile_city">City :</string>
+    <string name="profile_language">Language :</string>
+    <string name="profile_hair_color">Hair color :</string>
+    <string name="profile_hair_type">Hair type :</string>
+    <string name="profile_eyes_color">Eyes color :</string>
+    <string name="profile_unspecified">Unspecified</string>
+
+
+</resources>

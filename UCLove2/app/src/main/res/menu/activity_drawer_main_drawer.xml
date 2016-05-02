@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/nav_about_you">
+        <menu>
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="@string/nav_profile" />
+            <item
+                android:id="@+id/nav_notifications"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="@string/nav_notifications" />
+        </menu>
+    </item>
+
+    <item android:title="@string/nav_friends">
+        <menu>
+            <item
+                android:id="@+id/nav_friends_search"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="@string/nav_friends_search" />
+            <item
+                android:id="@+id/nav_friend_requests"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="@string/nav_friend_requests" />
+            <item
+                android:id="@+id/nav_friends"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="@string/nav_friends" />
+            <item
+                android:id="@+id/nav_favourites"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/nav_favourites" />
+
+            <item
+                android:id="@+id/nav_messages"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/nav_messages" />
+            <item
+                android:id="@+id/nav_meet"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/nav_meet" />
+        </menu>
+    </item>
+
+    <item android:title="@string/nav_preferences">
+        <menu>
+            <item
+                android:id="@+id/nav_search_preferences"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="@string/nav_search_preferences" />
+            <item
+                android:id="@+id/nav_notifications_preferences"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="@string/nav_notifications_preferences" />
+            <item
+                android:id="@+id/nav_edit_profile"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="@string/nav_edit_profile" />
+        </menu>
+    </item>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_log_off"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/nav_log_off" />
+    </group>
+
+</menu>
