@@ -11,6 +11,10 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import static java.lang.Math.acos;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+
 
 public class GPSTracker extends Service implements LocationListener {
 
@@ -225,5 +229,49 @@ public class GPSTracker extends Service implements LocationListener {
 
     }
 
+
+
+    public String CoordToString(double lat, double lon)
+    {
+        return (Double.toString(lat)+";"+Double.toString(lon));
+    }
+
+    public double Distance(String coordA, String coordB)
+    {
+        double LongA = ExtractLongitude(coordA);
+        double LongB = ExtractLongitude(coordB);
+        double LatA = ExtractLatitude(coordA);
+        double LatB = ExtractLatitude(coordB);
+
+        double R = 6371000; // Rayon de la Terre en mètres
+        double a = Math.toRadians(LatA); //latitude du point A (en radians)
+        double b = Math.toRadians(LatB); //latitude du point B (en radians)
+        double c = Math.toRadians(LongA); //longitude du point A (en radians)
+        double d = Math.toRadians(LongB); //longitude du point B (en radians)
+
+        double Dist;
+
+        Dist = R*acos(cos(a)*cos(b)*cos(c-d)+sin(a)*sin(b)); //Distance en metre
+
+        return Dist/1000; // En km
+
+    }
+
+    public double ExtractLatitude(String Coord)
+    {
+        String[] tab = Coord.split(";");
+        return Double.parseDouble(tab[0]);
+    }
+
+    public double ExtractLongitude(String Coord)
+    {
+        String[] tab = Coord.split(";");
+        return Double.parseDouble(tab[1]);
+    }
+
+    public String getCoord()
+    {
+        return CoordToString(latitude,longitude);
+    }
 
 }
