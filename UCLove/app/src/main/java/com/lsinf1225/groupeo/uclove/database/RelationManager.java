@@ -116,35 +116,44 @@ public class RelationManager {
     return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
   }
 
-  public User getFavorite(User user, int number){
-    //Relation a = new Relation(0, 0, 0, "", 0, 0);
+  public long getFavorite(User user, int number){
 
-    User a = new User(0,"", "", "", "", "", "", "", "", "", "", "", "", "", "");
-
+    Relation a = new Relation(0, -1, -1, "", 0, 0);
     int loop = 0;
-
+    long favorite_user_id = -1;
     int user_id = user.getUserID();
 
     //Sélectionne toutes les relations ou l'utilisateur passé en argument a marqué comme favori son contact
-    Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE ("+KEY_RELATION_USER_ID_A+"="+user_id+" AND "+KEY_RELATION_FAV_A+"=1) OR ("+KEY_RELATION_USER_ID_B+"="+user_id+" AND "+KEY_RELATION_FAV_B+"=1)", null);
+    Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+"
+    WHERE ("+KEY_RELATION_USER_ID_A+"="+user_id+"
+    AND "+KEY_RELATION_FAV_A+"=1)
+    OR ("+KEY_RELATION_USER_ID_B+"="+user_id+"
+    AND "+KEY_RELATION_FAV_B+"=1)", null);
 
-    if (c.moveToFirst() && loop <= number) {
-      if (c.moveToFirst() && loop <= number)
-      {
-        do {
-          if((c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_A)))==user_id){
-            // assigner les valeurs de l'user favori correspondant à fav_B dans un Objet User
-          }
-          else if((c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_B)))==user_id){
-            // assigner les valeurs de l'user favori correspondant à fav_A dans un Objet User
-          }
-        }
-        while (c.moveToNext());
+    if(c.moveToFirst()){
+      do{
+        a.setRelID(c.getInt(c.getColumnIndex(KEY_RELATION_ID)));
+        a.setRelUserIDA(c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_A)));
+        a.setRelUserIDB(c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_B)));
+        a.setRelStatus(c.getString(c.getColumnIndex(KEY_RELATION_STATUS)));
+        a.setRelFavA(c.getInt(c.getColumnIndex(KEY_RELATION_FAV_A)));
+        a.setRelFavB(c.getInt(c.getColumnIndex(KEY_RELATION_FAV_B)));
+        loop++;
       }
-      c.close(); // fermeture du curseur
-
-      return a;
-
+      while(c.moveToNext() && (loop < number));
+      c.close();
     }
+
+    if (loop < number) {
+      favorite_user_id = -1;
+    }
+    else if (a.getRelUserIDA() == user_id) {
+      favorite_user_id = a.getRelUserIDB();
+    } else {
+      favorite_user_id = a.getRelUserIDA();
+    }
+    return favorite_user_id;
+
+  }
 
   } // class RelationManager
