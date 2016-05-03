@@ -28,9 +28,11 @@ public class RelationManager {
             " "+KEY_RELATION_USER_ID_B+" INTEGER not null references User," +
             " "+KEY_RELATION_STATUS+" TEXT not null," +
             " "+KEY_RELATION_FAV_A+" INTEGER not null default 0," +
-            " "+KEY_RELATION_FAV_B+" INTEGER not null default 0," +
-            " unique("+KEY_RELATION_USER_ID_A+", "+KEY_RELATION_USER_ID_A+") " +
+            " "+KEY_RELATION_FAV_B+" INTEGER not null default 0" +
             ");";
+    public static final String TABLE_RELATION_TRIGGER = "CREATE TRIGGER no_duplicates_in_Relation BEFORE INSERT ON "+TABLE_NAME+
+            " FOR EACH ROW BEGIN SELECT RAISE (ABORT, 'No duplicates in table "+TABLE_NAME+"') FROM "+TABLE_NAME+
+            " WHERE "+KEY_RELATION_USER_ID_A+" = NEW."+KEY_RELATION_USER_ID_B+" AND "+KEY_RELATION_USER_ID_B+" = NEW."+KEY_RELATION_USER_ID_A+"; END;";
     private MySQLite maBaseSQLite; // notre gestionnaire du fichier SQLite
     private SQLiteDatabase db;
 
@@ -109,6 +111,102 @@ public class RelationManager {
         }
 
         return a;
+    }
+
+    public Relation getRelationFromUserIdsOrdered(long user_id_a, long user_id_b) {
+        // Retourne la relation dont l'id est passé en paramètre
+        Relation a = new Relation(0, 0, 0, "", 0, 0);
+
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_RELATION_USER_ID_A+"="+user_id_a+
+                                                             " AND "+KEY_RELATION_USER_ID_B+"="+user_id_b, null);
+        if (c.moveToFirst()) {
+            a.setRelID(c.getInt(c.getColumnIndex(KEY_RELATION_ID)));
+            a.setRelUserIDA(c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_A)));
+            a.setRelUserIDB(c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_B)));
+            a.setRelStatus(c.getString(c.getColumnIndex(KEY_RELATION_STATUS)));
+            a.setRelFavA(c.getInt(c.getColumnIndex(KEY_RELATION_FAV_A)));
+            a.setRelFavB(c.getInt(c.getColumnIndex(KEY_RELATION_FAV_B)));
+            c.close();
+        }
+
+        return a;
+    }
+
+    public Relation getRelationFromUserIds(long user_id_a, long user_id_b) {
+        // Retourne la relation dont l'id est passé en paramètre
+        Relation a = new Relation(0, 0, 0, "", 0, 0);
+
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE ("+KEY_RELATION_USER_ID_A+"="+user_id_a+
+                                                                " AND "+KEY_RELATION_USER_ID_B+"="+user_id_b+")"+
+                                                            " OR ("+KEY_RELATION_USER_ID_A+"="+user_id_b+
+                                                                " AND "+KEY_RELATION_USER_ID_B+"="+user_id_a+")", null);
+        if (c.moveToFirst()) {
+            a.setRelID(c.getInt(c.getColumnIndex(KEY_RELATION_ID)));
+            a.setRelUserIDA(c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_A)));
+            a.setRelUserIDB(c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_B)));
+            a.setRelStatus(c.getString(c.getColumnIndex(KEY_RELATION_STATUS)));
+            a.setRelFavA(c.getInt(c.getColumnIndex(KEY_RELATION_FAV_A)));
+            a.setRelFavB(c.getInt(c.getColumnIndex(KEY_RELATION_FAV_B)));
+            c.close();
+        }
+
+        return a;
+    }
+
+    public Relation getRelationFromUserIdsForSearch(long user_id_a, long user_id_b) {
+        // Retourne la relation dont l'id est passé en paramètre
+        Relation a = new Relation(0, 0, 0, "", 0, 0);
+
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE ("+KEY_RELATION_USER_ID_A+"="+user_id_a+" AND "+KEY_RELATION_USER_ID_B+"="+user_id_b+" AND "+KEY_RELATION_STATUS+"= 'Accepted')"+
+                                                              " OR ("+KEY_RELATION_USER_ID_B+"="+user_id_a+" AND "+KEY_RELATION_USER_ID_A+"="+user_id_b+" AND "+KEY_RELATION_STATUS+"= 'Accepted')"+
+                                                              " OR ("+KEY_RELATION_USER_ID_A+"="+user_id_a+" AND "+KEY_RELATION_USER_ID_B+"="+user_id_b+" AND "+KEY_RELATION_STATUS+"= 'Declined')"+
+                                                              " OR ("+KEY_RELATION_USER_ID_B+"="+user_id_a+" AND "+KEY_RELATION_USER_ID_A+"="+user_id_b+" AND "+KEY_RELATION_STATUS+"= 'Declined')"+
+                                                              " OR ("+KEY_RELATION_USER_ID_A+"="+user_id_a+" AND "+KEY_RELATION_USER_ID_B+"="+user_id_b+" AND "+KEY_RELATION_STATUS+"= 'Request')", null);
+        if (c.moveToFirst()) {
+            a.setRelID(c.getInt(c.getColumnIndex(KEY_RELATION_ID)));
+            a.setRelUserIDA(c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_A)));
+            a.setRelUserIDB(c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_B)));
+            a.setRelStatus(c.getString(c.getColumnIndex(KEY_RELATION_STATUS)));
+            a.setRelFavA(c.getInt(c.getColumnIndex(KEY_RELATION_FAV_A)));
+            a.setRelFavB(c.getInt(c.getColumnIndex(KEY_RELATION_FAV_B)));
+            c.close();
+        }
+
+        return a;
+    }
+
+    public long getFriend(long user_id, int number){
+        long friend_user_id = -1;
+        int loop = 0;
+        Relation a = new Relation(0, -1, -1, "", 0, 0);
+
+        String query = "SELECT * FROM "+TABLE_NAME+" WHERE ("+KEY_RELATION_USER_ID_A+"="+user_id+" AND "+KEY_RELATION_STATUS+"= 'Accepted')"+
+                                                      " OR ("+KEY_RELATION_USER_ID_B+"="+user_id+" AND "+KEY_RELATION_STATUS+"= 'Accepted')";
+
+        Cursor c = db.rawQuery(query, null);
+
+        if(c.moveToFirst()){
+            do{
+                a.setRelID(c.getInt(c.getColumnIndex(KEY_RELATION_ID)));
+                a.setRelUserIDA(c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_A)));
+                a.setRelUserIDB(c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_B)));
+                a.setRelStatus(c.getString(c.getColumnIndex(KEY_RELATION_STATUS)));
+                a.setRelFavA(c.getInt(c.getColumnIndex(KEY_RELATION_FAV_A)));
+                a.setRelFavB(c.getInt(c.getColumnIndex(KEY_RELATION_FAV_B)));
+                loop++;
+            }
+            while(c.moveToNext() && (loop < number));
+            c.close();
+        }
+        if (loop < number) {
+            friend_user_id = -1;
+        }
+        else if (a.getRelUserIDA() == user_id) {
+            friend_user_id = a.getRelUserIDB();
+        } else {
+            friend_user_id = a.getRelUserIDA();
+        }
+        return friend_user_id;
     }
 
     public Cursor getRelations() {

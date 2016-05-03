@@ -45,11 +45,15 @@ public class MainActivity extends AppCompatActivity {
             startActivity(DrawerActivity);
         } else {
             Context context = getApplicationContext();
-            CharSequence text = "Nom d'utilisateur ou mot de passe incorrect";
+            CharSequence text = getResources().getString(R.string.connection_invalid);
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }

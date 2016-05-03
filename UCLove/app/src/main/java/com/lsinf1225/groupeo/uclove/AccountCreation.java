@@ -306,7 +306,7 @@ public class AccountCreation extends AppCompatActivity implements DatePickerDial
             startActivity(DrawerActivity);
         } else {
             Context context = getApplicationContext();
-            CharSequence text = "Cet utilisateur existe déjà, ou les données sont incomplètes!";
+            CharSequence text = getResources().getString(R.string.account_invalid);;
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);

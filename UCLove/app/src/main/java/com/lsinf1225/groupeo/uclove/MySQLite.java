@@ -21,7 +21,7 @@ import com.lsinf1225.groupeo.uclove.database.UserManager;
 public class MySQLite extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "db.sqlite";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 8;
     private static MySQLite sInstance;
 
     public static synchronized MySQLite getInstance(Context context) {
@@ -37,15 +37,16 @@ public class MySQLite extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         // Création de la base de données
         // on exécute ici les requêtes de création des tables
+        sqLiteDatabase.execSQL("PRAGMA foreign_keys = ON;");
         sqLiteDatabase.execSQL(UserManager.CREATE_TABLE_USER); // création table "User"
         sqLiteDatabase.execSQL(RDVManager.CREATE_TABLE_RDV); // création table "RDV"
         sqLiteDatabase.execSQL(MessageManager.CREATE_TABLE_MESSAGE); // création table "RDV"
         sqLiteDatabase.execSQL(NotificationManager.CREATE_TABLE_NOTIFICATION); // création table "Notification"
         sqLiteDatabase.execSQL(NotifAuthManager.CREATE_TABLE_NOTIFAUTH); // création table "NotifAuth"
         sqLiteDatabase.execSQL(RelationManager.CREATE_TABLE_RELATION); // création table "Relation"
+        sqLiteDatabase.execSQL(RelationManager.TABLE_RELATION_TRIGGER); // trigger
         sqLiteDatabase.execSQL(CalendarManager.CREATE_TABLE_CALENDAR); // création table "Calendar"
         sqLiteDatabase.execSQL(PreferencesManager.CREATE_TABLE_PREFERENCES); // création table "Preferences"
-
     }
 
     @Override

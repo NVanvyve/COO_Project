@@ -71,11 +71,9 @@ public class ProfileFragment extends Fragment {
         myText = (TextView) myFragmentView.findViewById(R.id.profile_username_data);
         myText.setText(username);
 
-        myText = (TextView) myFragmentView.findViewById(R.id.profile_first_name_data);
-        myText.setText(firstName);
-
-        myText = (TextView) myFragmentView.findViewById(R.id.profile_last_name_data);
-        myText.setText(lastName);
+        String name = firstName + " " + lastName;
+        myText = (TextView) myFragmentView.findViewById(R.id.profile_name);
+        myText.setText(name);
 
         myText = (TextView) myFragmentView.findViewById(R.id.profile_birth_date_data);
         myText.setText(birthDate);

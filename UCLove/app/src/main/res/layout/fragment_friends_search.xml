@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:id="@+id/profile_profile_picture"
+        android:id="@+id/friends_search_profile_picture"
         android:layout_gravity="center_horizontal" />
 
     <ScrollView
@@ -64,32 +64,6 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:stretchColumns="*" >
-
-                <TableRow
-                    android:layout_height="match_parent"
-                    android:layout_width="0dp"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/profile_username"
-                        android:id="@+id/profile_username"
-                        android:textAlignment="textEnd"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorPrimary"
-                        android:paddingTop="20dp"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/profile_unspecified"
-                        android:id="@+id/profile_username_data"
-                        android:paddingStart="10dp"
-                        android:paddingTop="20dp"/>
-                </TableRow>
 
                 <TableRow
                     android:layout_height="match_parent"
@@ -245,6 +219,29 @@
                         android:id="@+id/profile_eyes_color_data"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/friends_search_dislike"
+                        android:id="@+id/friends_search_button_dislike"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/friends_search_like"
+                        android:id="@+id/friends_search_button_like"
+                        android:textColor="@color/white" />
                 </TableRow>
             </TableLayout>
 
