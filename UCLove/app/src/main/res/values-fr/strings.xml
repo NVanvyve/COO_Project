@@ -113,4 +113,11 @@
     <string name="account_creation_password">Mot de passe *</string>
     <string name="account_creation_username">Nom d\'utilisateur *</string>
     <string name="account_creation_intro">Les champs marqués d\'une étoile (*) sont obligatoires.</string>
+    <string name="friends_search_dislike">Rejeter</string>
+    <string name="friends_search_like">J\'aime</string>
+    <string name="friends_search_failed_intro">Aucun nouvel ami potentiel n\'a été trouvé. Veuillez modifier vos préférences de recherche.</string>
+    <string name="friends_search_accepted">Vous êtes maintenant amis!</string>
+    <string name="friends_search_request">Votre demande d\'amitié a été envoyée!</string>
+    <string name="connection_invalid">Nom d\'utilisateur ou mot de passe incorrect.</string>
+    <string name="account_invalid">Cet utilisateur existe déjà, ou les champs sont incomplets.</string>
 </resources>

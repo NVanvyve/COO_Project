@@ -227,11 +227,12 @@ public class UserManager {
     }
 
     public String formatquery(String str[]){
+        String acc;
         if(str[0]==null){
-            return(null);
+            return("");
         }
         else{
-            String acc="AND ( ";
+            acc="AND ( ";
             int i=0;
             while(str[i]!=null){
                 if(str[i+1]==null){
@@ -239,28 +240,30 @@ public class UserManager {
                     return(acc);
                 }
                 else{
-                    acc+=str[i]+"  OR";
+                    acc+=str[i]+" OR ";
                 }
+                i++;
             }
         }
-        return(null);
+        return acc;
     }
 
     public long userSearcher(User user) {
 
-        //retourne un utilisateur qui satisfait les critères de recherche de user et avec lequel il n'a pas encore interragis
+        //retourne un utilisateur qui satisfait les critères de recherche de user et avec lequel il n'a pas encore interragi
 
         PreferencesManager m = new PreferencesManager(contextglobal);
         m.open();
         Preferences newPrefs = m.getPreferences(user.getUserID());
-        m.close();
-
-        String query = "select user_id FROM User U Relation R WHERE ";
-        String haircolorpref[] = new String[7];
+        //m.close();
+        String query = "SELECT U.user_id FROM User U LEFT JOIN Relation R WHERE ";
+        String languagePref[] = new String[3];
+        int l = 0;
+        String haircolorpref[] = new String[8];
         int hc = 0;
-        String hairTypepref[] = new String[4];
+        String hairTypepref[] = new String[5];
         int ht = 0;
-        String eyecolorpref[] = new String[6];
+        String eyecolorpref[] = new String[7];
         int ec = 0;
         if (newPrefs.getPrefHairColorBlond() == 1) {
 
@@ -287,6 +290,8 @@ public class UserManager {
             haircolorpref[hc] = "U.user_hair_color = 'Other'";
             hc += 1;
         }
+        haircolorpref[hc] = "U.user_hair_color = 'Unspecified'";
+        hc += 1;
         if (newPrefs.getPrefHairTypeShort() == 1) {
             hairTypepref[ht] = "U.user_hair_type = 'Short'";
             ht += 1;
@@ -299,6 +304,8 @@ public class UserManager {
             hairTypepref[ht] = "U.user_hair_type = 'Long'";
             ht += 1;
         }
+        hairTypepref[ht] = "U.user_hair_type = 'Unspecified'";
+        ht += 1;
         if (newPrefs.getPrefEyesColorBlue() == 1) {
             eyecolorpref[ec] = "U.user_eyes_color = 'Blue'";
             ec += 1;
@@ -312,31 +319,54 @@ public class UserManager {
             ec += 1;
         }
         if (newPrefs.getPrefEyesColorGreen() == 1) {
-            eyecolorpref[ec] = "U.user_eyes_color = 'green'";
+            eyecolorpref[ec] = "U.user_eyes_color = 'Green'";
             ec += 1;
         }
         if (newPrefs.getPrefEyesColorGrey() == 1) {
             eyecolorpref[ec] = "U.user_eyes_color = 'Grey'";
             ec += 1;
         }
-        query += "( U.user_id <>'" + String.valueOf(user.getUserID()) + "' AND cast(strftime('%Y.%m%d', 'now') - strftime('%Y.%m%d', U.user_birth_date) as int) <='" + String.valueOf(newPrefs.getPrefAgeMax()) + "' AND cast(strftime('%Y.%m%d', 'now') - strftime('%Y.%m%d', U.user_birth_date) as int) >='" + String.valueOf(newPrefs.getPrefAgeMin()) + "' )";
+        eyecolorpref[ec] = "U.user_eyes_color = 'Unspecified'";
+        ec += 1;
+        if (newPrefs.getPrefLanguageFR() == 1) {
+            languagePref[l] = "U.user_language = 'French'";
+            l += 1;
+        }
+        if (newPrefs.getPrefLanguageEN() == 1) {
+            languagePref[l] = "U.user_language = 'English'";
+            l += 1;
+        }
+        query += "U.user_id <> '" + String.valueOf(user.getUserID()) + "' AND cast(strftime('%Y.%m%d', 'now') - strftime('%Y.%m%d', U.user_birth_date) as int) <='" + String.valueOf(newPrefs.getPrefAgeMax()) + "' AND cast(strftime('%Y.%m%d', 'now') - strftime('%Y.%m%d', U.user_birth_date) as int) >='" + String.valueOf(newPrefs.getPrefAgeMin()) + "' ";
         query += formatquery(haircolorpref);
         query += formatquery(hairTypepref);
         query += formatquery(eyecolorpref);
-        if (user.getUserSexuality().equals("heterosexual")) {
-            query += " AND ( U.user_sex <>'" + user.getUserSex() + "' AND (U.user_sexuality ='heterosexual' OR U.user_sexuality='bisexual' )";
-        } else if (user.getUserSexuality().equals("homosexual")) {
-            query += " AND ( U.user_sex ='" + user.getUserSex() + "' AND (U.user_sexuality ='homosexual' OR U.user_sexuality='bisexual'  )";
+        query += formatquery(languagePref);
+        if (user.getUserSexuality().equals("Heterosexual")) {
+            query += " AND ( U.user_sex <> '" + user.getUserSex() + "' ) AND (U.user_sexuality ='Heterosexual' OR U.user_sexuality='Bisexual' )";
+        } else if (user.getUserSexuality().equals("Homosexual")) {
+            query += " AND ( U.user_sex = '" + user.getUserSex() + "' ) AND (U.user_sexuality ='Homosexual' OR U.user_sexuality='Bisexual'  )";
         } else {
-            query += " AND ( (U.user_sexuality ='homosexual' AND U.user_sexuality <>'" + user.getUserSex() + "') OR (U.user_sexuality='bisexual') OR (U.user_sexuality ='heterosexual' AND U.user_sexuality ='" + user.getUserSex() + "')  )";
+            query += " AND (( (U.user_sexuality ='Homosexual' AND U.user_sexuality ='" + user.getUserSex() + "') OR (U.user_sexuality='Bisexual') OR (U.user_sexuality ='Heterosexual' AND U.user_sexuality <>'" + user.getUserSex() + "'))  )";
         }
-        query += " AND ( U.user_id = P.user_id_a AND P.user_id_b='" + String.valueOf(user.getUserID()) + "' AND P.rel_status='request'";
+        query += " OR ( U.user_id = R.rel_user_id_a AND R.rel_user_id_b='" + String.valueOf(user.getUserID()) + "' AND R.rel_status = 'Request' );";
+        System.out.println(query);
         Cursor d = db.rawQuery(query, null);
         if (d.moveToFirst()) {
-            long userID = d.getLong(d.getColumnIndex(KEY_USER_ID));
+            long userID = -1;
+            do {
+                userID = d.getLong(d.getColumnIndex(KEY_USER_ID));
+                RelationManager rm = new RelationManager(contextglobal);
+                rm.open();
+                Relation rel = rm.getRelationFromUserIdsForSearch(user.getUserID(), userID);
+                if (!rel.getRelSatus().equals("Accepted") && !rel.getRelSatus().equals("Declined") && !rel.getRelSatus().equals("Request")) {
+                    d.close();
+                    return userID;
+                } else {
+                    userID = -1;
+                }
+            } while (d.moveToNext());
             d.close();
             return (userID);
-
         } else {
             d.close();
             return -1;

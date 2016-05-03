@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.lsinf1225.groupeo.uclove.GPSTracker;
 import com.lsinf1225.groupeo.uclove.R;
+import static java.lang.Math.*;
 
 
 public class MeetingFragment extends Fragment {

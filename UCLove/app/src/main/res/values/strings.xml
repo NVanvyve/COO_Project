@@ -19,6 +19,8 @@
     <string name="birth_date">Birth date</string>
     <string name="set_birth_date">Set birth date *</string>
     <string name="city">City *</string>
+    <string name="account_invalid">This user already exists, or the fields are incomplete.</string>
+    <string name="connection_invalid">Username or password incorrect.</string>
 
     <!--Account creation-->
     <string name="language">Language</string>
@@ -175,6 +177,15 @@
     <string name="profile_hair_type">Hair type :</string>
     <string name="profile_eyes_color">Eyes color :</string>
     <string name="profile_unspecified">Unspecified</string>
+
+    <!--Friends search fragment-->
+    <string name="friends_search_like">Like</string>
+    <string name="friends_search_dislike">Dislike</string>
+    <string name="friends_search_accepted">You are now friends!</string>
+    <string name="friends_search_request">Your friend request has been sent!</string>
+
+    <!--Friends search failed fragment-->
+    <string name="friends_search_failed_intro">No possible new friend was found. Please change your search preferences.</string>
 
 
 </resources>

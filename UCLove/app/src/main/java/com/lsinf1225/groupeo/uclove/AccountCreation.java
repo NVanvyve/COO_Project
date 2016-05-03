@@ -265,9 +265,7 @@ public class AccountCreation extends AppCompatActivity implements DatePickerDial
         final Spinner sexualitySpinner = (Spinner) findViewById(R.id.account_creation_sexuality);
         String sexuality = mapSexuality(sexualitySpinner.getSelectedItem().toString());
 
-        //On initialise la position de l'utilisateur
-        GPSTracker gps = new GPSTracker(this);
-        String position = gps.getCoord();
+        String position = "POSITION";
 
         User newUser = new User(0, username, password, first_name, last_name, birthDate, city, language, hairColor, hairType, eyesColor, sex, sexuality, position, mCurrentPhotoPath);
 
@@ -278,12 +276,11 @@ public class AccountCreation extends AppCompatActivity implements DatePickerDial
             // Si l'utilisateur n'existe pas, on l'ajoute dans la BDD
             long userID = m.addUser(newUser);
 
-
             //On initialise les préférences de recherche de l'utilisateur
             Preferences newPreferences = new Preferences(1, (int)userID, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 200, 0, 1000000);
             PreferencesManager pm = new PreferencesManager(this);
             pm.open();
-            pm.addPreferences(newPreferences);
+                pm.addPreferences(newPreferences);
             pm.close();
 
             //On initialise les préférences de notifications de l'utilisateur
@@ -294,14 +291,12 @@ public class AccountCreation extends AppCompatActivity implements DatePickerDial
             NotifAuth na5 = new NotifAuth(1, (int)userID, 5, 1);
             NotifAuthManager nam = new NotifAuthManager(this);
             nam.open();
-            nam.addNotifAuth(na1);
-            nam.addNotifAuth(na2);
-            nam.addNotifAuth(na3);
-            nam.addNotifAuth(na4);
-            nam.addNotifAuth(na5);
+                nam.addNotifAuth(na1);
+                nam.addNotifAuth(na2);
+                nam.addNotifAuth(na3);
+                nam.addNotifAuth(na4);
+                nam.addNotifAuth(na5);
             nam.close();
-
-
 
             // On passe l'userID dans l'intent
             Intent DrawerActivity = new Intent(AccountCreation.this, DrawerMainActivity.class);
@@ -311,7 +306,7 @@ public class AccountCreation extends AppCompatActivity implements DatePickerDial
             startActivity(DrawerActivity);
         } else {
             Context context = getApplicationContext();
-            CharSequence text = "Cet utilisateur existe déjà, ou les données sont incomplètes!";;
+            CharSequence text = getResources().getString(R.string.account_invalid);;
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);
