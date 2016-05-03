@@ -116,4 +116,26 @@ public class RelationManager {
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
     }
 
+    public User getFavorite(User user, int number){
+      //SELECT *  FROM Relation WHERE (userIDA==4 AND favA==0) OR (userIDB==4 and favB==0)
+      Relation a = new Relation(0, 0, 0, "", 0, 0);
+
+      int user_id = user.getUserID();
+
+      //Sélectionne toutes les relations ou l'utilisateur passé en argument a marqué comme favori son contact
+      Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE ("+KEY_RELATION_USER_ID_A+"="+user_id+" AND "+KEY_RELATION_FAV_A+"=1) OR ("+KEY_RELATION_USER_ID_B+"="+user_id+" AND "+KEY_RELATION_FAV_B+"=1)", null);
+      if (c.moveToFirst()) {
+        a.setRelID(c.getInt(c.getColumnIndex(KEY_RELATION_ID)));
+        a.setRelUserIDA(c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_A)));
+        a.setRelUserIDB(c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_B)));
+        a.setRelStatus(c.getString(c.getColumnIndex(KEY_RELATION_STATUS)));
+        a.setRelFavA(c.getInt(c.getColumnIndex(KEY_RELATION_FAV_A)));
+        a.setRelFavB(c.getInt(c.getColumnIndex(KEY_RELATION_FAV_B)));
+        c.close();
+      }
+
+      return a;
+
+    }
+
 } // class RelationManager
