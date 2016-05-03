@@ -106,7 +106,7 @@ public class MessageManager {
 
     public Message getRecentMessage(int rel_id, int recent_number){
 
-      int loop = 0
+      int loop = 0;
 
       Message a = new Message(0, 0, 0, "", "");
 

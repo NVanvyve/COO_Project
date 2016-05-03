@@ -65,7 +65,7 @@ public class PreferencesManager {
     private SQLiteDatabase db;
 
     // Constructeur
-    public PreferencesManager(Context context)
+    public PreferencesManager(UserManager context)
     {
         maBaseSQLite = MySQLite.getInstance(context);
     }

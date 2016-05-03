@@ -120,9 +120,9 @@ public class NotificationManager {
 
     public Message getRecentNotification(int notif_user_id, int recent_number){
 
-      int loop = 0
+      int loop = 0;
 
-      Notification a = new Notificaton(0, 0 "", "", "", 0);
+      Notification a = new Notificaton(0,0,"", "", "", 0);
 
       Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_NOTIF_USER_ID + "=" + notif_user_id + " ORDER BY strftime(" + KEY_NOTIF_DATE + ",'YYYY-MM-DD HH:MM:SS')");
 
