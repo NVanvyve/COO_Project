@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.lsinf1225.groupeo.uclove.database.User;
 import com.lsinf1225.groupeo.uclove.database.UserManager;
+import com.lsinf1225.groupeo.uclove.drawer_fragments.MeetingFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.NotificationsPreferencesFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.ProfileFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.SearchPreferencesFragment;
@@ -94,6 +95,14 @@ public class DrawerMainActivity extends AppCompatActivity
                     .replace(R.id.content_frame, fragment)
                     .commit();
             setTitle(this.getString(R.string.nav_profile));
+
+        } else if (id == R.id.nav_meet) {
+            Fragment fragment = new MeetingFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
+            setTitle(this.getString(R.string.nav_meet));
 
         } else if (id == R.id.nav_search_preferences) {
             Fragment fragment = new SearchPreferencesFragment();
