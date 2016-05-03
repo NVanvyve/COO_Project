@@ -108,7 +108,7 @@ public class MessageManager {
 
       int loop = 0
 
-      Message a = new Message(0, 0, 0, "", "");
+      Message a = new Message(0, -1, -1, "", "");
 
       Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_MESSAGE_REL_ID + "=" + rel_id + " ORDER BY strftime(" + KEY_MESSAGE_DATE + ",'YYYY-MM-DD HH:MM:SS')");
 
