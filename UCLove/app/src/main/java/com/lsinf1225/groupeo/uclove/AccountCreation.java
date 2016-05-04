@@ -265,7 +265,8 @@ public class AccountCreation extends AppCompatActivity implements DatePickerDial
         final Spinner sexualitySpinner = (Spinner) findViewById(R.id.account_creation_sexuality);
         String sexuality = mapSexuality(sexualitySpinner.getSelectedItem().toString());
 
-        String position = "POSITION";
+        GPSTracker gps = new GPSTracker(this);
+        String position = gps.getCoord();
 
         User newUser = new User(0, username, password, first_name, last_name, birthDate, city, language, hairColor, hairType, eyesColor, sex, sexuality, position, mCurrentPhotoPath);
 

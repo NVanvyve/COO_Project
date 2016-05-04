@@ -69,6 +69,12 @@ public class DrawerMainActivity extends AppCompatActivity
         Picasso.with(myImage.getContext()).load(currentUser.getUserProfilePic()).fit().centerCrop().into(myImage);
         String completeName = currentUser.getUserFirstName() + " " + currentUser.getUserLastName();
         myText.setText(completeName);
+
+        //MAJ de la position
+        GPSTracker gps = new GPSTracker(this);
+        String position = gps.getCoord();
+        currentUser.setUserPosition(position);
+
         // Create a new fragment and specify the planet to show based on position
         Fragment fragment = new ProfileFragment();
 
