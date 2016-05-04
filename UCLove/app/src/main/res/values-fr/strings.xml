@@ -120,4 +120,14 @@
     <string name="friends_search_request">Votre demande d\'amitié a été envoyée!</string>
     <string name="connection_invalid">Nom d\'utilisateur ou mot de passe incorrect.</string>
     <string name="account_invalid">Cet utilisateur existe déjà, ou les champs sont incomplets.</string>
+    <string name="nav_profile_of">Profil de</string>
+    <string name="message_send">Envoyer</string>
+    <string name="friend_profile_send_message">Envoyer un message</string>
+    <string name="nav_message_with">Message avec</string>
+    <string name="friend_profile_favourite">Enregistrer comme favori</string>
+    <string name="friend_profile_meet">Rencontrer</string>
+    <string name="friends_failed_intro">Aucun ami trouvé. Allez vous faire de nouveaux amis dans l\'onglet \'Chercher des amis\'!</string>
+    <string name="nav_date_preferences">Dates disponibles</string>
+    <string name="date_preferences_pick">Indiquez vos dates disponibles</string>
+    <string name="date_preferences_button_delete">Supprimer</string>
 </resources>

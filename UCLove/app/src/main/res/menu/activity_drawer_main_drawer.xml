@@ -55,6 +55,10 @@
                 android:icon="@drawable/ic_menu_gallery"
                 android:title="@string/nav_notifications_preferences" />
             <item
+                android:id="@+id/nav_date_preferences"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="@string/nav_date_preferences" />
+            <item
                 android:id="@+id/nav_edit_profile"
                 android:icon="@drawable/ic_menu_slideshow"
                 android:title="@string/nav_edit_profile" />

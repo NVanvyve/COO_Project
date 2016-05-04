@@ -214,8 +214,8 @@ public class AccountCreation extends AppCompatActivity implements DatePickerDial
     }
 
     public void showDatePickerDialog(View v) {
-        DatePickerFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "datePicker");
+        DatePickerFragmentAccountCreation newFragment = new DatePickerFragmentAccountCreation();
+        newFragment.show(getFragmentManager(), "datePicker");
     }
 
     @Override

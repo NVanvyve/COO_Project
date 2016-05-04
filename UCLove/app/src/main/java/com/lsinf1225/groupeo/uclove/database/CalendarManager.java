@@ -24,7 +24,7 @@ public class CalendarManager {
             " "+KEY_CAL_ID+" INTEGER not null primary key," +
             " "+KEY_CAL_USER_ID+" INTEGER not null references User," +
             " "+KEY_CAL_DATE+" TEXT not null," +
-            " "+KEY_CAL_STATUS+" TEXT not null default 'Libre'," +
+            " "+KEY_CAL_STATUS+" TEXT not null default 'Free'," +
             " unique("+KEY_CAL_USER_ID+", "+KEY_CAL_DATE+") " +
             ");";
     private MySQLite maBaseSQLite; // notre gestionnaire du fichier SQLite
@@ -96,6 +96,32 @@ public class CalendarManager {
             a.setCalDate(c.getString(c.getColumnIndex(KEY_CAL_DATE)));
             a.setCalStatus(c.getString(c.getColumnIndex(KEY_CAL_STATUS)));
             c.close();
+        }
+
+        return a;
+    }
+
+    public Calendar getDatePreferences(long user_id, int number){
+        int loop = 0;
+        Calendar a = new Calendar(-1, -1, "", "");
+
+        String query = "SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_CAL_USER_ID+"="+user_id+" AND "+KEY_CAL_STATUS+"='Free'";
+
+        Cursor c = db.rawQuery(query, null);
+
+        if(c.moveToFirst()){
+            do{
+                a.setCalID(c.getInt(c.getColumnIndex(KEY_CAL_ID)));
+                a.setCalUserID(c.getInt(c.getColumnIndex(KEY_CAL_USER_ID)));
+                a.setCalDate(c.getString(c.getColumnIndex(KEY_CAL_DATE)));
+                a.setCalStatus(c.getString(c.getColumnIndex(KEY_CAL_STATUS)));
+                loop++;
+            }
+            while(c.moveToNext() && (loop < number));
+            c.close();
+        }
+        if (loop < number) {
+            a.setCalID(-1);
         }
 
         return a;

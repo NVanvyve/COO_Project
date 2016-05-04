@@ -109,15 +109,18 @@
     <!--Navigation menu-->
     <string name="nav_about_you">About you</string>
     <string name="nav_profile">Profile</string>
+    <string name="nav_profile_of">Profile of</string>
     <string name="nav_notifications">Notifications</string>
     <string name="nav_friends_search">Search friends</string>
     <string name="nav_friend_requests">Friend requests</string>
     <string name="nav_friends">Friends</string>
     <string name="nav_favourites">Favourites</string>
     <string name="nav_messages">Messages</string>
+    <string name="nav_message_with">Message with</string>
     <string name="nav_meet">Meet friends</string>
     <string name="nav_preferences">Preferences</string>
     <string name="nav_notifications_preferences">Notifications preferences</string>
+    <string name="nav_date_preferences">Available dates</string>
     <string name="nav_search_preferences">Search preferences</string>
     <string name="nav_edit_profile">Edit your profile</string>
     <string name="nav_log_off">Log off</string>
@@ -186,6 +189,21 @@
 
     <!--Friends search failed fragment-->
     <string name="friends_search_failed_intro">No possible new friend was found. Please change your search preferences.</string>
+
+    <!--Friends failed fragment-->
+    <string name="friends_failed_intro">No friends were found. Go make new friends in the \'Search friends\' tab!</string>
+
+    <!--Friends profile fragment-->
+    <string name="friend_profile_send_message">Send message</string>
+    <string name="friend_profile_meet">Meet</string>
+    <string name="friend_profile_favourite">Save as favourite</string>
+
+    <!--Message fragment-->
+    <string name="message_send">Send</string>
+
+    <!--Date preferences fragment-->
+    <string name="date_preferences_pick">Pick an available date</string>
+    <string name="date_preferences_button_delete">Delete</string>
 
 
 </resources>

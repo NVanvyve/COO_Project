@@ -1,6 +1,7 @@
 package com.lsinf1225.groupeo.uclove;
 
 import android.app.FragmentManager;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -12,11 +13,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lsinf1225.groupeo.uclove.database.Calendar;
+import com.lsinf1225.groupeo.uclove.database.CalendarManager;
 import com.lsinf1225.groupeo.uclove.database.User;
 import com.lsinf1225.groupeo.uclove.database.UserManager;
+import com.lsinf1225.groupeo.uclove.drawer_fragments.DatePreferencesFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.FriendsFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.FriendsSearchFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.MeetingFragment;
@@ -25,8 +31,10 @@ import com.lsinf1225.groupeo.uclove.drawer_fragments.ProfileFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.SearchPreferencesFragment;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+
 public class DrawerMainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener{
 
     long user_id = 0;
 
@@ -122,6 +130,14 @@ public class DrawerMainActivity extends AppCompatActivity
                     .commit();
             setTitle(this.getString(R.string.nav_notifications_preferences));
 
+        } else if (id == R.id.nav_date_preferences) {
+            Fragment fragment = new DatePreferencesFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
+            setTitle(this.getString(R.string.nav_date_preferences));
+
         } else if (id == R.id.nav_meet) {
             Fragment fragment = new MeetingFragment();
             FragmentManager fragmentManager = getFragmentManager();
@@ -152,5 +168,28 @@ public class DrawerMainActivity extends AppCompatActivity
 
     public long returnUserID() {
         return user_id;
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int day) {
+        //do some stuff for example write on log and update TextField on activity
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        c.set(year, month, day);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String freeDate = sdf.format(c.getTime());
+
+        Calendar newCal = new Calendar(0, (int)user_id, freeDate, "Free");
+        CalendarManager cm = new CalendarManager(this);
+        cm.open();
+        cm.addCalendar(newCal);
+        cm.close();
+
+        Fragment fragment = new DatePreferencesFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, fragment)
+                .commit();
+        setTitle(this.getString(R.string.nav_date_preferences));
     }
 }

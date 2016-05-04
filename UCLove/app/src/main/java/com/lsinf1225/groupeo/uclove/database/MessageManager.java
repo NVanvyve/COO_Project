@@ -42,7 +42,7 @@ public class MessageManager {
         db.close();
     }
 
-    public long addUser(Message message) {
+    public long addMessage(Message message) {
         // Ajout d'un enregistrement dans la table
 
         ContentValues values = new ContentValues();
@@ -99,38 +99,38 @@ public class MessageManager {
         return a;
     }
 
+    public Message getRecentMessage(long rel_id, int recent_number){
+
+        int loop = 0;
+
+        Message a = new Message(-1, -1, -1, "", "");
+
+        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_MESSAGE_REL_ID + "=" + rel_id + " ORDER BY strftime(" + KEY_MESSAGE_DATE + ",'YYYY-MM-DD HH:MM:SS')", null);
+
+        if(c.moveToFirst()){
+            do{
+                a.setMessageID(c.getInt(c.getColumnIndex(KEY_MESSAGE_ID)));
+                a.setMessageRelID(c.getInt(c.getColumnIndex(KEY_MESSAGE_REL_ID)));
+                a.setMessageUserID(c.getInt(c.getColumnIndex(KEY_MESSAGE_USER_ID)));
+                a.setMessageDate(c.getString(c.getColumnIndex(KEY_MESSAGE_DATE)));
+                a.setMessageText(c.getString(c.getColumnIndex(KEY_MESSAGE_TEXT)));
+                loop++;
+            }
+            while(c.moveToNext() && (loop < recent_number));
+            c.close();
+        }
+
+        if (loop < recent_number) {
+            a.setMessageID(-1);
+        }
+
+        return a;
+
+    }
+
     public Cursor getMessages() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
-    }
-
-    public Message getRecentMessage(int rel_id, int recent_number){
-
-      int loop = 0
-
-      Message a = new Message(0, -1, -1, "", "");
-
-      Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_MESSAGE_REL_ID + "=" + rel_id + " ORDER BY strftime(" + KEY_MESSAGE_DATE + ",'YYYY-MM-DD HH:MM:SS')");
-
-      if(c.moveToFirst()){
-          do{
-            a.setMessageID(c.getInt(c.getColumnIndex(KEY_MESSAGE_ID)));
-            a.setMessageRelID(c.getInt(c.getColumnIndex(KEY_MESSAGE_REL_ID)));
-            a.setMessageUserID(c.getInt(c.getColumnIndex(KEY_MESSAGE_USER_ID)));
-            a.setMessageDate(c.getString(c.getColumnIndex(KEY_MESSAGE_DATE)));
-            a.setMessageText(c.getString(c.getColumnIndex(KEY_MESSAGE_TEXT)));
-            loop++;
-          }
-          while(c.moveToNext() && (loop < recent_number));
-          c.close();
-      }
-
-      if (loop < recent_number) {
-        a.setMessageID(-1);
-      }
-
-      return a;
-
     }
 
 }
