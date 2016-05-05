@@ -118,9 +118,12 @@
     <string name="nav_messages">Messages</string>
     <string name="nav_message_with">Message with</string>
     <string name="nav_meet">Meet friends</string>
+    <string name="nav_meet_requests">Meeting requests</string>
+    <string name="nav_meet_planned">Meetings planned</string>
     <string name="nav_preferences">Preferences</string>
     <string name="nav_notifications_preferences">Notifications preferences</string>
     <string name="nav_date_preferences">Available dates</string>
+    <string name="nav_free_dates_of">Available dates of</string>
     <string name="nav_search_preferences">Search preferences</string>
     <string name="nav_edit_profile">Edit your profile</string>
     <string name="nav_log_off">Log off</string>
@@ -204,6 +207,36 @@
     <!--Date preferences fragment-->
     <string name="date_preferences_pick">Pick an available date</string>
     <string name="date_preferences_button_delete">Delete</string>
+    <string name="date_preferences_intro">Long click on an item to delete it.</string>
+    <string name="date_preferences_toast">You\'re no longer free on this date.</string>
 
+    <!--Meet on profile fragment-->
+    <string name="meet_on_profile_intro">Here are the dates where your friend is free. Long click on one of them to send a meet request!</string>
+    <string name="meet_on_profile_toast">Meeting request sent!</string>
+
+    <!--Meet requests fragment-->
+    <string name="meet_request_intro">You have a meeting request from your friend...</string>
+    <string name="meet_request_on">on</string>
+    <string name="meet_request_button_accept">Accept</string>
+    <string name="meet_request_button_decline">Decline</string>
+    <string name="meet_request_accepted">Meeting request accepted.</string>
+    <string name="meet_request_declined">Meeting request declined.</string>
+
+    <!--Meet requests failed fragment-->
+    <string name="meet_requests_failed_intro">No meeting requests were found. Please come back later!</string>
+
+    <!--Planed meetings failed fragment-->
+    <string name="planned_meetings_failed_intro">No planned meetings were found. Plan new meetings by going to the \'Meeting requests\' tab, or ask a friend for a meeting yourself!</string>
+
+    <!--Planned meeting info fragment-->
+    <string name="planned_meeting_info_intro">You have a planned meeting with your friend...</string>
+    <string name="planned_meeting_info_on">on</string>
+    <string name="planned_meeting_info_distance">Your friend is at a distance of</string>
+
+    <!--Messages list failed fragment-->
+    <string name="messages_list_failed_intro">You do not have exchanged messages with a friend yet!</string>
+
+    <!--Messages list failed fragment-->
+    <string name="favourites_failed_intro">You have not specified yet a friend as favourite!</string>
 
 </resources>

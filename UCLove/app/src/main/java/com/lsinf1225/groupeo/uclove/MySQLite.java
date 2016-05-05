@@ -21,7 +21,7 @@ import com.lsinf1225.groupeo.uclove.database.UserManager;
 public class MySQLite extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "db.sqlite";
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
     private static MySQLite sInstance;
 
     public static synchronized MySQLite getInstance(Context context) {

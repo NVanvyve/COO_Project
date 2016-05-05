@@ -8,20 +8,23 @@ package com.lsinf1225.groupeo.uclove.database;
 public class RDV {
 
     private int rdv_id;
-    private int rdv_user_id;
+    private int rdv_user_id_a;
+    private int rdv_user_id_b;
     private int rdv_rel_id;
     private String rdv_date;
     private String rdv_status;
 
     // Constructeur
     public RDV(int rdv_id,
-               int rdv_user_id,
                int rdv_rel_id,
+               int rdv_user_id_a,
+               int rdv_user_id_b,
                String rdv_date,
                String rdv_status) {
         this.rdv_id=rdv_id;
-        this.rdv_user_id=rdv_user_id;
         this.rdv_rel_id=rdv_rel_id;
+        this.rdv_user_id_a=rdv_user_id_a;
+        this.rdv_user_id_b=rdv_user_id_b;
         this.rdv_date=rdv_date;
         this.rdv_status=rdv_status;
 
@@ -36,15 +39,6 @@ public class RDV {
         this.rdv_id = rdv_id;
     }
 
-    //RDV_User_ID
-    public int getRDVUserID() {
-        return rdv_user_id;
-    }
-
-    public void setRDVUserID(int rdv_user_id) {
-        this.rdv_user_id = rdv_user_id;
-    }
-
     //RDV_Rel_ID
     public int getRDVRelID() {
         return rdv_rel_id;
@@ -52,6 +46,24 @@ public class RDV {
 
     public void setRDVRelID(int rdv_rel_id) {
         this.rdv_rel_id = rdv_rel_id;
+    }
+
+    //RDV_User_ID_A
+    public int getRDVUserIDA() {
+        return rdv_user_id_a;
+    }
+
+    public void setRDVUserIDA(int rdv_user_id_a) {
+        this.rdv_user_id_a = rdv_user_id_a;
+    }
+
+    //RDV_User_ID_B
+    public int getRDVUserIDB() {
+        return rdv_user_id_b;
+    }
+
+    public void setRDVUserIDB(int rdv_user_id_b) {
+        this.rdv_user_id_b = rdv_user_id_b;
     }
 
     //RDV_Date

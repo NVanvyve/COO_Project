@@ -1,6 +1,7 @@
 package com.lsinf1225.groupeo.uclove.drawer_fragments;
 
 import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.app.DialogFragment;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lsinf1225.groupeo.uclove.CustomAdapterDatePreferences;
 import com.lsinf1225.groupeo.uclove.DatePickerFragmentAccountCreation;
@@ -87,6 +89,13 @@ public class DatePreferencesFragment extends Fragment {
                 cm.open();
                 cm.supCalendar(a);
                 cm.close();
+
+                Context context = getActivity();
+                CharSequence text = getResources().getString(R.string.date_preferences_toast);;
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
                 Fragment fragment = new DatePreferencesFragment();
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()

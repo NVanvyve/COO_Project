@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,10 +22,13 @@ import com.lsinf1225.groupeo.uclove.database.CalendarManager;
 import com.lsinf1225.groupeo.uclove.database.User;
 import com.lsinf1225.groupeo.uclove.database.UserManager;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.DatePreferencesFragment;
+import com.lsinf1225.groupeo.uclove.drawer_fragments.FavouritesFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.FriendsFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.FriendsSearchFragment;
-import com.lsinf1225.groupeo.uclove.drawer_fragments.MeetingFragment;
+import com.lsinf1225.groupeo.uclove.drawer_fragments.MeetRequestsFragment;
+import com.lsinf1225.groupeo.uclove.drawer_fragments.MessagesListFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.NotificationsPreferencesFragment;
+import com.lsinf1225.groupeo.uclove.drawer_fragments.PlannedMeetingsFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.ProfileFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.SearchPreferencesFragment;
 import com.squareup.picasso.Picasso;
@@ -51,12 +53,16 @@ public class DrawerMainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        // On récupère l'user_id.
+        // On récupère l'user_id et on update sa position
         Intent intent = getIntent();
         user_id = intent.getLongExtra("userID", -1L);
         UserManager m = new UserManager(this); // gestionnaire de la table "user"
         m.open();
         User currentUser = m.getUser(user_id);
+        GPSTracker gps = new GPSTracker(this);
+        String position = gps.getCoord(); // On récupère les coordonnées
+        currentUser.setUserPosition(position);
+        m.modUser(currentUser);
         m.close();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -69,12 +75,6 @@ public class DrawerMainActivity extends AppCompatActivity
         Picasso.with(myImage.getContext()).load(currentUser.getUserProfilePic()).fit().centerCrop().into(myImage);
         String completeName = currentUser.getUserFirstName() + " " + currentUser.getUserLastName();
         myText.setText(completeName);
-
-        //MAJ de la position
-        GPSTracker gps = new GPSTracker(this);
-        String position = gps.getCoord();
-        currentUser.setUserPosition(position);
-
         // Create a new fragment and specify the planet to show based on position
         Fragment fragment = new ProfileFragment();
 
@@ -128,6 +128,14 @@ public class DrawerMainActivity extends AppCompatActivity
                     .commit();
             setTitle(this.getString(R.string.nav_search_preferences));
 
+        } else if (id == R.id.nav_messages) {
+            Fragment fragment = new MessagesListFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
+            setTitle(this.getString(R.string.nav_messages));
+
         } else if (id == R.id.nav_notifications_preferences) {
             Fragment fragment = new NotificationsPreferencesFragment();
             FragmentManager fragmentManager = getFragmentManager();
@@ -144,13 +152,21 @@ public class DrawerMainActivity extends AppCompatActivity
                     .commit();
             setTitle(this.getString(R.string.nav_date_preferences));
 
-        } else if (id == R.id.nav_meet) {
-            Fragment fragment = new MeetingFragment();
+        } else if (id == R.id.nav_meet_requests) {
+            Fragment fragment = new MeetRequestsFragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, fragment)
                     .commit();
-            setTitle(this.getString(R.string.nav_meet));
+            setTitle(this.getString(R.string.nav_meet_requests));
+
+        } else if (id == R.id.nav_meet_planned) {
+            Fragment fragment = new PlannedMeetingsFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
+            setTitle(this.getString(R.string.nav_meet_planned));
 
         } else if (id == R.id.nav_friends) {
             Fragment fragment = new FriendsFragment();
@@ -159,6 +175,14 @@ public class DrawerMainActivity extends AppCompatActivity
                     .replace(R.id.content_frame, fragment)
                     .commit();
             setTitle(this.getString(R.string.nav_friends));
+
+        } else if (id == R.id.nav_favourites) {
+            Fragment fragment = new FavouritesFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
+            setTitle(this.getString(R.string.nav_favourites));
 
         } else if (id == R.id.nav_log_off) {
             // On passe l'userID dans l'intent

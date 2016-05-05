@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lsinf1225.groupeo.uclove.DrawerMainActivity;
+import com.lsinf1225.groupeo.uclove.NotificationSender;
 import com.lsinf1225.groupeo.uclove.R;
 import com.lsinf1225.groupeo.uclove.database.User;
 import com.lsinf1225.groupeo.uclove.database.UserManager;
@@ -29,6 +30,11 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        NotificationSender notificationSender1 = new NotificationSender("Vous êtes sur le profil!", getActivity());
+        NotificationSender notificationSender2 = new NotificationSender("MDR", getActivity());
+        notificationSender1.send();
+        notificationSender2.send();
 
         myFragmentView = inflater.inflate(R.layout.fragment_profile, container, false);
 

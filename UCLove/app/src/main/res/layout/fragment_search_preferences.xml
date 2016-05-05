@@ -24,7 +24,9 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/pref_search_intro"
-                android:id="@+id/pref_search_intro" />
+                android:id="@+id/pref_search_intro"
+                android:layout_gravity="center"
+                android:gravity="center"/>
 
             <TextView
                 android:layout_width="wrap_content"

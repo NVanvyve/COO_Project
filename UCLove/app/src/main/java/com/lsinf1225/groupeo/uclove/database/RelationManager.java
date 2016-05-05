@@ -14,6 +14,8 @@ import com.lsinf1225.groupeo.uclove.MySQLite;
 
 public class RelationManager {
 
+    Context globalcontext;
+
     private static final String TABLE_NAME = "Relation";
     public static final String KEY_RELATION_ID="rel_id";
     public static final String KEY_RELATION_USER_ID_A ="rel_user_id_a";
@@ -39,6 +41,7 @@ public class RelationManager {
     // Constructeur
     public RelationManager(Context context)
     {
+        globalcontext = context;
         maBaseSQLite = MySQLite.getInstance(context);
     }
 
@@ -60,7 +63,7 @@ public class RelationManager {
         ContentValues values = new ContentValues();
         values.put(KEY_RELATION_USER_ID_A, relation.getRelUserIDA());
         values.put(KEY_RELATION_USER_ID_B, relation.getRelUserIDB());
-        values.put(KEY_RELATION_STATUS, relation.getRelSatus());
+        values.put(KEY_RELATION_STATUS, relation.getRelStatus());
         values.put(KEY_RELATION_FAV_A, relation.getRelFavA());
         values.put(KEY_RELATION_FAV_B, relation.getRelFavB());
 
@@ -75,7 +78,7 @@ public class RelationManager {
         ContentValues values = new ContentValues();
         values.put(KEY_RELATION_USER_ID_A, relation.getRelUserIDA());
         values.put(KEY_RELATION_USER_ID_B, relation.getRelUserIDB());
-        values.put(KEY_RELATION_STATUS, relation.getRelSatus());
+        values.put(KEY_RELATION_STATUS, relation.getRelStatus());
         values.put(KEY_RELATION_FAV_A, relation.getRelFavA());
         values.put(KEY_RELATION_FAV_B, relation.getRelFavB());
 
@@ -208,6 +211,85 @@ public class RelationManager {
         }
         return friend_user_id;
     }
+
+    public long getFavorite(long user_id, int number){
+
+        long user_id_returned = -1;
+        int loop = 0;
+
+        //Sélectionne toutes les relations ou l'utilisateur passé en argument a marqué comme favori son contact
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE ("+KEY_RELATION_USER_ID_A+"="+user_id+" AND "+KEY_RELATION_FAV_A+"=1) OR ("+KEY_RELATION_USER_ID_B+"="+user_id+" AND "+KEY_RELATION_FAV_B+"=1)", null);
+
+        if (c.moveToFirst()) {
+            do {
+                if((c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_A)))==user_id){
+                    // assigner les valeurs de l'user favori correspondant à fav_B dans un Objet User
+                    user_id_returned = (long) c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_B));
+                }
+                else if((c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_B)))==user_id){
+                    // assigner les valeurs de l'user favori correspondant à fav_A dans un Objet User
+                    user_id_returned = (long) c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_A));
+                }
+                loop++;
+            } while (c.moveToNext() && loop < number);
+        }
+        c.close(); // fermeture du curseur
+
+        if (loop < number) {
+            user_id_returned = -1;
+        }
+
+        return user_id_returned;
+    }
+
+    public long getFriendsWhoSentMessage(long user_id, int number){
+        int loop = 0;
+
+        //int qui prendra la valeur de l'id de la personne en relation avec le User passé en argument
+        long user_message;
+        // id de la relation entre user_id et user_message
+        long rel_id;
+        //user_id qui sera retourné
+        long returned_user_id = -1;
+        //Récupère les relations Accepted dans lesquelles apparait le User passé en argument
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE ("+KEY_RELATION_USER_ID_A+"="+user_id+" OR "+KEY_RELATION_USER_ID_B+"="+user_id+") AND "+KEY_RELATION_STATUS+"='Accepted'", null);
+
+        if(c.moveToFirst()){
+            do{
+                //Check si le User est en relation avec B si oui assigne user_message à B
+                if(c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_A))==user_id){
+                    user_message = c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_B));
+                }
+                //Assigne user_message à A
+                else{
+                    user_message = c.getInt(c.getColumnIndex(KEY_RELATION_USER_ID_A));
+                }
+
+                rel_id = c.getInt(c.getColumnIndex(KEY_RELATION_ID));
+
+                //Sélectionne les messages de user_message et check avec moveToFirst s'il y en a, si non décrémente la boucle (pour bien obtenir la n-ième personne avec qui User a discuté)
+                Cursor d = db.rawQuery("SELECT *  FROM Message WHERE message_rel_id="+rel_id, null);
+                if(d.moveToFirst()){
+                    returned_user_id = user_message;
+                }
+                else{
+                    returned_user_id = -1;
+                }
+                d.close();
+                loop++;
+            }
+            while(c.moveToNext() && (loop < number));
+            c.close();
+        }
+
+        if (loop < number) {
+            returned_user_id = -1;
+        }
+        System.out.println(returned_user_id);
+        return returned_user_id;
+
+    }
+
 
     public Cursor getRelations() {
         // sélection de tous les enregistrements de la table

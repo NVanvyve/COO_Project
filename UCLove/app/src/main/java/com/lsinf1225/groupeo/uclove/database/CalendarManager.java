@@ -14,6 +14,7 @@ import com.lsinf1225.groupeo.uclove.MySQLite;
 
 public class CalendarManager {
 
+    Context globalcontext;
     private static final String TABLE_NAME = "Calendar";
     public static final String KEY_CAL_ID="cal_id";
     public static final String KEY_CAL_USER_ID="cal_user_id";
@@ -33,6 +34,7 @@ public class CalendarManager {
     // Constructeur
     public CalendarManager(Context context)
     {
+        globalcontext = context;
         maBaseSQLite = MySQLite.getInstance(context);
     }
 
@@ -101,6 +103,21 @@ public class CalendarManager {
         return a;
     }
 
+    public Calendar getCalendarByUserIdAndDate(long user_id, String date) {
+        Calendar a = new Calendar(0, 0, "", "");
+        String query = "SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_CAL_USER_ID+"="+user_id+" AND "+KEY_CAL_DATE+"='"+date+"'";
+        Cursor c = db.rawQuery(query, null);
+        if (c.moveToFirst()) {
+            a.setCalID(c.getInt(c.getColumnIndex(KEY_CAL_ID)));
+            a.setCalUserID(c.getInt(c.getColumnIndex(KEY_CAL_USER_ID)));
+            a.setCalDate(c.getString(c.getColumnIndex(KEY_CAL_DATE)));
+            a.setCalStatus(c.getString(c.getColumnIndex(KEY_CAL_STATUS)));
+            c.close();
+        }
+
+        return a;
+    }
+
     public Calendar getDatePreferences(long user_id, int number){
         int loop = 0;
         Calendar a = new Calendar(-1, -1, "", "");
@@ -126,6 +143,48 @@ public class CalendarManager {
 
         return a;
     }
+
+
+    public Calendar getFreeDatesOfFriend(long user_id_a, long user_id_b, int number){
+        int loop = 0;
+        Calendar a = new Calendar(-1, -1, "", "");
+
+        RelationManager rm = new RelationManager(globalcontext);
+        rm.open();
+        Relation relation = rm.getRelationFromUserIds(user_id_a, user_id_b);
+        long rel_id = relation.getRelID();
+
+        String query = "SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_CAL_USER_ID+"="+user_id_b+" AND "+KEY_CAL_STATUS+"='Free'";
+
+        Cursor c = db.rawQuery(query, null);
+
+        if(c.moveToFirst()){
+            do{
+                a.setCalID(c.getInt(c.getColumnIndex(KEY_CAL_ID)));
+                a.setCalUserID(c.getInt(c.getColumnIndex(KEY_CAL_USER_ID)));
+                a.setCalDate(c.getString(c.getColumnIndex(KEY_CAL_DATE)));
+                a.setCalStatus(c.getString(c.getColumnIndex(KEY_CAL_STATUS)));
+
+                Cursor d = db.rawQuery("SELECT * FROM RDV WHERE rdv_user_id_a="+user_id_a+" AND rdv_rel_id="+rel_id+" AND rdv_date='"+a.getCalDate()+"'", null);
+                if(!d.moveToFirst()){
+                    loop ++;
+                }
+                else{
+                    a.setCalID(-1);
+                }
+                d.close();
+            }
+            while(c.moveToNext() && (loop < number));
+            c.close();
+        }
+        if (loop < number) {
+            a.setCalID(-1);
+        }
+        System.out.println(a.getCalID());
+
+        return a;
+    }
+
 
     public Cursor getCalendars() {
         // sélection de tous les enregistrements de la table

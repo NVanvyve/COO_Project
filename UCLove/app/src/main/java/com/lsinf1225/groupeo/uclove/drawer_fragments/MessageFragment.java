@@ -19,6 +19,8 @@ import com.lsinf1225.groupeo.uclove.DrawerMainActivity;
 import com.lsinf1225.groupeo.uclove.R;
 import com.lsinf1225.groupeo.uclove.database.Message;
 import com.lsinf1225.groupeo.uclove.database.MessageManager;
+import com.lsinf1225.groupeo.uclove.database.Notification;
+import com.lsinf1225.groupeo.uclove.database.NotificationManager;
 import com.lsinf1225.groupeo.uclove.database.Relation;
 import com.lsinf1225.groupeo.uclove.database.RelationManager;
 import com.lsinf1225.groupeo.uclove.database.User;
@@ -30,6 +32,8 @@ import java.util.List;
 
 public class MessageFragment extends Fragment {
 
+    User user_a;
+    User user_b;
     long user_id_b;
     long user_id_a;
     long rel_id;
@@ -49,8 +53,8 @@ public class MessageFragment extends Fragment {
 
         UserManager um = new UserManager(getActivity());
         um.open();
-        User user_a = um.getUser(user_id_a);
-        User user_b = um.getUser(user_id_b);
+        user_a = um.getUser(user_id_a);
+        user_b = um.getUser(user_id_b);
 
         ((DrawerMainActivity) getActivity()).setTitle(this.getString(R.string.nav_message_with) + " " + user_b.getUserFirstName());
 
@@ -107,7 +111,12 @@ public class MessageFragment extends Fragment {
                 Message newMessage = new Message(0, (int)rel_id, (int)user_id_a, date, textMessage);
                 mm.open();
                 mm.addMessage(newMessage);
-                mm.close();
+
+                NotificationManager nm = new NotificationManager(getActivity());
+                nm.open();
+                Notification notif = new Notification(0, (int)user_id_b, date, "Vous avez un nouveau message de "+user_a.getUserFirstName()+" "+user_a.getUserLastName()+".", "Unread", 3);
+                nm.addNotification(notif);
+                nm.close();
 
                 Bundle args = new Bundle();
                 args.putInt("friend_user_id", (int)user_id_b);

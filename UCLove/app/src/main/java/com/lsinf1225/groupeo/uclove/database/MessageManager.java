@@ -105,7 +105,7 @@ public class MessageManager {
 
         Message a = new Message(-1, -1, -1, "", "");
 
-        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_MESSAGE_REL_ID + "=" + rel_id + " ORDER BY strftime(" + KEY_MESSAGE_DATE + ",'YYYY-MM-DD HH:MM:SS')", null);
+        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_MESSAGE_REL_ID + "=" + rel_id + " ORDER BY "+ KEY_MESSAGE_ID, null);
 
         if(c.moveToFirst()){
             do{
@@ -122,6 +122,27 @@ public class MessageManager {
 
         if (loop < recent_number) {
             a.setMessageID(-1);
+        }
+
+        return a;
+
+    }
+
+    public Message getMostRecentMessage(long rel_id){
+
+        Message a = new Message(-1, -1, -1, "", "");
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_MESSAGE_REL_ID + "=" + rel_id + " ORDER BY "+KEY_MESSAGE_ID+" DESC";
+
+        Cursor c = db.rawQuery(query, null);
+
+        if(c.moveToFirst()){
+            a.setMessageID(c.getInt(c.getColumnIndex(KEY_MESSAGE_ID)));
+            a.setMessageRelID(c.getInt(c.getColumnIndex(KEY_MESSAGE_REL_ID)));
+            a.setMessageUserID(c.getInt(c.getColumnIndex(KEY_MESSAGE_USER_ID)));
+            a.setMessageDate(c.getString(c.getColumnIndex(KEY_MESSAGE_DATE)));
+            a.setMessageText(c.getString(c.getColumnIndex(KEY_MESSAGE_TEXT)));
+            c.close();
         }
 
         return a;

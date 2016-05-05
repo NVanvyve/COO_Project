@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.lsinf1225.groupeo.uclove.DrawerMainActivity;
 import com.lsinf1225.groupeo.uclove.R;
+import com.lsinf1225.groupeo.uclove.database.Notification;
+import com.lsinf1225.groupeo.uclove.database.NotificationManager;
 import com.lsinf1225.groupeo.uclove.database.Relation;
 import com.lsinf1225.groupeo.uclove.database.RelationManager;
 import com.lsinf1225.groupeo.uclove.database.User;
@@ -116,10 +118,16 @@ public class FriendsSearchFragment extends Fragment {
                 RelationManager m = new RelationManager(getActivity());
                 m.open();
                 Relation r = m.getRelationFromUserIdsOrdered(newFriendUserId, user_id);
-                if ((r.getRelSatus()).equals("Request")) {
+                if ((r.getRelStatus()).equals("Request")) {
                     r.setRelStatus("Accepted");
                     m.modRelation(r);
-                    m.close();
+
+                    NotificationManager nm = new NotificationManager(getActivity());
+                    nm.open();
+                    Notification notif = new Notification(0, (int)newFriendUserId, date, "Vous avez un nouveau message de "+user_a.getUserFirstName()+" "+user_a.getUserLastName()+".", "Unread", 3);
+                    nm.addNotification(notif);
+                    nm.close();
+
                     Context context = getActivity();
                     CharSequence text = getResources().getString(R.string.friends_search_accepted);;
                     int duration = Toast.LENGTH_SHORT;
@@ -159,7 +167,7 @@ public class FriendsSearchFragment extends Fragment {
                 RelationManager m = new RelationManager(getActivity());
                 m.open();
                 Relation r = m.getRelationFromUserIdsOrdered(newFriendUserId, user_id);
-                if ((r.getRelSatus()).equals("Request")) {
+                if ((r.getRelStatus()).equals("Request")) {
                     r.setRelStatus("Declined");
                     m.modRelation(r);
                     m.close();

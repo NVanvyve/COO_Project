@@ -12,6 +12,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.lsinf1225.groupeo.uclove.MySQLite;
 
+import java.util.*;
+
 public class NotificationManager {
 
     private static final String TABLE_NAME = "Notification";
@@ -55,10 +57,19 @@ public class NotificationManager {
     public long addNotification(Notification notification) {
         // Ajout d'un enregistrement dans la table
 
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        int year = c.get(java.util.Calendar.YEAR);
+        int month = c.get(java.util.Calendar.MONTH);
+        int day = c.get(java.util.Calendar.DAY_OF_MONTH);
+        int hours = c.get(java.util.Calendar.HOUR_OF_DAY);
+        int minutes = c.get(java.util.Calendar.MINUTE);
+        int seconds = c.get(java.util.Calendar.SECOND);
+        String date = year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
+
         ContentValues values = new ContentValues();
         values.put(KEY_NOTIF_ID, notification.getNotifID());
         values.put(KEY_NOTIF_USER_ID, notification.getNotifUserID());
-        values.put(KEY_NOTIF_DATE, notification.getNotifDate());
+        values.put(KEY_NOTIF_DATE, date);
         values.put(KEY_NOTIF_TEXT, notification.getNotifText());
         values.put(KEY_NOTIF_STATUS, notification.getNotifStatus());
         values.put(KEY_NOTIF_CODE, notification.getNotifCode());

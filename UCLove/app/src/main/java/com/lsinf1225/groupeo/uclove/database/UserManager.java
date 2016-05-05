@@ -349,7 +349,6 @@ public class UserManager {
             query += " AND (( (U.user_sexuality ='Homosexual' AND U.user_sexuality ='" + user.getUserSex() + "') OR (U.user_sexuality='Bisexual') OR (U.user_sexuality ='Heterosexual' AND U.user_sexuality <>'" + user.getUserSex() + "'))  )";
         }
         query += " OR ( U.user_id = R.rel_user_id_a AND R.rel_user_id_b='" + String.valueOf(user.getUserID()) + "' AND R.rel_status = 'Request' );";
-        System.out.println(query);
         Cursor d = db.rawQuery(query, null);
         if (d.moveToFirst()) {
             long userID = -1;
@@ -358,7 +357,7 @@ public class UserManager {
                 RelationManager rm = new RelationManager(contextglobal);
                 rm.open();
                 Relation rel = rm.getRelationFromUserIdsForSearch(user.getUserID(), userID);
-                if (!rel.getRelSatus().equals("Accepted") && !rel.getRelSatus().equals("Declined") && !rel.getRelSatus().equals("Request")) {
+                if (!rel.getRelStatus().equals("Accepted") && !rel.getRelStatus().equals("Declined") && !rel.getRelStatus().equals("Request")) {
                     d.close();
                     return userID;
                 } else {

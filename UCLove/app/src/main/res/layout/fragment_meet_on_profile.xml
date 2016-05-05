@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/meet_on_profile_intro"
+        android:id="@+id/meet_on_profile_intro"
+        android:padding="10dp"
+        android:gravity="center"/>
+
+    <ListView
+        android:layout_below="@+id/meet_on_profile_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/meet_on_profile_list_view" />
+
+</RelativeLayout>

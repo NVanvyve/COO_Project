@@ -144,6 +144,24 @@ public class FriendProfileFragment extends Fragment {
             }
         });
 
+        // On écoute le bouton meet
+        Button buttonMeet= (Button) myFragmentView.findViewById(R.id.friend_profile_meet);
+        buttonMeet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putInt("friend_user_id", (int)user_id_b);
+                Fragment fragment = new MeetOnProfileFragment();
+                fragment.setArguments(args);
+
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_frame, fragment)
+                        .commit();
+            }
+        });
+
+
         // On écoute les changements du switch
         Switch sw = (Switch) myFragmentView.findViewById(R.id.friend_profile_favourite);
         sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

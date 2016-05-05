@@ -58,7 +58,7 @@ public class Relation {
     }
 
     // REL_STATUS
-    public String getRelSatus(){
+    public String getRelStatus(){
         return rel_status;
     }
 

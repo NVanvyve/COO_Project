@@ -8,16 +8,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/date_preferences_list_view"
-        android:layout_marginBottom="43dp"
+        android:layout_marginBottom="70dp"
         android:layout_alignParentBottom="@+id/InnerRelativeLayout" />
 
     <RelativeLayout
         android:id="@+id/InnerRelativeLayout"
         android:layout_width="wrap_content"
-        android:layout_height="43dp"
+        android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="5dp"
         android:layout_marginStart="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/date_preferences_intro"
+            android:id="@+id/textView4"
+            android:layout_centerHorizontal="true"/>
 
         <Button
             android:text="@string/date_preferences_pick"
@@ -33,5 +41,6 @@
         </Button>
 
     </RelativeLayout>
+
 
 </RelativeLayout>

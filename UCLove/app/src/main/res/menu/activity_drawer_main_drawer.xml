@@ -21,10 +21,6 @@
                 android:icon="@drawable/ic_menu_camera"
                 android:title="@string/nav_friends_search" />
             <item
-                android:id="@+id/nav_friend_requests"
-                android:icon="@drawable/ic_menu_gallery"
-                android:title="@string/nav_friend_requests" />
-            <item
                 android:id="@+id/nav_friends"
                 android:icon="@drawable/ic_menu_slideshow"
                 android:title="@string/nav_friends" />
@@ -38,9 +34,14 @@
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/nav_messages" />
             <item
-                android:id="@+id/nav_meet"
+                android:id="@+id/nav_meet_requests"
                 android:icon="@drawable/ic_menu_send"
-                android:title="@string/nav_meet" />
+                android:title="@string/nav_meet_requests" />
+
+            <item
+                android:id="@+id/nav_meet_planned"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/nav_meet_planned" />
         </menu>
     </item>
 

@@ -130,4 +130,24 @@
     <string name="nav_date_preferences">Dates disponibles</string>
     <string name="date_preferences_pick">Indiquez vos dates disponibles</string>
     <string name="date_preferences_button_delete">Supprimer</string>
+    <string name="date_preferences_intro">Appuyez longuement pour supprimer une ligne.</string>
+    <string name="date_preferences_toast">Vous n\'êtes plus libre ce jour-là.</string>
+    <string name="meet_on_profile_intro">Voici les dates où votre ami(e) est disponible. Appuyez longuement sur l\'une d\'entre elles pour lui envoyer une proposition de rendez-vous.</string>
+    <string name="nav_free_dates_of">Dates disponibles de</string>
+    <string name="meet_on_profile_toast">Demande de rendez-vous envoyée</string>
+    <string name="meet_request_on">le</string>
+    <string name="meet_request_intro">Vous avez une demande de rendez-vous de votre ami(e)...</string>
+    <string name="meet_request_button_accept">Accepter</string>
+    <string name="meet_request_button_decline">Refuser</string>
+    <string name="meet_requests_failed_intro">Vous n\'avez pas de nouvelles demandes de rendez-vous. Revenez plus tard!</string>
+    <string name="meet_request_accepted">Demande de rendez-vous acceptée.</string>
+    <string name="nav_meet_planned">Rendez-vous planifiés</string>
+    <string name="meet_request_declined">Demande de rendez-vous refusée.</string>
+    <string name="nav_meet_requests">Demandes de rendez-vous</string>
+    <string name="planned_meetings_failed_intro">Pas de rendez-vous planifié trouvé. Vous pouvez obtenir de nouveaux rendez-vous en vous rendant dans la section \'Demande de rendez-vous\', ou en demandant un rendez-vous à un(e) ami(e) vous-même.</string>
+    <string name="planned_meeting_info_on">le</string>
+    <string name="planned_meeting_info_distance">Votre ami se trouve à une distance de</string>
+    <string name="planned_meeting_info_intro">Vous avez un rendez-vous planifié avec votre ami...</string>
+    <string name="messages_list_failed_intro">Vous n\'avez pas encore échangé de messages avec un(e) ami(e).</string>
+    <string name="favourites_failed_intro">Vous n\'avez pas encore spécifié un(e) ami(e) comme favori!</string>
 </resources>
