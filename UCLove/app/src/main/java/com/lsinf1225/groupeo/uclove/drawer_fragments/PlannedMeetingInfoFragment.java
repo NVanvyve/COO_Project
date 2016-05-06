@@ -90,6 +90,7 @@ public class PlannedMeetingInfoFragment extends Fragment {
 
         TextView myText;
 
+        // On remplit les champs de texte
         myText = (TextView) myFragmentView.findViewById(R.id.planned_meeting_info_name);
         myText.setText(name);
 

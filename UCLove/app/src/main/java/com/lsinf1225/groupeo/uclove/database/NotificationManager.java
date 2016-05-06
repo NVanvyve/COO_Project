@@ -137,6 +137,7 @@ public class NotificationManager {
     }
 
     public Notification getRecentNotifications(long user_id, int number){
+        //retourne la n-ieme notification la plus récente
 
         int loop = 0;
 
@@ -166,6 +167,7 @@ public class NotificationManager {
     }
 
     public int deleteNotificationsFromUser(long user_id){
+        // supprime les notifs d'un utilisateur
 
         // suppression d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la clause WHERE, 0 sinon
@@ -177,6 +179,7 @@ public class NotificationManager {
     }
 
     public Notification getRecentUnreadNotifications(long user_id, int number){
+        // retourne la n-ieme notification non lue
 
         int loop = 0;
 

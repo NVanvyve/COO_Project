@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void connection(View v) {
+
+        // On récupère les informations dans les champs de texte
         final EditText usernameField = (EditText) findViewById(R.id.main_username);
         String username = usernameField.getText().toString();
 
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         UserManager m = new UserManager(this); // gestionnaire de la table "user"
         m.open();
 
+        // On récupère l'user_id associé
         long user_id = m.isAlreadyInDatabase(username, password);
 
         m.close();
@@ -57,5 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        // désactivé
     }
 }

@@ -83,6 +83,7 @@ public class MessageFragment extends Fragment {
         }
         m.close();
 
+        // On affiche la liste des messages
         ListAdapter myListAdapter = new CustomAdapterMessages(getActivity(), message, image, messageright);
         ListView myListView = (ListView) myFragmentView.findViewById(R.id.message_list_view);
         myListView.setAdapter(myListAdapter);
@@ -95,6 +96,7 @@ public class MessageFragment extends Fragment {
                 EditText text = (EditText) myFragmentView.findViewById(R.id.message_text_field);
                 String textMessage = text.getText().toString();
 
+                // Enregistre la date et l'heure
                 Calendar c = Calendar.getInstance();
                 int year = c.get(Calendar.YEAR);
                 int month = c.get(Calendar.MONTH);
@@ -107,8 +109,9 @@ public class MessageFragment extends Fragment {
                 MessageManager mm = new MessageManager(getActivity());
                 Message newMessage = new Message(0, (int)rel_id, (int)user_id_a, date, textMessage);
                 mm.open();
-                mm.addMessage(newMessage);
+                mm.addMessage(newMessage); // Ajoute le message
 
+                // Envoie une notif
                 NotificationManager nm = new NotificationManager(getActivity());
                 nm.open();
                 Notification notif = new Notification(0, (int)user_id_b, date, "Vous avez un nouveau message de "+user_a.getUserFirstName()+" "+user_a.getUserLastName()+".", "Unread", 3);

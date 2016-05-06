@@ -98,6 +98,7 @@ public class FriendProfileFragment extends Fragment {
 
         TextView myText;
 
+        // on remplit les champs de texte
         String name = firstName + " " + lastName;
         myText = (TextView) myFragmentView.findViewById(R.id.friend_profile_name);
         myText.setText(name);

@@ -32,12 +32,12 @@ public class NotificationSender{
 
         Notification.Builder builder = new Notification.Builder(mContext);
 
+        // Construction de la notification
         builder.setAutoCancel(true);
         builder.setTicker(mContext.getResources().getString(R.string.app_name));
         builder.setContentTitle(mContext.getResources().getString(R.string.app_name));
         builder.setContentText(Message);
         builder.setSmallIcon(R.drawable.ic_stat_name); // icône de l'app
-        //builder.setLargeIcon(/*bitmap*/);
         builder.setContentIntent(pendingIntent);
         builder.setOngoing(false);
 
@@ -45,12 +45,14 @@ public class NotificationSender{
         manager.notify(id, myNotication);
     }
 
+    // On supprime une notification système
     public void cancelNotification() {
         String ns = Context.NOTIFICATION_SERVICE;
         NotificationManager nMgr = (NotificationManager) mContext.getSystemService(ns);
         nMgr.cancel(id);
     }
 
+    // On supprime toutes les notifications système
     public void cancelAllNotifications() {
         String ns = Context.NOTIFICATION_SERVICE;
         NotificationManager nMgr = (NotificationManager) mContext.getSystemService(ns);

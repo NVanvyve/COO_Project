@@ -63,10 +63,12 @@ public class FriendsFragment extends Fragment {
         rm.close();
 
         if (!hasFailed) {
+            // S'il y a un élément, on affiche la liste
             ListAdapter myListAdapter = new CustomAdapterFriends(getActivity(), name, city, image, userid);
             ListView myListView = (ListView) myFragmentView.findViewById(R.id.friends_list_view);
             myListView.setAdapter(myListAdapter);
 
+            // Quand on appuye sur une rangée de la liste
             myListView.setOnItemClickListener(
                     new AdapterView.OnItemClickListener() {
                         @Override
@@ -79,6 +81,7 @@ public class FriendsFragment extends Fragment {
                             Fragment fragment = new FriendProfileFragment();
                             fragment.setArguments(args);
 
+                            // On redirige vers le profil de l'ami
                             FragmentManager fragmentManager = getFragmentManager();
                             fragmentManager.beginTransaction()
                                     .setCustomAnimations(R.animator.slide_in_left,

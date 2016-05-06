@@ -80,7 +80,7 @@ public class DrawerMainActivity extends AppCompatActivity
         Picasso.with(myImage.getContext()).load(currentUser.getUserProfilePic()).fit().centerCrop().into(myImage);
         String completeName = currentUser.getUserFirstName() + " " + currentUser.getUserLastName();
         myText.setText(completeName);
-        // Create a new fragment and specify the planet to show based on position
+        // Create a new fragment
         Fragment fragment = new ProfileFragment();
 
         // Insert the fragment by replacing any existing fragment
@@ -117,6 +117,8 @@ public class DrawerMainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
+
+    // Lien vers les différents fragments en appuyant sur les item du menu
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -233,6 +235,8 @@ public class DrawerMainActivity extends AppCompatActivity
         return user_id;
     }
 
+
+    // Pour le datepicker
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
         //do some stuff for example write on log and update TextField on activity

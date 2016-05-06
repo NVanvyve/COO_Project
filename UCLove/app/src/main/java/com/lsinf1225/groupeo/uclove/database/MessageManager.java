@@ -100,6 +100,7 @@ public class MessageManager {
     }
 
     public Message getRecentMessage(long rel_id, int recent_number){
+        // retourne le n-ieme message le plus récent
 
         int loop = 0;
 
@@ -129,6 +130,7 @@ public class MessageManager {
     }
 
     public Message getMostRecentMessage(long rel_id){
+        // retourne le message le plus récent
 
         Message a = new Message(-1, -1, -1, "", "");
 

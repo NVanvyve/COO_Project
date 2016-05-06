@@ -146,6 +146,8 @@ public class CalendarManager {
 
 
     public Calendar getFreeDatesOfFriend(long user_id_a, long user_id_b, int number){
+        // retourne les dates où un ami est libre pour un rendez-vous.
+
         int loop = 0;
         Calendar a = new Calendar(-1, -1, "", "");
 

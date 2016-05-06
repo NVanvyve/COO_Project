@@ -63,6 +63,7 @@ public class DatePreferencesFragment extends Fragment {
         }
         cm.close();
 
+        // On affiche la liste
         ListAdapter myListAdapter = new CustomAdapterDatePreferences(getActivity(), date, dateid);
         ListView myListView = (ListView) myFragmentView.findViewById(R.id.date_preferences_list_view);
         myListView.setAdapter(myListAdapter);
@@ -86,6 +87,8 @@ public class DatePreferencesFragment extends Fragment {
                 cm.open();
                 cm.supCalendar(a);
                 cm.close();
+
+                // Si on click longtemps sur une rangée, la date se supprime.
 
                 Context context = getActivity();
                 CharSequence text = getResources().getString(R.string.date_preferences_toast);;

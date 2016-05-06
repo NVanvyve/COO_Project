@@ -65,6 +65,7 @@ public class EditProfileFragment extends Fragment {
         String hairColor = mapHairColorFR(currentUser.getUserHairColor());
         String hairType = mapHairStyleFR(currentUser.getUserHairType());
 
+        // On met les données initiales de l'utilisateur dans les champs de texte
         final EditText usernameField = (EditText) myFragmentView.findViewById(R.id.edit_profile_username);
         usernameField.setText(username);
 
@@ -83,6 +84,7 @@ public class EditProfileFragment extends Fragment {
         final Spinner hairTypeSpinner = (Spinner) myFragmentView.findViewById(R.id.edit_profile_hair_type);
         hairTypeSpinner.setSelection(((ArrayAdapter)hairTypeSpinner.getAdapter()).getPosition(hairType));
 
+        // On prend une photo
         Button button1= (Button) myFragmentView.findViewById(R.id.edit_profile_upload_picture);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +107,7 @@ public class EditProfileFragment extends Fragment {
             }
         });
 
+        // On soumet les évetuels changements
         Button button2= (Button) myFragmentView.findViewById(R.id.edit_profile_send_info);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,7 +137,7 @@ public class EditProfileFragment extends Fragment {
                 User editedUser = new User(currentUser.getUserID(), username, password, currentUser.getUserFirstName(), currentUser.getUserLastName(), currentUser.getUserBirthDate(), city, language, hairColor, hairType, currentUser.getUserEyesColor(), currentUser.getUserSex(), currentUser.getUserSexuality(), currentUser.getUserPosition(), mCurrentPhotoPath);
 
                 if (m.canEditProfile(editedUser)){
-                    m.modUser(editedUser);
+                    m.modUser(editedUser); // On enregistre les changements
 
                     Context context = getActivity();
                     CharSequence text = getResources().getString(R.string.edit_profile_ok);;

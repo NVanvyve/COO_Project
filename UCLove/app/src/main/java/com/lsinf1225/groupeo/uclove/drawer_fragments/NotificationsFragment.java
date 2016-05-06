@@ -75,6 +75,7 @@ public class NotificationsFragment extends Fragment {
                             TextView textView2 = (TextView) view.findViewById(R.id.notifications_id);
                             Integer notifId = Integer.parseInt(textView2.getText().toString());
 
+                            // Si on appuye, mets le statut la notification comme lu
                             NotificationManager nm = new NotificationManager(getActivity());
                             nm.open();
                             Notification notif = nm.getNotification((long)notifId);
@@ -82,9 +83,11 @@ public class NotificationsFragment extends Fragment {
                             nm.modNotification(notif);
                             nm.close();
 
+                            // Supprime la notif système
                             NotificationSender ns = new NotificationSender("", notifId, getActivity());
                             ns.cancelNotification();
 
+                            // Redirige vers l'écran correspondant
                             if (code == 1) {
                                 Fragment fragment = new FriendsSearchFragment();
                                 FragmentManager fragmentManager = getFragmentManager();
@@ -129,6 +132,7 @@ public class NotificationsFragment extends Fragment {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
+                    // Si on appuye longuement, supprime toutes les notifs de l'app et toutes les notifications système aussi
                     NotificationManager nm = new NotificationManager(getActivity());
                     nm.open();
                     nm.deleteNotificationsFromUser(user_id);
@@ -142,6 +146,7 @@ public class NotificationsFragment extends Fragment {
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
 
+                    // Recharge le fragment pour afficher les changements
                     Fragment fragment = new NotificationsFragment();
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction()

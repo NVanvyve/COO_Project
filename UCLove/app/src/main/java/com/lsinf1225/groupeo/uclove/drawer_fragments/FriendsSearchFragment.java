@@ -121,6 +121,7 @@ public class FriendsSearchFragment extends Fragment {
                     .commit();
         }
 
+        // Si on accepte l'amitié
         Button button1= (Button) myFragmentView.findViewById(R.id.friends_search_button_like);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,8 +129,8 @@ public class FriendsSearchFragment extends Fragment {
                 RelationManager m = new RelationManager(getActivity());
                 m.open();
                 Relation r = m.getRelationFromUserIdsOrdered(newFriendUserId, user_id);
-                if ((r.getRelStatus()).equals("Request")) {
-                    r.setRelStatus("Accepted");
+                if ((r.getRelStatus()).equals("Request")) { // Si la demande était déjà en request
+                    r.setRelStatus("Accepted"); // On est direct ami
                     m.modRelation(r);
 
                     NotificationManager nm = new NotificationManager(getActivity());
@@ -150,7 +151,7 @@ public class FriendsSearchFragment extends Fragment {
                             .replace(R.id.content_frame, fragment)
                             .commit();
                 } else {
-                    r.setRelStatus("Request");
+                    r.setRelStatus("Request"); // Sinon on crée la relation et on la passe en request
                     r.setRelUserIDA((int)user_id);
                     r.setRelUserIDB((int)newFriendUserId);
                     m.addRelation(r);
@@ -176,6 +177,7 @@ public class FriendsSearchFragment extends Fragment {
             }
         });
 
+        // Si on refuse l'amitié
         Button button2= (Button) myFragmentView.findViewById(R.id.friends_search_button_dislike);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override

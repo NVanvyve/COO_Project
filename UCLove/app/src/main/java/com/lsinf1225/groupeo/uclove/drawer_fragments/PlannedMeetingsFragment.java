@@ -50,7 +50,7 @@ public class PlannedMeetingsFragment extends Fragment {
         rdvManager.open();
         userManager.open();
         for (int i = 1; i<=50; i++) {
-            RDV rdv = rdvManager.getRDVAccepted(user_id, i);
+            RDV rdv = rdvManager.getRDVAccepted(user_id, i); // On récupère les rendez-vous
             if (rdv.getRDVID() != -1) {
                 hasFailed = false;
 

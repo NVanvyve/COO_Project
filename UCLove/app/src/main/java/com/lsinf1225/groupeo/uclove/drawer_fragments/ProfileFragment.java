@@ -68,6 +68,7 @@ public class ProfileFragment extends Fragment {
             e.printStackTrace();
         }
 
+        // On affiche les données de l'utilisateur
         TextView myText;
         myText = (TextView) myFragmentView.findViewById(R.id.profile_username_data);
         myText.setText(username);

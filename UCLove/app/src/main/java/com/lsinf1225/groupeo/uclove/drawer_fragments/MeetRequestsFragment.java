@@ -105,15 +105,17 @@ public class MeetRequestsFragment extends Fragment {
                     .commit();
         }
 
+        // Si l'utilisateur appuye sur le bouton accepter
         Button button1= (Button) myFragmentView.findViewById(R.id.meet_request_button_accept);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rdv.setRDVStatus("Accepted");
+                rdv.setRDVStatus("Accepted"); // Rendez-vous accepté
                 RDVManager rm = new RDVManager(getActivity());
                 rm.open();
                 rm.modRDV(rdv);
 
+                // Envoi d'une notification
                 NotificationManager nm = new NotificationManager(getActivity());
                 nm.open();
                 Notification notif = new Notification(0, userb.getUserID(), "",  usera.getUserFirstName()+" "+usera.getUserLastName()+" a accepté votre demande de rendez-vous.", "Unread", 5);
@@ -121,7 +123,7 @@ public class MeetRequestsFragment extends Fragment {
 
                 CalendarManager calendarManager = new CalendarManager(getActivity());
                 calendarManager.open();
-                cal.setCalStatus("Busy");
+                cal.setCalStatus("Busy"); // Il n'est plus libre
                 calendarManager.modCalendar(cal);
 
                 Context context = getActivity();
@@ -139,11 +141,12 @@ public class MeetRequestsFragment extends Fragment {
             }
         });
 
+        // Si l'utilisateur appuye sur le bouton refuser
         Button button2= (Button) myFragmentView.findViewById(R.id.meet_request_button_decline);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rdv.setRDVStatus("Declined");
+                rdv.setRDVStatus("Declined"); // RDV refusé
                 RDVManager rm = new RDVManager(getActivity());
                 rm.open();
                 rm.modRDV(rdv);

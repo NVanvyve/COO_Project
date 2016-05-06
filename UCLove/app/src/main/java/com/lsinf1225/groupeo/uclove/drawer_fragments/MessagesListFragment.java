@@ -73,6 +73,7 @@ public class MessagesListFragment extends Fragment {
         mm.close();
 
         if (!hasFailed) {
+            // S'il y a un élément, affiche la liste
             ListAdapter myListAdapter = new CustomAdapterMessagesList(getActivity(), name, message, image, userid);
             ListView myListView = (ListView) myFragmentView.findViewById(R.id.messages_list_list_view);
             myListView.setAdapter(myListAdapter);
@@ -99,6 +100,7 @@ public class MessagesListFragment extends Fragment {
                     }
             );
         } else {
+            // Sinon, redirige vers un message d'erreur
             Fragment fragment = new MessagesListFailedFragment();
             // Insert the fragment by replacing any existing fragment
             FragmentManager fragmentManager = getFragmentManager();

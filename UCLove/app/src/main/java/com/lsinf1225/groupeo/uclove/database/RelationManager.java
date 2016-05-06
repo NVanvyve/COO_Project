@@ -136,7 +136,7 @@ public class RelationManager {
     }
 
     public Relation getRelationFromUserIds(long user_id_a, long user_id_b) {
-        // Retourne la relation dont l'id est passé en paramètre
+        // Retourne la relation dont les user_id sont passés en paramètre
         Relation a = new Relation(0, 0, 0, "", 0, 0);
 
         Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE ("+KEY_RELATION_USER_ID_A+"="+user_id_a+
@@ -157,7 +157,7 @@ public class RelationManager {
     }
 
     public Relation getRelationFromUserIdsForSearch(long user_id_a, long user_id_b) {
-        // Retourne la relation dont l'id est passé en paramètre
+        // Retourne la relation dont les user_id sont passés en paramètre pour la recherche d'amis
         Relation a = new Relation(0, 0, 0, "", 0, 0);
 
         Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE ("+KEY_RELATION_USER_ID_A+"="+user_id_a+" AND "+KEY_RELATION_USER_ID_B+"="+user_id_b+" AND "+KEY_RELATION_STATUS+"= 'Accepted')"+
@@ -213,7 +213,7 @@ public class RelationManager {
     }
 
     public long getFavorite(long user_id, int number){
-
+    // retourne le n-ieme favori d'un utilisateur
         long user_id_returned = -1;
         int loop = 0;
 
@@ -243,6 +243,7 @@ public class RelationManager {
     }
 
     public long getFriendsWhoSentMessage(long user_id, int number){
+        //retourne le n-ieme ami avec qui on a conversé
         int loop = 0;
 
         //int qui prendra la valeur de l'id de la personne en relation avec le User passé en argument

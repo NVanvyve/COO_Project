@@ -63,6 +63,7 @@ public class FavouritesFragment extends Fragment {
         rm.close();
 
         if (!hasFailed) {
+            // S'il y a un élément, on affiche la liste
             ListAdapter myListAdapter = new CustomAdapterFavourites(getActivity(), name, city, image, userid);
             ListView myListView = (ListView) myFragmentView.findViewById(R.id.favourites_list_view);
             myListView.setAdapter(myListAdapter);
@@ -79,6 +80,7 @@ public class FavouritesFragment extends Fragment {
                             Fragment fragment = new FriendProfileFragment();
                             fragment.setArguments(args);
 
+                            // Si on clique sur une rangée de la liste, on charge le profil de cet ami
                             FragmentManager fragmentManager = getFragmentManager();
                             fragmentManager.beginTransaction()
                                     .setCustomAnimations(R.animator.slide_in_left,
