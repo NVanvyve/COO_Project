@@ -98,7 +98,7 @@ public class DrawerMainActivity extends AppCompatActivity
         for (int i = 0; i < 10; i++) {
             Notification notif = nm.getRecentUnreadNotifications(user_id, i);
             if (notif.getNotifID() != -1) {
-                NotificationSender notifToSend = new NotificationSender(notif.getNotifText(), this);
+                NotificationSender notifToSend = new NotificationSender(notif.getNotifText(), notif.getNotifID(), this);
                 notifToSend.send();
             }
         }

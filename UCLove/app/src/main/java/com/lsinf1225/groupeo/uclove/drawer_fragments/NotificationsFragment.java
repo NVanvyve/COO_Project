@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lsinf1225.groupeo.uclove.NotificationSender;
 import com.lsinf1225.groupeo.uclove.custom_adapters.CustomAdapterNotifications;
 import com.lsinf1225.groupeo.uclove.DrawerMainActivity;
 import com.lsinf1225.groupeo.uclove.R;
@@ -81,6 +82,9 @@ public class NotificationsFragment extends Fragment {
                             nm.modNotification(notif);
                             nm.close();
 
+                            NotificationSender ns = new NotificationSender("", notifId, getActivity());
+                            ns.cancelNotification();
+
                             if (code == 1) {
                                 Fragment fragment = new FriendsSearchFragment();
                                 FragmentManager fragmentManager = getFragmentManager();
@@ -128,6 +132,9 @@ public class NotificationsFragment extends Fragment {
                     NotificationManager nm = new NotificationManager(getActivity());
                     nm.open();
                     nm.deleteNotificationsFromUser(user_id);
+
+                    NotificationSender ns = new NotificationSender("", 0, getActivity());
+                    ns.cancelAllNotifications();
 
                     Context context = getActivity();
                     CharSequence text = getResources().getString(R.string.notifications_toast);;

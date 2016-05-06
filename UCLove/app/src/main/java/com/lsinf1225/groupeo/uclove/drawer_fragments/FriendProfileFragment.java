@@ -13,6 +13,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.lsinf1225.groupeo.uclove.DrawerMainActivity;
+import com.lsinf1225.groupeo.uclove.GPSTracker;
 import com.lsinf1225.groupeo.uclove.R;
 import com.lsinf1225.groupeo.uclove.database.NotifAuthManager;
 import com.lsinf1225.groupeo.uclove.database.Relation;
@@ -59,6 +60,7 @@ public class FriendProfileFragment extends Fragment {
         UserManager m = new UserManager(getActivity());
         m.open();
         User currentUser = m.getUser(user_id_b);
+        User friend = m.getUser(user_id_a);
         m.close();
 
         language_code = Locale.getDefault().getLanguage();
@@ -76,6 +78,10 @@ public class FriendProfileFragment extends Fragment {
         String hairColor = mapHairColor(currentUser.getUserHairColor());
         String hairType = mapHairStyle(currentUser.getUserHairType());
         String eyesColor = mapEyesColor(currentUser.getUserEyesColor());
+        String position = currentUser.getUserPosition();
+        GPSTracker gps = new GPSTracker(getActivity());
+
+        double distance = gps.Distance(position, friend.getUserPosition());
 
         ((DrawerMainActivity) getActivity()).setTitle(this.getString(R.string.nav_profile_of) + " " + firstName);
 
@@ -113,6 +119,10 @@ public class FriendProfileFragment extends Fragment {
 
         myText = (TextView) myFragmentView.findViewById(R.id.friend_profile_eyes_color_data);
         myText.setText(eyesColor);
+
+        String distanceData = String.valueOf((int)distance) + " km";
+        myText = (TextView) myFragmentView.findViewById(R.id.friend_profile_distance_data);
+        myText.setText(distanceData);
 
         // On met le switch dans la bonne position
         if (isUserA) {

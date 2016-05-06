@@ -153,4 +153,7 @@
     <string name="notifications_failed_intro">Vous n\'avez pas encore de notifications.</string>
     <string name="notifications_toast">Toutes les notifications ont été supprimées.</string>
     <string name="edit_profile_button_edit">Modifier profil</string>
+    <string name="edit_profile_failed">L\'édition du profil a échoué. Le nom d\'utilisateur est peut-être déjà pris, ou tous les champs ne sont pas complets.</string>
+    <string name="edit_profile_ok">Edition du profil réussie.</string>
+    <string name="profile_distance">Distance :</string>
 </resources>

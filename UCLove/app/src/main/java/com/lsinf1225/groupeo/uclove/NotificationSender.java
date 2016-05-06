@@ -3,26 +3,24 @@ package com.lsinf1225.groupeo.uclove;
         import android.app.Notification;
         import android.app.NotificationManager;
         import android.app.PendingIntent;
-        import android.app.Service;
         import android.content.Context;
         import android.content.Intent;
 
-        import java.util.Random;
 
 public class NotificationSender{
 
     private String Message;
     private final Context mContext;
+    private int id;
 
 
-    public NotificationSender(String Message,Context context){
+    public NotificationSender(String Message, int id, Context context){
         this.Message=Message;
         this.mContext=context;
+        this.id = id;
     }
 
     public void send(){
-        Random random = new Random();
-        int m = random.nextInt(9999 - 1000) + 1000;
 
         Notification myNotication;
 
@@ -42,10 +40,20 @@ public class NotificationSender{
         //builder.setLargeIcon(/*bitmap*/);
         builder.setContentIntent(pendingIntent);
         builder.setOngoing(false);
-        builder.setPriority(Notification.PRIORITY_MAX);
-        builder.setVibrate(new long[]{0, 1000, 1000, 1000, 1000}); // Need : <uses-permission android:name="android.permission.VIBRATE" />
 
         myNotication = builder.getNotification();
-        manager.notify(m, myNotication);
+        manager.notify(id, myNotication);
+    }
+
+    public void cancelNotification() {
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager nMgr = (NotificationManager) mContext.getSystemService(ns);
+        nMgr.cancel(id);
+    }
+
+    public void cancelAllNotifications() {
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager nMgr = (NotificationManager) mContext.getSystemService(ns);
+        nMgr.cancelAll();
     }
 }

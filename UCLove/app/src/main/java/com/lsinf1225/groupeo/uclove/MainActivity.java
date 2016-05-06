@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.lsinf1225.groupeo.uclove.database.UserManager;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
     @Override

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lsinf1225.groupeo.uclove.DrawerMainActivity;
+import com.lsinf1225.groupeo.uclove.GPSTracker;
 import com.lsinf1225.groupeo.uclove.R;
 import com.lsinf1225.groupeo.uclove.database.Notification;
 import com.lsinf1225.groupeo.uclove.database.NotificationManager;
@@ -68,6 +69,10 @@ public class FriendsSearchFragment extends Fragment {
             String hairColor = mapHairColor(newFriend.getUserHairColor());
             String hairType = mapHairStyle(newFriend.getUserHairType());
             String eyesColor = mapEyesColor(newFriend.getUserEyesColor());
+            String position = newFriend.getUserPosition();
+
+            GPSTracker gps = new GPSTracker(getActivity());
+            double distance = gps.Distance(position, currentUser.getUserPosition());
 
             // On formate la date
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -103,6 +108,10 @@ public class FriendsSearchFragment extends Fragment {
 
             myText = (TextView) myFragmentView.findViewById(R.id.profile_eyes_color_data);
             myText.setText(eyesColor);
+
+            String distanceData = String.valueOf((int)distance) + " km";
+            myText = (TextView) myFragmentView.findViewById(R.id.profile_distance_data);
+            myText.setText(distanceData);
         } else {
             Fragment fragment = new FriendsSearchFailedFragment();
             // Insert the fragment by replacing any existing fragment
