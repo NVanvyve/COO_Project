@@ -11,7 +11,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.lsinf1225.groupeo.uclove.CustomAdapterFriends;
+import com.lsinf1225.groupeo.uclove.custom_adapters.CustomAdapterFriends;
 import com.lsinf1225.groupeo.uclove.DrawerMainActivity;
 import com.lsinf1225.groupeo.uclove.R;
 import com.lsinf1225.groupeo.uclove.database.RelationManager;

@@ -11,13 +11,11 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.lsinf1225.groupeo.uclove.CustomAdapterFriends;
-import com.lsinf1225.groupeo.uclove.CustomAdapterPlannedMeetings;
+import com.lsinf1225.groupeo.uclove.custom_adapters.CustomAdapterPlannedMeetings;
 import com.lsinf1225.groupeo.uclove.DrawerMainActivity;
 import com.lsinf1225.groupeo.uclove.R;
 import com.lsinf1225.groupeo.uclove.database.RDV;
 import com.lsinf1225.groupeo.uclove.database.RDVManager;
-import com.lsinf1225.groupeo.uclove.database.RelationManager;
 import com.lsinf1225.groupeo.uclove.database.User;
 import com.lsinf1225.groupeo.uclove.database.UserManager;
 

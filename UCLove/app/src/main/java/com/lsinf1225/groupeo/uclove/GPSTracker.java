@@ -1,3 +1,8 @@
+/**
+ * Source : http://www.androidhive.info/2012/07/android-gps-location-manager-tutorial/
+ */
+
+
 package com.lsinf1225.groupeo.uclove;
 
 import android.app.Service;

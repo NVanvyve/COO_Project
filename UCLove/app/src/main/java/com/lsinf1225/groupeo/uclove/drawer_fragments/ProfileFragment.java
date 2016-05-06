@@ -31,11 +31,6 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        NotificationSender notificationSender1 = new NotificationSender("Vous êtes sur le profil!", getActivity());
-        NotificationSender notificationSender2 = new NotificationSender("MDR", getActivity());
-        notificationSender1.send();
-        notificationSender2.send();
-
         myFragmentView = inflater.inflate(R.layout.fragment_profile, container, false);
 
         // On récupère l'userID

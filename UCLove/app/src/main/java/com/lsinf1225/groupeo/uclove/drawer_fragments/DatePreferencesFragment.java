@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.app.DialogFragment;
 
 import android.widget.ListAdapter;
@@ -17,8 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lsinf1225.groupeo.uclove.CustomAdapterDatePreferences;
-import com.lsinf1225.groupeo.uclove.DatePickerFragmentAccountCreation;
+import com.lsinf1225.groupeo.uclove.custom_adapters.CustomAdapterDatePreferences;
 import com.lsinf1225.groupeo.uclove.DatePickerFragmentDatePreferences;
 import com.lsinf1225.groupeo.uclove.DrawerMainActivity;
 import com.lsinf1225.groupeo.uclove.R;
@@ -28,7 +26,6 @@ import com.lsinf1225.groupeo.uclove.database.User;
 import com.lsinf1225.groupeo
         .uclove.database.UserManager;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -6,15 +6,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.lsinf1225.groupeo.uclove.CustomAdapterFriends;
-import com.lsinf1225.groupeo.uclove.CustomAdapterMessages;
+import com.lsinf1225.groupeo.uclove.custom_adapters.CustomAdapterMessages;
 import com.lsinf1225.groupeo.uclove.DrawerMainActivity;
 import com.lsinf1225.groupeo.uclove.R;
 import com.lsinf1225.groupeo.uclove.database.Message;

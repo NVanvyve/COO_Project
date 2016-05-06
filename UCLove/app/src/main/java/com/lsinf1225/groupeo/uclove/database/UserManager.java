@@ -10,6 +10,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.lsinf1225.groupeo.uclove.GPSTracker;
 import com.lsinf1225.groupeo.uclove.MySQLite;
 
 public class UserManager {
@@ -209,6 +210,39 @@ public class UserManager {
         }
     }
 
+
+    public boolean canEditProfile(User user) {
+        // Vérifie si le username de l'utilisateur n'est pas déjà utilisé par quelqu'un.
+
+        String userName = user.getUserUsername();
+        String password = user.getUserPassword();
+        String firstName = user.getUserFirstName();
+        String lastName = user.getUserLastName();
+        String birthDate = user.getUserBirthDate();
+        String city = user.getUserCity();
+        String language = user.getUserLanguage();
+
+        String query1 = "SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_USER_FIRST_NAME + "<>'" + firstName +
+                "' AND " + KEY_USER_LAST_NAME + "<>'" + lastName +
+                "' AND " + KEY_USER_BIRTH_DATE + "<>'" + birthDate +
+                "' AND " + KEY_USER_USERNAME + "='" + userName +
+                "'";
+
+        Cursor c = db.rawQuery(query1, null);
+        if (c.moveToFirst()
+                || (userName.equals(""))
+                || (password.equals(""))
+                || (city.equals(""))
+                || (language.equals("Unspecified"))
+                ) {
+            c.close();
+            return false;
+        } else {
+            c.close();
+            return true;
+        }
+    }
+
     public long isAlreadyInDatabase(String userName, String password) {
         // retourne le user_id de l'utilisateur s'il est déjà inscrit, sinon retourne -1
 
@@ -256,7 +290,7 @@ public class UserManager {
         m.open();
         Preferences newPrefs = m.getPreferences(user.getUserID());
         //m.close();
-        String query = "SELECT U.user_id FROM User U LEFT JOIN Relation R WHERE ";
+        String query = "SELECT U.user_id, U.user_position FROM User U LEFT JOIN Relation R WHERE ";
         String languagePref[] = new String[3];
         int l = 0;
         String haircolorpref[] = new String[8];
@@ -350,14 +384,19 @@ public class UserManager {
         }
         query += " OR ( U.user_id = R.rel_user_id_a AND R.rel_user_id_b='" + String.valueOf(user.getUserID()) + "' AND R.rel_status = 'Request' );";
         Cursor d = db.rawQuery(query, null);
+        int maxDistance = newPrefs.getPrefDistanceMax();
+        String position = user.getUserPosition();
+        String positionUserB;
         if (d.moveToFirst()) {
             long userID = -1;
             do {
                 userID = d.getLong(d.getColumnIndex(KEY_USER_ID));
+                positionUserB = d.getString(d.getColumnIndex(KEY_USER_POSITION));
+                GPSTracker gps = new GPSTracker(contextglobal);
                 RelationManager rm = new RelationManager(contextglobal);
                 rm.open();
                 Relation rel = rm.getRelationFromUserIdsForSearch(user.getUserID(), userID);
-                if (!rel.getRelStatus().equals("Accepted") && !rel.getRelStatus().equals("Declined") && !rel.getRelStatus().equals("Request")) {
+                if (!rel.getRelStatus().equals("Accepted") && !rel.getRelStatus().equals("Declined") && !rel.getRelStatus().equals("Request") && gps.Distance(position, positionUserB) < maxDistance) {
                     d.close();
                     return userID;
                 } else {

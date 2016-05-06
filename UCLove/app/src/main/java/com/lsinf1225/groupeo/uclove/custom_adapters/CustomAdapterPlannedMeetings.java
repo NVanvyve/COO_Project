@@ -1,4 +1,4 @@
-package com.lsinf1225.groupeo.uclove;
+package com.lsinf1225.groupeo.uclove.custom_adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lsinf1225.groupeo.uclove.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

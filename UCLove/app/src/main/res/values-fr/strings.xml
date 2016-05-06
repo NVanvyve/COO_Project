@@ -52,7 +52,7 @@
     <string name="pref_search_distance_max">Distance maximale</string>
     <string name="pref_search_age_max">Age maximal</string>
     <string name="pref_search_age_min">Age minimal</string>
-    <string name="pref_search_distance">Distance</string>
+    <string name="pref_search_distance">Distance maximale</string>
     <string name="pref_search_eyes_color">Couleur des yeux</string>
     <string name="pref_search_eyes_color_black">Yeux noirs</string>
     <string name="pref_search_eyes_color_blue">Yeux bleus</string>
@@ -150,4 +150,7 @@
     <string name="planned_meeting_info_intro">Vous avez un rendez-vous planifié avec votre ami...</string>
     <string name="messages_list_failed_intro">Vous n\'avez pas encore échangé de messages avec un(e) ami(e).</string>
     <string name="favourites_failed_intro">Vous n\'avez pas encore spécifié un(e) ami(e) comme favori!</string>
+    <string name="notifications_failed_intro">Vous n\'avez pas encore de notifications.</string>
+    <string name="notifications_toast">Toutes les notifications ont été supprimées.</string>
+    <string name="edit_profile_button_edit">Modifier profil</string>
 </resources>

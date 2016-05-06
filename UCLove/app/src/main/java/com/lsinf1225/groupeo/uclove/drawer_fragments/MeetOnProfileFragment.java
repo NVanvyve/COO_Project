@@ -1,6 +1,5 @@
 package com.lsinf1225.groupeo.uclove.drawer_fragments;
 
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -9,19 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lsinf1225.groupeo.uclove.CustomAdapterDatePreferences;
-import com.lsinf1225.groupeo.uclove.CustomAdapterMeetOnProfile;
-import com.lsinf1225.groupeo.uclove.DatePickerFragmentDatePreferences;
+import com.lsinf1225.groupeo.uclove.custom_adapters.CustomAdapterMeetOnProfile;
 import com.lsinf1225.groupeo.uclove.DrawerMainActivity;
 import com.lsinf1225.groupeo.uclove.R;
 import com.lsinf1225.groupeo.uclove.database.Calendar;
 import com.lsinf1225.groupeo.uclove.database.CalendarManager;
+import com.lsinf1225.groupeo.uclove.database.Notification;
+import com.lsinf1225.groupeo.uclove.database.NotificationManager;
 import com.lsinf1225.groupeo.uclove.database.RDV;
 import com.lsinf1225.groupeo.uclove.database.RDVManager;
 import com.lsinf1225.groupeo.uclove.database.Relation;
@@ -35,7 +33,7 @@ import java.util.List;
 public class MeetOnProfileFragment extends Fragment {
 
     private View myFragmentView;
-    User currentUser;
+    User user_a;
     long user_id_a;
     long user_id_b;
     Relation relation;
@@ -54,7 +52,7 @@ public class MeetOnProfileFragment extends Fragment {
 
         UserManager um = new UserManager(getActivity());
         um.open();
-        User user_a = um.getUser(user_id_a);
+        user_a = um.getUser(user_id_a);
         User user_b = um.getUser(user_id_b);
 
         // On récupère la relation entre les deux users
@@ -99,7 +97,11 @@ public class MeetOnProfileFragment extends Fragment {
                 RDVManager rdvm = new RDVManager(getActivity());
                 rdvm.open();
                 rdvm.addRDV(rdv);
-                rdvm.close();
+
+                NotificationManager nm = new NotificationManager(getActivity());
+                nm.open();
+                Notification notif = new Notification(0, (int)user_id_b, "",  "Vous avez une nouvelle demande de rendez-vous de "+user_a.getUserFirstName()+" "+user_a.getUserLastName()+".", "Unread", 4);
+                nm.addNotification(notif);
 
                 Context context = getActivity();
                 CharSequence text = getResources().getString(R.string.meet_on_profile_toast);;

@@ -30,6 +30,7 @@ import java.util.Locale;
 
 public class FriendsSearchFragment extends Fragment {
 
+    User currentUser;
     String language_code;
     long user_id;
     long newFriendUserId;
@@ -45,7 +46,7 @@ public class FriendsSearchFragment extends Fragment {
         user_id = ((DrawerMainActivity) getActivity()).returnUserID();
         UserManager m = new UserManager(getActivity()); // gestionnaire de la table "user"
         m.open();
-        User currentUser = m.getUser(user_id);
+        currentUser = m.getUser(user_id);
         newFriendUserId = m.userSearcher(currentUser);
         if (newFriendUserId != -1) { // Si un utilisateur a été trouvé.
             User newFriend;
@@ -124,7 +125,7 @@ public class FriendsSearchFragment extends Fragment {
 
                     NotificationManager nm = new NotificationManager(getActivity());
                     nm.open();
-                    Notification notif = new Notification(0, (int)newFriendUserId, date, "Vous avez un nouveau message de "+user_a.getUserFirstName()+" "+user_a.getUserLastName()+".", "Unread", 3);
+                    Notification notif = new Notification(0, (int)newFriendUserId, "", "Vous êtes désormais ami avec "+currentUser.getUserFirstName()+" "+currentUser.getUserLastName()+".", "Unread", 2);
                     nm.addNotification(notif);
                     nm.close();
 
@@ -144,7 +145,13 @@ public class FriendsSearchFragment extends Fragment {
                     r.setRelUserIDA((int)user_id);
                     r.setRelUserIDB((int)newFriendUserId);
                     m.addRelation(r);
-                    m.close();
+
+                    NotificationManager nm = new NotificationManager(getActivity());
+                    nm.open();
+                    Notification notif = new Notification(0, (int)newFriendUserId, "", "Vous avez une nouvelle demande d'amitié de "+currentUser.getUserFirstName()+" "+currentUser.getUserLastName()+".", "Unread", 1);
+                    nm.addNotification(notif);
+                    nm.close();
+
                     Context context = getActivity();
                     CharSequence text = getResources().getString(R.string.friends_search_request);;
                     int duration = Toast.LENGTH_SHORT;

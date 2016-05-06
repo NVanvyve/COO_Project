@@ -158,7 +158,7 @@
         <string name="pref_search_age_max">Maximum age</string>
         <string name="pref_search_age_min">Minimum age</string>
 
-    <string name="pref_search_distance">Distance</string>
+    <string name="pref_search_distance">Maximum distance</string>
     <string name="pref_search_distance_max">Maximum distance</string>
 
     <!--Notifications preferences fragment-->
@@ -238,5 +238,12 @@
 
     <!--Messages list failed fragment-->
     <string name="favourites_failed_intro">You have not specified yet a friend as favourite!</string>
+
+    <!--Notifications fragment-->
+    <string name="notifications_toast">All notifications deleted.</string>
+    <string name="notifications_failed_intro">You do not have notifications yet.</string>
+
+    <!--Notifications fragment-->
+    <string name="edit_profile_button_edit">Edit profile</string>
 
 </resources>

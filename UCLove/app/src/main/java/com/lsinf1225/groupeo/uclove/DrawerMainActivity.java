@@ -19,14 +19,18 @@ import android.widget.TextView;
 
 import com.lsinf1225.groupeo.uclove.database.Calendar;
 import com.lsinf1225.groupeo.uclove.database.CalendarManager;
+import com.lsinf1225.groupeo.uclove.database.Notification;
+import com.lsinf1225.groupeo.uclove.database.NotificationManager;
 import com.lsinf1225.groupeo.uclove.database.User;
 import com.lsinf1225.groupeo.uclove.database.UserManager;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.DatePreferencesFragment;
+import com.lsinf1225.groupeo.uclove.drawer_fragments.EditProfileFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.FavouritesFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.FriendsFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.FriendsSearchFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.MeetRequestsFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.MessagesListFragment;
+import com.lsinf1225.groupeo.uclove.drawer_fragments.NotificationsFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.NotificationsPreferencesFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.PlannedMeetingsFragment;
 import com.lsinf1225.groupeo.uclove.drawer_fragments.ProfileFragment;
@@ -44,6 +48,7 @@ public class DrawerMainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -86,6 +91,18 @@ public class DrawerMainActivity extends AppCompatActivity
 
         navigationView.setCheckedItem(R.id.nav_profile);
         setTitle(this.getString(R.string.nav_profile));
+
+        // Envoie des notifications système
+        NotificationManager nm = new NotificationManager(this);
+        nm.open();
+        for (int i = 0; i < 10; i++) {
+            Notification notif = nm.getRecentUnreadNotifications(user_id, i);
+            if (notif.getNotifID() != -1) {
+                NotificationSender notifToSend = new NotificationSender(notif.getNotifText(), this);
+                notifToSend.send();
+            }
+        }
+        nm.close();
     }
 
     @Override
@@ -111,6 +128,14 @@ public class DrawerMainActivity extends AppCompatActivity
                     .replace(R.id.content_frame, fragment)
                     .commit();
             setTitle(this.getString(R.string.nav_profile));
+
+        } else if (id == R.id.nav_notifications) {
+            Fragment fragment = new NotificationsFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
+            setTitle(this.getString(R.string.nav_notifications));
 
         } else if (id == R.id.nav_friends_search) {
             Fragment fragment = new FriendsSearchFragment();
@@ -183,6 +208,14 @@ public class DrawerMainActivity extends AppCompatActivity
                     .replace(R.id.content_frame, fragment)
                     .commit();
             setTitle(this.getString(R.string.nav_favourites));
+
+        } else if (id == R.id.nav_edit_profile) {
+            Fragment fragment = new EditProfileFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
+            setTitle(this.getString(R.string.nav_edit_profile));
 
         } else if (id == R.id.nav_log_off) {
             // On passe l'userID dans l'intent

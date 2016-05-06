@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.lsinf1225.groupeo.uclove.DrawerMainActivity;
 import com.lsinf1225.groupeo.uclove.R;
 import com.lsinf1225.groupeo.uclove.database.CalendarManager;
+import com.lsinf1225.groupeo.uclove.database.Notification;
+import com.lsinf1225.groupeo.uclove.database.NotificationManager;
 import com.lsinf1225.groupeo.uclove.database.RDV;
 import com.lsinf1225.groupeo.uclove.database.RDVManager;
 import com.lsinf1225.groupeo.uclove.database.User;
@@ -28,8 +30,9 @@ import java.util.Date;
 
 public class MeetRequestsFragment extends Fragment {
 
-    String language_code;
     long user_id;
+    User userb;
+    User usera;
     RDV rdv;
     com.lsinf1225.groupeo.uclove.database.Calendar cal;
     private View myFragmentView;
@@ -42,6 +45,9 @@ public class MeetRequestsFragment extends Fragment {
 
         // On récupère l'userID
         user_id = ((DrawerMainActivity) getActivity()).returnUserID();
+        UserManager um = new UserManager(getActivity());
+        um.open();
+        usera = um.getUser(user_id);
 
         // On récupère une demande de rendez-vous
         RDVManager m = new RDVManager(getActivity());
@@ -50,7 +56,7 @@ public class MeetRequestsFragment extends Fragment {
 
         long rdvId = rdv.getRDVID();
         String rdvDate = rdv.getRDVDate();
-        long rdvUserIdB = rdv.getRDVUserIDB();
+        long rdvUserIdB = rdv.getRDVUserIDA();
 
         if (rdvId != -1) { // Si une demande de rendez-vous a été trouvée
 
@@ -60,9 +66,8 @@ public class MeetRequestsFragment extends Fragment {
             cal = cm.getCalendarByUserIdAndDate(user_id, rdvDate);
 
             // On récupère le profil de l'utilisateur qui a fait la demande
-            UserManager um = new UserManager(getActivity());
             um.open();
-            User userb = um.getUser(rdvUserIdB);
+            userb = um.getUser(rdvUserIdB);
 
             // On affiche sa photo de profil
             ImageView myImage = (ImageView) myFragmentView.findViewById(R.id.meet_request_image);
@@ -108,6 +113,11 @@ public class MeetRequestsFragment extends Fragment {
                 RDVManager rm = new RDVManager(getActivity());
                 rm.open();
                 rm.modRDV(rdv);
+
+                NotificationManager nm = new NotificationManager(getActivity());
+                nm.open();
+                Notification notif = new Notification(0, userb.getUserID(), "",  usera.getUserFirstName()+" "+usera.getUserLastName()+" a accepté votre demande de rendez-vous.", "Unread", 5);
+                nm.addNotification(notif);
 
                 CalendarManager calendarManager = new CalendarManager(getActivity());
                 calendarManager.open();
