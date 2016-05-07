@@ -240,7 +240,7 @@ public class AccountCreation extends AppCompatActivity implements DatePickerDial
                 break;
             case "Moyen":
             case "Medium":
-                returnedHairStyle = "Moyen";
+                returnedHairStyle = "Medium";
                 break;
             case "Long":
                 returnedHairStyle = "Long";
